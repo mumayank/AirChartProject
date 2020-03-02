@@ -1,0 +1,3 @@
+rootProject.name='AirChartProject'
+include ':app'
+include ':airchart'
