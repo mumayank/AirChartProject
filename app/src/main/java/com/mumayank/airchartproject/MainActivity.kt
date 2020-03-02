@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.data.Entry
 import com.mumayank.airchart.AirChart
+import com.mumayank.airchart.ChartItem
 import com.mumayank.airchart.YLeftItem
 import kotlinx.android.synthetic.main.activity_main.*
 
