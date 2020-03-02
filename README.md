@@ -93,3 +93,49 @@ AirChart.bar(object: AirChart.BarInterface{
 })
 
 ```
+
+Expected JSONObject of a chart item from the server to the client is:
+
+```json
+{
+  "title": "Structure Progress",
+  "decimalFormatPattern": "0.0",
+  "xLabel": "Projects",
+  "xLabels": [
+    "Angul-Samb",
+    "Jammu ORR",
+    "Cuttak-PKG-1",
+    "Cuttak-PKG-2",
+    "Nagpur-Mumbai"
+  ],
+  "yLeftLabel": "Progress Value",
+  "yLeftItems": [
+    {
+      "legendLabel": "Scope",
+      "values": [
+        24,
+        12,
+        13,
+        12,
+        17
+      ]
+    },
+    {
+      "legendLabel": "Taken up",
+      "values": [
+        13,
+        5,
+        2,
+        9,
+        5
+      ]
+    }
+  ],
+  "colors": [
+    "#2196f3",
+    "#ff9800"
+  ]
+}
+```
+
+Use ChartItem class (provided by this lib) for creating a chartItem object from JSON.
