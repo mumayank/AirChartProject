@@ -206,7 +206,8 @@ class AirChart {
             barInterface.getChartHolderViewGroup()?.title?.text = barInterface.getTitle()
             barInterface.getChartHolderViewGroup()?.title?.visibility = if (barInterface.getIsTitleVisible()) View.VISIBLE else View.GONE
             barInterface.getChartHolderViewGroup()?.xLabel?.text = barInterface.getXLabel()
-            barInterface.getChartHolderViewGroup()?.yLabelLeft?.text = barInterface.getYLeftLabel()
+            val yLabelLeft = barInterface.getChartHolderViewGroup()?.yLabelLeft as TextView?
+            yLabelLeft?.text = barInterface.getYLeftLabel()
             barInterface.getChartHolderViewGroup()?.yLabelRightLayout?.visibility = View.GONE
 
             // setup rv for legends
