@@ -1,8 +1,7 @@
-package com.einsite.airchartproject
+package com.mumayank.airchartproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.einsite.airchart.AirChart
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 

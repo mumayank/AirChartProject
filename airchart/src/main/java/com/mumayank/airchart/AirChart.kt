@@ -1,4 +1,4 @@
-package com.einsite.airchart
+package com.mumayank.airchart
 
 class AirChart {
     companion object {
