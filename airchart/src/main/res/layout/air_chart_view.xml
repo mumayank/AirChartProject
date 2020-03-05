@@ -46,17 +46,17 @@
             <LinearLayout
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
+                android:orientation="vertical"
+                tools:ignore="UselessLeaf" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:text="Some text"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
@@ -73,9 +73,10 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
@@ -98,7 +99,7 @@
                         android:layout_marginBottom="8dp"
                         app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
                         app:tint="@android:color/black"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="ContentDescription,VectorDrawableCompat" />
 
                     <com.mumayank.airchart.TextViewVertical
                         android:id="@+id/yLabelLeft"
@@ -118,9 +119,10 @@
                     android:id="@+id/chart"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights" />
 
                 <LinearLayout
                     android:id="@+id/yLabelRightLayout"
@@ -140,7 +142,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
-                        app:tint="@android:color/black" />
+                        app:tint="@android:color/black"
+                        tools:ignore="ContentDescription" />
 
                     <com.mumayank.airchart.TextViewVertical
                         android:id="@+id/yLabelRight"
@@ -182,10 +185,10 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
                     app:tint="@android:color/black"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="ContentDescription,VectorDrawableCompat" />
 
             </LinearLayout>
 
@@ -200,7 +203,8 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="No data to display"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText" />
 
     </FrameLayout>
 
