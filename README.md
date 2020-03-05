@@ -98,15 +98,15 @@ Expected JSONObject of a chart item from the server to the client is:
 
 ```json
 {
-  "title": "Structure Progress",
+  "title": "Student records",
   "decimalFormatPattern": "0.0",
   "xLabel": "Projects",
   "xLabels": [
-    "Angul-Samb",
-    "Jammu ORR",
-    "Cuttak-PKG-1",
-    "Cuttak-PKG-2",
-    "Nagpur-Mumbai"
+    "Narendra",
+    "Rahul",
+    "Prakash",
+    "Sonia",
+    "Lalu"
   ],
   "yLeftLabel": "Progress Value",
   "yLeftItems": [
