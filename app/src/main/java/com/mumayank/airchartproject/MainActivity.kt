@@ -1,5 +1,6 @@
 package com.mumayank.airchartproject
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         AirChart.bar(object: AirChart.BarInterface{
 
-            override fun getContext(): Context {
+            override fun getActivity(): Activity {
                 return this@MainActivity
             }
 
@@ -58,6 +59,10 @@ class MainActivity : AppCompatActivity() {
                 return arrayListOf(
                     YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f))
                 )
+            }
+
+            override fun getIsAnimationRequired(): Boolean {
+                return true
             }
 
             override fun onNoValueSelected() {

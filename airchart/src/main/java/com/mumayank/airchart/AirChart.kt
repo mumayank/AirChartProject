@@ -1,5 +1,6 @@
 package com.mumayank.airchart
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.air_chart_view_rv_item.view.*
 class AirChart {
 
     interface BarInterface {
-        fun getContext(): Context
+        fun getActivity(): Activity
         fun getChartHolderViewGroup(): ViewGroup?
         fun getTitle(): String
         fun getIsTitleVisible(): Boolean
@@ -41,6 +42,7 @@ class AirChart {
         fun getXLabels(): ArrayList<String>
         fun getYLeftLabel(): String
         fun getYLeftItems(): java.util.ArrayList<YLeftItem>
+        fun getIsAnimationRequired(): Boolean
         fun onValueSelected(e: Entry?)
         fun onNoValueSelected()
     }
@@ -55,13 +57,13 @@ class AirChart {
         fun bar(barInterface: BarInterface, getBarChart:((barChart: BarChart)->Unit)? = null) {
 
             // inflate the layout
-            val inflater = barInterface.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val inflater = barInterface.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             barInterface.getChartHolderViewGroup()?.removeAllViews()
-            barInterface.getChartHolderViewGroup()?.addView(inflater.inflate(R.layout.air_chart_view, LinearLayout(barInterface.getContext())), ViewGroup.LayoutParams(
+            barInterface.getChartHolderViewGroup()?.addView(inflater.inflate(R.layout.air_chart_view, LinearLayout(barInterface.getActivity())), ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
 
             // make chart
-            val barChart = BarChart(barInterface.getContext())
+            val barChart = BarChart(barInterface.getActivity())
 
             // label count
             var valuesCount = 0
@@ -86,7 +88,7 @@ class AirChart {
                 }
                 val barDataSet = BarDataSet(barEntries, value.legendLabel)
                 barDataSet.valueTextSize = 12f
-                barDataSet.valueTextColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+                barDataSet.valueTextColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
                 barDataSet.valueFormatter = object : ValueFormatter() {
                     override fun getFormattedValue(value: Float): String {
                         val mFormat = DecimalFormat(barInterface.getDecimalFormatPattern())
@@ -95,12 +97,12 @@ class AirChart {
                 }
                 if (barInterface.getColors().isNotEmpty()) {
                     if (barInterface.getYLeftItems().size > 1) {
-                        barDataSet.color = getItemFromArrayAtIndexCyclicly(colors, index)
+                        barDataSet.color = getItemFromArrayAtIndexCyclically(colors, index)
                     } else {
                         barDataSet.colors = colors
                     }
                 } else {
-                    barDataSet.color = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+                    barDataSet.color = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
                 }
                 barDataSet.setDrawValues(true)
                 val barData = BarData(barDataSet)
@@ -125,7 +127,7 @@ class AirChart {
 
             barChart.xAxis.valueFormatter = IndexAxisValueFormatter(barInterface.getXLabels())
 
-            barChart.xAxis?.textColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.xAxis?.textColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
             barChart.xAxis?.setDrawAxisLine(true)
             barChart.xAxis?.setDrawGridLines(false)
             barChart.xAxis?.position = XAxis.XAxisPosition.BOTTOM
@@ -135,14 +137,14 @@ class AirChart {
             barChart.xAxis?.setDrawLabels(true)
             barChart.xAxis.labelRotationAngle = -90f
             barChart.xAxis.enableGridDashedLine(8f, 10f, 0f)
-            barChart.xAxis.gridColor = ContextCompat.getColor(barInterface.getContext(), R.color.colorLightGray)
+            barChart.xAxis.gridColor = ContextCompat.getColor(barInterface.getActivity(), R.color.colorLightGray)
             barChart.xAxis.textSize = 12f
-            barChart.xAxis.textColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
-            barChart.xAxis.axisLineColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.xAxis.textColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
+            barChart.xAxis.axisLineColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
             barChart.xAxis.setAvoidFirstLastClipping(false)
             barChart.xAxis.labelCount = if (barInterface.getXLabels().size > 20) 20 else barInterface.getXLabels().size
 
-            barChart.axisRight?.textColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.axisRight?.textColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
             barChart.axisRight?.setDrawAxisLine(true)
             barChart.axisRight?.setDrawGridLines(false)
             barChart.axisRight?.isGranularityEnabled = true
@@ -150,10 +152,10 @@ class AirChart {
             barChart.axisRight?.setDrawLabels(false)
             barChart.axisRight?.axisMinimum = barData.xMin - 0.5f
             barChart.axisRight?.axisMaximum = barData.xMax + 0.5f
-            barChart.axisRight.axisLineColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.axisRight.axisLineColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
 
             barChart.axisLeft?.axisMinimum = 0f
-            barChart.axisLeft?.textColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.axisLeft?.textColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
             barChart.axisLeft.textSize = 12f
             barChart.axisLeft?.setDrawAxisLine(true)
             barChart.axisLeft?.setDrawGridLines(false)
@@ -161,7 +163,7 @@ class AirChart {
             barChart.axisLeft?.granularity = 1f
             barChart.axisLeft?.setDrawLabels(true)
             barChart.axisLeft.setDrawTopYLabelEntry(true)
-            barChart.axisLeft.axisLineColor = ContextCompat.getColor(barInterface.getContext(), android.R.color.black)
+            barChart.axisLeft.axisLineColor = ContextCompat.getColor(barInterface.getActivity(), android.R.color.black)
             barChart.axisLeft?.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
                     return value.toInt().toString()
@@ -172,7 +174,7 @@ class AirChart {
             barChart.description = null
             barChart.setVisibleXRangeMinimum(2f)
             barChart.setNoDataText("No data to display")
-            barChart.setGridBackgroundColor(ContextCompat.getColor(barInterface.getContext(), android.R.color.white))
+            barChart.setGridBackgroundColor(ContextCompat.getColor(barInterface.getActivity(), android.R.color.white))
             barChart.setPinchZoom(false)
             barChart.isDoubleTapToZoomEnabled = false
             barChart.setDrawBorders(false)
@@ -268,14 +270,14 @@ class AirChart {
             }
 
             if (barChart.data.dataSetCount > 1) {
-                val nos = barInterface.getXLabels().size.toFloat()
-                val barSpace = 0f;
+                // val nos = barInterface.getXLabels().size.toFloat()
+                val barSpace = 0f
                 val groupSpace = 0.3f
                 val totalBarWidth = 1f - groupSpace
                 val barWidth = totalBarWidth / barChart.data.dataSetCount
-                barChart.barData.barWidth = barWidth;
-                barChart.groupBars(0f, groupSpace, barSpace);
-                barChart.xAxis.setCenterAxisLabels(true);
+                barChart.barData.barWidth = barWidth
+                barChart.groupBars(0f, groupSpace, barSpace)
+                barChart.xAxis.setCenterAxisLabels(true)
                 barChart.xAxis.granularity = 1f
                 barChart.xAxis.isGranularityEnabled = true
                 barChart.xAxis?.axisMinimum = barData.xMin
@@ -292,7 +294,7 @@ class AirChart {
                 barInterface.getChartHolderViewGroup()?.rvHolderParent?.visibility = View.VISIBLE
                 val airRv = AirRv(object: AirRv.Callback {
                     override fun getAppContext(): Context? {
-                        return barInterface.getContext()
+                        return barInterface.getActivity()
                     }
 
                     override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
@@ -301,7 +303,7 @@ class AirChart {
                         customViewHolder.legendLabelTV.text = yVal.legendLabel
                         customViewHolder.legendColorLayout.setBackgroundColor(
                                 if (barInterface.getColors().isNullOrEmpty().not()) {
-                                    getItemFromArrayAtIndexCyclicly(colors, position)
+                                    getItemFromArrayAtIndexCyclically(colors, position)
                                 } else {
                                     android.R.color.black
                                 }
@@ -344,17 +346,20 @@ class AirChart {
                 barInterface.getChartHolderViewGroup()?.rvHolderParent?.visibility = View.GONE
             }
 
-            // barChart.animateXY(TIME, TIME)
-            barChart.invalidate()
+            if (barInterface.getIsAnimationRequired()) {
+                barChart.animateXY(TIME, TIME)
+            } else {
+                barChart.invalidate()
+            }
 
             getBarChart?.invoke(barChart)
 
         }
 
-        private fun <T> getItemFromArrayAtIndexCyclicly(arrayList: ArrayList<T>, index: Int): T {
+        private fun <T> getItemFromArrayAtIndexCyclically(arrayList: ArrayList<T>, index: Int): T {
             if (index > arrayList.size - 1) {
                 val newIndex = index - arrayList.size
-                return getItemFromArrayAtIndexCyclicly(arrayList, newIndex)
+                return getItemFromArrayAtIndexCyclically(arrayList, newIndex)
             } else {
                 return arrayList[index]
             }
