@@ -139,3 +139,15 @@ Expected JSONObject of a chart item from the server to the client is:
 ```
 
 Use ChartItem class (provided by this lib) for creating a chartItem object from JSON.
+
+## Changelog
+
+#### v.0.1.4
+
++ change getContext to getActivity to avoid confusion when used in the activity
++ add getIsAnimationRequired interface method to make it easy to animate/ display a chart directly
++ bump up dependency library versions
+
+If you are already using this library, and you decide to upgrade, the change required from your end would be:
++ You will be required to implement getIsAnimationRequired interface method, and return a boolean value
++ You will be required to remove getContext and include getActivity interface method instead, while supplying activity context insted of app context
