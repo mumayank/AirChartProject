@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AirChart.bar(object: AirChart.BarInterface{
+        AirChart.bar(object: AirChart.BarInterface {
 
             override fun getActivity(): Activity {
                 return this@MainActivity
@@ -31,22 +31,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun getTitle(): String {
                 return "This is title of the chart"
-            }
-
-            override fun getSubTitle(): String {
-                return "This is sub title of the chart"
-            }
-
-            override fun getIsTitleVisible(): Boolean {
-                return true
-            }
-
-            override fun getColors(): ArrayList<String> {
-                return arrayListOf("#ffa726", "#2196f3")
-            }
-
-            override fun getDecimalFormatPattern(): String {
-                return "0.00"
             }
 
             override fun getXLabel(): String {
@@ -69,22 +53,39 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-            override fun getAdditionalData(): java.util.ArrayList<AdditionalData>? {
-                return arrayListOf(AdditionalData("something", "46.5"), AdditionalData("some other thing", "this is a good value"),AdditionalData("something", "46.5"), AdditionalData("some other thing", "this is a good value"),AdditionalData("something", "46.5"))
+            /**
+             * Additional functions need to be inflated manually:
+             */
+
+            override fun getSubTitle(): String {
+                return "This is a sub title"
+            }
+
+            override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
+                return arrayListOf(AdditionalData("Total turnout", "4.5"), AdditionalData("Final turnover", "19.5 %"), AdditionalData("Subtracted value", "As discussed"))
+            }
+
+            override fun getColors(): ArrayList<String>? {
+                return arrayListOf("#ffa726", "#2196f3")
+            }
+
+            override fun getDecimalFormatPattern(): String {
+                return "0.00"
             }
 
             override fun getIsAnimationRequired(): Boolean {
                 return true
             }
 
-            override fun onNoValueSelected() {
-                // do nothing for now
+            override fun onValueSelected(e: Entry?) {
+                // later
             }
 
-            override fun onValueSelected(e: Entry?) {
-                // do nothing for now
+            override fun onNoValueSelected() {
+                // later
             }
 
         })
+        
     }
 }
