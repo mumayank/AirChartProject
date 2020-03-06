@@ -49,6 +49,13 @@
         android:orientation="vertical" />
 
     <LinearLayout
+        android:id="@+id/customView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical" />
+
+    <LinearLayout
         android:id="@+id/rvHolderLegends"
         android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"

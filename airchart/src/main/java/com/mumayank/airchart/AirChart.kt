@@ -46,7 +46,7 @@ class AirChart {
             return null
         }
 
-        fun getCustomView(): View? {
+        fun getCustomViewLayoutResId(): Int? {
             return null
         }
 
@@ -80,11 +80,14 @@ class AirChart {
             getBarChart: ((barChart: BarChart) -> Unit)? = null
         ) {
             // inflate the layout
-            val inflater = barInterface.getActivity()
+            val layoutInflater = barInterface.getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             barInterface.getChartHolderViewGroup()?.removeAllViews()
             barInterface.getChartHolderViewGroup()?.addView(
-                inflater.inflate(R.layout.air_chart_view, LinearLayout(barInterface.getActivity())),
+                layoutInflater.inflate(
+                    R.layout.air_chart_view,
+                    LinearLayout(barInterface.getActivity())
+                ),
                 ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
                 )
@@ -268,6 +271,22 @@ class AirChart {
             yLabelLeft?.text = barInterface.getYLeftLabel()
             barInterface.getChartHolderViewGroup()?.yLabelRightLayout?.visibility = View.GONE
 
+            // setup custom view
+            if (barInterface.getCustomViewLayoutResId() == null) {
+                barInterface.getChartHolderViewGroup()?.customView?.visibility = View.GONE
+            } else {
+                barInterface.getChartHolderViewGroup()?.customView?.removeAllViews()
+                barInterface.getChartHolderViewGroup()?.customView?.addView(
+                    layoutInflater.inflate(
+                        barInterface.getCustomViewLayoutResId() as Int,
+                        LinearLayout(barInterface.getActivity())
+                    ), ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                )
+                barInterface.getChartHolderViewGroup()?.customView?.visibility = View.VISIBLE
+            }
+
             // setup rv for legends
             barInterface.getChartHolderViewGroup()?.rvHolderLegends?.visibility = View.GONE
 
@@ -278,7 +297,8 @@ class AirChart {
             // add chart
             barInterface.getChartHolderViewGroup()?.chart?.removeAllViews()
             barInterface.getChartHolderViewGroup()?.chart?.addView(
-                barChart, ViewGroup.LayoutParams(
+                barChart,
+                ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
                 )
             )
