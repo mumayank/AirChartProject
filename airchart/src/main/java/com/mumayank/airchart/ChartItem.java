@@ -1,15 +1,17 @@
 package com.mumayank.airchart;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 
 public class ChartItem {
 
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("subTitle")
+    @Expose
+    private String subTitle;
     @SerializedName("decimalFormatPattern")
     @Expose
     private String decimalFormatPattern;
@@ -18,16 +20,22 @@ public class ChartItem {
     private String xLabel;
     @SerializedName("xLabels")
     @Expose
-    private ArrayList<String> xLabels = null;
+    private List<String> xLabels = null;
     @SerializedName("yLeftLabel")
     @Expose
     private String yLeftLabel;
     @SerializedName("yLeftItems")
     @Expose
-    private ArrayList<YLeftItem> yLeftItems = null;
+    private List<YLeftItem> yLeftItems = null;
     @SerializedName("colors")
     @Expose
-    private ArrayList<String> colors = null;
+    private List<String> colors = null;
+    @SerializedName("additionalDatas")
+    @Expose
+    private List<AdditionalData> additionalDatas = null;
+    @SerializedName("isAnimationRequired")
+    @Expose
+    private Boolean isAnimationRequired;
 
     /**
      * No args constructor for use in serialization
@@ -38,23 +46,29 @@ public class ChartItem {
 
     /**
      *
+     * @param additionalDatas
+     * @param subTitle
      * @param xLabels
      * @param yLeftItems
+     * @param isAnimationRequired
      * @param title
      * @param yLeftLabel
      * @param decimalFormatPattern
      * @param xLabel
      * @param colors
      */
-    public ChartItem(String title, String decimalFormatPattern, String xLabel, ArrayList<String> xLabels, String yLeftLabel, ArrayList<YLeftItem> yLeftItems, ArrayList<String> colors) {
+    public ChartItem(String title, String subTitle, String decimalFormatPattern, String xLabel, List<String> xLabels, String yLeftLabel, List<YLeftItem> yLeftItems, List<String> colors, List<AdditionalData> additionalDatas, Boolean isAnimationRequired) {
         super();
         this.title = title;
+        this.subTitle = subTitle;
         this.decimalFormatPattern = decimalFormatPattern;
         this.xLabel = xLabel;
         this.xLabels = xLabels;
         this.yLeftLabel = yLeftLabel;
         this.yLeftItems = yLeftItems;
         this.colors = colors;
+        this.additionalDatas = additionalDatas;
+        this.isAnimationRequired = isAnimationRequired;
     }
 
     public String getTitle() {
@@ -63,6 +77,14 @@ public class ChartItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public String getDecimalFormatPattern() {
@@ -81,11 +103,11 @@ public class ChartItem {
         this.xLabel = xLabel;
     }
 
-    public ArrayList<String> getXLabels() {
+    public List<String> getXLabels() {
         return xLabels;
     }
 
-    public void setXLabels(ArrayList<String> xLabels) {
+    public void setXLabels(List<String> xLabels) {
         this.xLabels = xLabels;
     }
 
@@ -97,20 +119,36 @@ public class ChartItem {
         this.yLeftLabel = yLeftLabel;
     }
 
-    public ArrayList<YLeftItem> getYLeftItems() {
+    public List<YLeftItem> getYLeftItems() {
         return yLeftItems;
     }
 
-    public void setYLeftItems(ArrayList<YLeftItem> yLeftItems) {
+    public void setYLeftItems(List<YLeftItem> yLeftItems) {
         this.yLeftItems = yLeftItems;
     }
 
-    public ArrayList<String> getColors() {
+    public List<String> getColors() {
         return colors;
     }
 
-    public void setColors(ArrayList<String> colors) {
+    public void setColors(List<String> colors) {
         this.colors = colors;
+    }
+
+    public List<AdditionalData> getAdditionalDatas() {
+        return additionalDatas;
+    }
+
+    public void setAdditionalDatas(List<AdditionalData> additionalDatas) {
+        this.additionalDatas = additionalDatas;
+    }
+
+    public Boolean getIsAnimationRequired() {
+        return isAnimationRequired;
+    }
+
+    public void setIsAnimationRequired(Boolean isAnimationRequired) {
+        this.isAnimationRequired = isAnimationRequired;
     }
 
 }
