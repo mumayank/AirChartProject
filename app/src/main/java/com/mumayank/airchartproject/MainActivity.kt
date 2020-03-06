@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
                 return "This is title of the chart"
             }
 
+            override fun getSubTitle(): String {
+                return "This is sub title of the chart"
+            }
+
             override fun getIsTitleVisible(): Boolean {
                 return true
             }

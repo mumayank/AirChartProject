@@ -35,6 +35,7 @@ class AirChart {
         fun getActivity(): Activity
         fun getChartHolderViewGroup(): ViewGroup?
         fun getTitle(): String
+        fun getSubTitle(): String
         fun getIsTitleVisible(): Boolean
         fun getColors(): ArrayList<String>
         fun getDecimalFormatPattern(): String
@@ -206,6 +207,7 @@ class AirChart {
 
             // setup views
             barInterface.getChartHolderViewGroup()?.title?.text = barInterface.getTitle()
+            barInterface.getChartHolderViewGroup()?.subTitle?.text = barInterface.getSubTitle()
             barInterface.getChartHolderViewGroup()?.title?.visibility = if (barInterface.getIsTitleVisible()) View.VISIBLE else View.GONE
             barInterface.getChartHolderViewGroup()?.xLabel?.text = barInterface.getXLabel()
             val yLabelLeft = barInterface.getChartHolderViewGroup()?.yLabelLeft as TextView?

@@ -17,9 +17,23 @@
         android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
-        tools:text="This is chart title" />
+        tools:text="This is chart title but what if it goes beyond a line" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@android:color/black"
+        tools:text="This is chart sub title only for noobs" />
 
     <FrameLayout
         android:id="@+id/rvHolderParent"
@@ -34,31 +48,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:visibility="invisible">
-
-            <LinearLayout
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:orientation="vertical"
-                tools:ignore="UselessLeaf" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Some text"
-                android:textColor="@android:color/black"
-                android:textSize="12sp"
-                tools:ignore="HardcodedText" />
-
-        </LinearLayout>
 
     </FrameLayout>
 
