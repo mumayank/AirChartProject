@@ -29,22 +29,27 @@ where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirChartProject.svg)]
 
 ## Usage
 
+#### STEP 1/3 : Add activity view model
 This library uses the power of ViewModel and Coroutines to do pre-processing in the background, and then display the chart on the UI.
 
 Hence, for your activity (say `MainActivity`), create your view model (say `MainViewModel`):
-```kotlin
+```
 import androidx.lifecycle.ViewModel
 class MainViewModel : ViewModel()
 ```
-
-Then, in your activity, initialize the library instance before loading data (i.e., before making any API call). This will load the view with beautiful progress UI
-```kotlin
-val airChart = AirChart(this, MainViewModel::class.java, parentLayout)
-```
 (Note that for an activity and all its fragment, same view model can be used. But use different view models for different activities)
 
+#### STEP 2/3 : Init the lib
+
+Then, in your activity, initialize the library instance before loading data (i.e., before making any API call). This will load the view with beautiful progress UI
+```
+val airChart = AirChart(this, MainViewModel::class.java, parentLayout)
+```
+
+#### STEP 3/3 : Use the lib
+
 Finally, when your data is ready, you can call this method to load the bar chart:
-```kotlin
+```
 airChart.bar(object: AirChart.BarInterface {
 
   override fun getTitle(): String? {
@@ -113,6 +118,11 @@ airChart.bar(object: AirChart.BarInterface {
 
 })
 
+```
+#### Note
+Note that you can init and use the library in one shot also like:
+```
+AirChart(this, MainViewModel::class.java, parentLayout).bar(...)
 ```
 
 Expected JSONObject of a chart item from the server to the client is:
