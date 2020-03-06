@@ -3,10 +3,7 @@ package com.mumayank.airchart
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -24,10 +21,11 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.ChartTouchListener
 import com.github.mikephil.charting.listener.OnChartGestureListener
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import kotlinx.android.synthetic.main.air_chart_view.view.*
+import kotlinx.android.synthetic.main.air_chart_view_rv_item_additional_data.view.*
+import kotlinx.android.synthetic.main.air_chart_view_rv_item_legends.view.*
 import mumayank.com.airrecyclerview.AirRv
 import java.text.DecimalFormat
-import kotlinx.android.synthetic.main.air_chart_view.view.*
-import kotlinx.android.synthetic.main.air_chart_view_rv_item.view.*
 
 class AirChart {
 
@@ -43,6 +41,7 @@ class AirChart {
         fun getXLabels(): ArrayList<String>
         fun getYLeftLabel(): String
         fun getYLeftItems(): java.util.ArrayList<YLeftItem>
+        fun getAdditionalData(): java.util.ArrayList<AdditionalData>?
         fun getIsAnimationRequired(): Boolean
         fun onValueSelected(e: Entry?)
         fun onNoValueSelected()
@@ -215,7 +214,7 @@ class AirChart {
             barInterface.getChartHolderViewGroup()?.yLabelRightLayout?.visibility = View.GONE
 
             // setup rv for legends
-            barInterface.getChartHolderViewGroup()?.rvHolderParent?.visibility = View.GONE
+            barInterface.getChartHolderViewGroup()?.rvHolderLegends?.visibility = View.GONE
 
             // check for no data
             barInterface.getChartHolderViewGroup()?.noData?.visibility = if (valuesCount == 0) View.VISIBLE else View.GONE
@@ -293,7 +292,7 @@ class AirChart {
 
             // setup legend
             if (barInterface.getYLeftItems().size > 1) {
-                barInterface.getChartHolderViewGroup()?.rvHolderParent?.visibility = View.VISIBLE
+                barInterface.getChartHolderViewGroup()?.rvHolderLegends?.visibility = View.VISIBLE
                 val airRv = AirRv(object: AirRv.Callback {
                     override fun getAppContext(): Context? {
                         return barInterface.getActivity()
@@ -301,7 +300,7 @@ class AirChart {
 
                     override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
                         val yVal = barInterface.getYLeftItems()[position]
-                        val customViewHolder = viewHolder as CustomViewHolder
+                        val customViewHolder = viewHolder as LegedsViewHolder
                         customViewHolder.legendLabelTV.text = yVal.legendLabel
                         customViewHolder.legendColorLayout.setBackgroundColor(
                                 if (barInterface.getColors().isNullOrEmpty().not()) {
@@ -317,11 +316,19 @@ class AirChart {
                     }
 
                     override fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
-                        return StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                        return object: StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+                            override fun canScrollVertically(): Boolean {
+                                return false
+                            }
+
+                            override fun canScrollHorizontally(): Boolean {
+                                return false
+                            }
+                        }
                     }
 
                     override fun getRvHolderViewGroup(): ViewGroup? {
-                        return barInterface.getChartHolderViewGroup()?.rvHolder
+                        return barInterface.getChartHolderViewGroup()?.rvHolderLegends
                     }
 
                     override fun getSize(): Int? {
@@ -329,11 +336,11 @@ class AirChart {
                     }
 
                     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
-                        return CustomViewHolder(view)
+                        return LegedsViewHolder(view)
                     }
 
                     override fun getViewLayoutId(viewType: Int): Int? {
-                        return R.layout.air_chart_view_rv_item
+                        return R.layout.air_chart_view_rv_item_legends
                     }
 
                     override fun getViewType(position: Int): Int? {
@@ -343,9 +350,74 @@ class AirChart {
                 })
                 airRv.rv.isNestedScrollingEnabled = false
                 airRv.rv.setHasFixedSize(true)
-                airRv.rv.setItemViewCacheSize(20)
             } else {
-                barInterface.getChartHolderViewGroup()?.rvHolderParent?.visibility = View.GONE
+                barInterface.getChartHolderViewGroup()?.rvHolderLegends?.visibility = View.GONE
+            }
+
+            // setup additional data
+            if (barInterface.getAdditionalData() == null) {
+                barInterface.getChartHolderViewGroup()?.rvHolderAdditionalData?.visibility = View.GONE
+            } else {
+                val additionalDatas = arrayListOf<AdditionalData>()
+                additionalDatas.addAll(barInterface.getAdditionalData() as ArrayList<AdditionalData>)
+                if (additionalDatas.size % 2 != 0) {
+                    additionalDatas.add(AdditionalData("-", "-"))
+                }
+
+                val airRv = AirRv(object: AirRv.Callback {
+                    override fun getAppContext(): Context? {
+                        return barInterface.getActivity()
+                    }
+
+                    override fun getBindView(viewHolder: RecyclerView.ViewHolder, viewType: Int, position: Int) {
+                        val additionalData = additionalDatas[position]
+                        val additionalDataViewHolder = viewHolder as AdditionalDataViewHolder
+                        additionalDataViewHolder.keyTV.text = additionalData.key
+                        additionalDataViewHolder.valueTV.text = additionalData.value
+                        additionalDataViewHolder.keyTV.gravity = if (position % 2 != 0) Gravity.END else Gravity.START
+                        additionalDataViewHolder.valueTV.gravity = if (position % 2 != 0) Gravity.END else Gravity.START
+                    }
+
+                    override fun getEmptyView(): View? {
+                        return null
+                    }
+
+                    override fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
+                        return object: StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+                            override fun canScrollVertically(): Boolean {
+                                return false
+                            }
+
+                            override fun canScrollHorizontally(): Boolean {
+                                return false
+                            }
+                        }
+                    }
+
+                    override fun getRvHolderViewGroup(): ViewGroup? {
+                        return barInterface.getChartHolderViewGroup()?.rvHolderAdditionalData
+                    }
+
+                    override fun getSize(): Int? {
+                        return additionalDatas.size
+                    }
+
+                    override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
+                        return AdditionalDataViewHolder(view)
+                    }
+
+                    override fun getViewLayoutId(viewType: Int): Int? {
+                        return R.layout.air_chart_view_rv_item_additional_data
+                    }
+
+                    override fun getViewType(position: Int): Int? {
+                        return 0
+                    }
+
+                })
+                airRv.rv.isNestedScrollingEnabled = false
+                airRv.rv.setHasFixedSize(true)
+                barInterface.getChartHolderViewGroup()?.rvHolderAdditionalData?.visibility = View.VISIBLE
             }
 
             if (barInterface.getIsAnimationRequired()) {
@@ -376,9 +448,14 @@ class AirChart {
         }
     }
 
-    class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class LegedsViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val legendColorLayout: LinearLayout = view.legendColorLayout
         val legendLabelTV: TextView = view.legendLabelTV
+    }
+
+    class AdditionalDataViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val keyTV: TextView = view.keyTV
+        val valueTV: TextView = view.valueTV
     }
 
 }

@@ -29,27 +29,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
+        android:textSize="12sp"
         android:gravity="center"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textColor="@android:color/black"
         tools:text="This is chart sub title only for noobs" />
 
-    <FrameLayout
-        android:id="@+id/rvHolderParent"
+    <LinearLayout
+        android:id="@+id/rvHolderAdditionalData"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle_rounded_corner_outline"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/rvHolderLegends"
+        android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <LinearLayout
-            android:id="@+id/rvHolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical" />
-
-    </FrameLayout>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical" />
 
     <FrameLayout
         android:layout_width="match_parent"

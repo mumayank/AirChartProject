@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.data.Entry
+import com.mumayank.airchart.AdditionalData
 import com.mumayank.airchart.AirChart
 import com.mumayank.airchart.ChartItem
 import com.mumayank.airchart.YLeftItem
@@ -61,8 +63,14 @@ class MainActivity : AppCompatActivity() {
 
             override fun getYLeftItems(): java.util.ArrayList<YLeftItem> {
                 return arrayListOf(
-                    YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f))
+                    YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f)),
+                    YLeftItem("Legend 2", arrayListOf(5f, 5.5f, 3f, 4f)),
+                    YLeftItem("Legend 3", arrayListOf(5f, 5.5f, 3f, 4f))
                 )
+            }
+
+            override fun getAdditionalData(): java.util.ArrayList<AdditionalData>? {
+                return arrayListOf(AdditionalData("something", "46.5"), AdditionalData("some other thing", "this is a good value"),AdditionalData("something", "46.5"), AdditionalData("some other thing", "this is a good value"),AdditionalData("something", "46.5"))
             }
 
             override fun getIsAnimationRequired(): Boolean {
