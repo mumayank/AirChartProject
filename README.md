@@ -41,6 +41,8 @@ Then, in your activity, initialize the library instance before loading data (i.e
 ```kotlin
 val airChart = AirChart(this, MainViewModel::class.java, parentLayout)
 ```
+(Note that for an activity and all its fragment, same view model can be used. But use different view models for different activities)
+
 Finally, when your data is ready, you can call this method to load the bar chart:
 ```kotlin
 airChart.bar(object: AirChart.BarInterface {
