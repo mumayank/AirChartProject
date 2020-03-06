@@ -142,6 +142,16 @@ Use ChartItem class (provided by this lib) for creating a chartItem object from 
 
 ## Changelog
 
+#### v.0.1.5
+
++ add extra padding to the left of y-left-label so that it doesn't appear at too much corner of the whole view
++ removed warnings from the project
+
+If you are already using this library, and you decide to upgrade, the change required from your end would be:
++ None
+
+---
+
 #### v.0.1.4
 
 + change getContext to getActivity to avoid confusion when used in the activity
