@@ -3,7 +3,7 @@
 
 ## Setup
 
-Add this line in your root build.gradle at the end of repositories:
+Add this line in your `root build.gradle` at the end of repositories:
 
 ```gradle
 allprojects {
@@ -13,8 +13,14 @@ allprojects {
   }
 }
   ```
-Add this line in your app build.gradle:
+Add this line in your `app build.gradle`:
 ```gradle
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 dependencies {
   implementation 'com.github.mumayank:AirChartProject:LATEST_VERSION' // add this line
 }
@@ -23,72 +29,85 @@ where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirChartProject.svg)]
 
 ## Usage
 
+This library uses the power of ViewModel and Coroutines to do pre-processing in the background, and then display the chart on the UI.
+
+Hence, for your activity (say `MainActivity`), create your view model (say `MainViewModel`):
+```kotlin
+import androidx.lifecycle.ViewModel
+class MainViewModel : ViewModel()
 ```
 
-AirChart.bar(object: AirChart.BarInterface{
+Then, in your activity, initialize the library instance before loading data (i.e., before making any API call). This will load the view with beautiful progress UI
+```kotlin
+val airChart = AirChart(this, MainViewModel::class.java, parentLayout)
+```
+Finally, when your data is ready, you can call this method to load the bar chart:
+```kotlin
+airChart.bar(object: AirChart.BarInterface {
 
-    override fun getContext(): Context {
-        return this@MainActivity
-    }
+  override fun getTitle(): String? {
+      return "This is title of the chart"
+  }
 
-    override fun getChartHolderViewGroup(): ViewGroup? {
-        // return any regular ViewGroup (LinearLayout, FrameLayout, etc)
-        // where you want the chart to appear
+  override fun getXLabel(): String {
+      return "This is X label"
+  }
 
-        return parentLayout
-    }
+  override fun getXLabels(): ArrayList<String> {
+      return arrayListOf("A", "B", "C", "D")
+  }
 
-    override fun getTitle(): String {
-        return "This is title of the chart"
-    }
+  override fun getYLeftLabel(): String {
+      return "This is Y label"
+  }
 
-    override fun getIsTitleVisible(): Boolean {
-        // Optionally, in case you have a different view
-        // for the chart title, you can hide it
+  override fun getYLeftItems(): java.util.ArrayList<YLeftItem> {
+      return arrayListOf(
+          YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f)),
+          YLeftItem("Legend 2", arrayListOf(5f, 5.5f, 3f, 4f)),
+          YLeftItem("Legend 3", arrayListOf(5f, 5.5f, 3f, 4f))
+      )
+  }
 
-        return true
-    }
+  /**
+   * Additional optional functions that can be overridden on demand:
+   */
 
-    override fun getColors(): ArrayList<String> {
-        // Hex code of the list of colors, applied cyclically
+  override fun getSubTitle(): String {
+      return "This is a sub title"
+  }
 
-        return arrayListOf("#ffa726", "#2196f3")
-    }
+  override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
+      return arrayListOf(
+          AdditionalData("Total turnout", "4.5"),
+          AdditionalData("Final turnover", "19.5 %"),
+          AdditionalData("Subtracted value", "As discussed")
+      )
+  }
 
-    override fun getDecimalFormatPattern(): String {
-        // How should the values above the bars be visible? You can specify the format here
+  override fun getCustomViewLayoutResId(): Int? {
+      return R.layout.custom_view
+  }
 
-        return "0.00"
-    }
+  override fun getColors(): ArrayList<String>? {
+      return arrayListOf("#ffa726", "#2196f3")
+  }
 
-    override fun getXLabel(): String {
-        return "This is X label"
-    }
+  override fun getDecimalFormatPattern(): String {
+      return "0.00"
+  }
 
-    override fun getXLabels(): ArrayList<String> {
-        return arrayListOf("A", "B", "C", "D")
-    }
+  override fun getIsAnimationRequired(): Boolean {
+      return true
+  }
 
-    override fun getYLeftLabel(): String {
-        return "This is Y label"
-    }
+  override fun onValueSelected(e: Entry?) {
+      // later
+  }
 
-    override fun getYLeftItems(): java.util.ArrayList<YLeftItem> {
-        // The Y-Axis values. Note that when supplied more than 1 item in the arraylist,
-        // the chart automatically gets converted into a group-bar chart
-
-        return arrayListOf(
-            YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f))
-        )
-    }
-
-    override fun onNoValueSelected() {
-        // you can optionally perform some action when the user selects outside any bar
-    }
-
-    override fun onValueSelected(e: Entry?) {
-        // you can optionally perform some action when the user selects any bar
-    }
+  override fun onNoValueSelected() {
+      // later
+  }
 
 })
 
@@ -99,6 +118,7 @@ Expected JSONObject of a chart item from the server to the client is:
 ```json
 {
   "title": "Student records",
+  "subTitle": "Subtitle",
   "decimalFormatPattern": "0.0",
   "xLabel": "Projects",
   "xLabels": [
@@ -134,13 +154,38 @@ Expected JSONObject of a chart item from the server to the client is:
   "colors": [
     "#2196f3",
     "#ff9800"
-  ]
+  ],
+  "additionalDatas": [
+    {
+      "key": "Key1",
+      "value": "Value1"
+    },
+    {
+      "key": "Key2",
+      "value2": "Value2"
+    }
+  ],
+  "isAnimationRequired": true
 }
 ```
 
-Use ChartItem class (provided by this lib) for creating a chartItem object from JSON.
+To create Java class object from this JSON, ChartItem, YLeftItem, and AdditionalData classes have been included in this lib.
 
 ## Changelog
+
+#### v.0.2.1
+
+Majore update!
++ The chart handles progress bar on its own by splitting initialization of the view and loading of the chart
++ Additional interface methods are not inflated by default now. They can be overridden by the developer on demand
++ Added option to add subtitle text, additional info key-value pairs, and a custom view
++ Uses the power of ViewModels to lazy load the bar to drastically improve performance
+
+If you are already using this library, and you decide to upgrade, the change required from your end would be:
++ Update `app build.gradle`
++ Create your activity's `ViewModel`
++ Change the usage of the library 
+---
 
 #### v.0.1.5
 
