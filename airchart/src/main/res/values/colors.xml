@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorLightGray">#D3D3D3</color>
-    <color name="blueGrey50" tools:keep="@color/blueGrey50">#eceff1</color>
+    <color name="blueGrey50">#eceff1</color>
+    <color name="grey300">#e0e0e0</color>
 </resources>
