@@ -22,16 +22,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun showChart(shouldShowChar2: Boolean = false) {
 
-        val airChart2 = AirChart(this, MainViewModel::class.java, parentLayout)
+        val airChart2 = AirChart(this, parentLayout)
 
-        AirCoroutine.execute(AirCoroutine.getViewModel(this, MainViewModel::class.java), object: AirCoroutine.Callback {
-            override suspend fun doTaskInBg(viewModel: ViewModel): AirCoroutine.TaskResult? {
+        AirCoroutine.execute(this, object: AirCoroutine.Callback {
+
+            override suspend fun doTaskInBg(viewModel: ViewModel): Boolean? {
                 delay(2000)
-                return AirCoroutine.TaskResult.SUCCESS
+                return true
             }
 
-            override fun getTaskType(): AirCoroutine.TaskType? {
-                return AirCoroutine.TaskType.CALCULATIONS
+            override fun isTaskTypeCalculation(): Boolean {
+                return true
             }
 
             override fun onFailure(viewModel: ViewModel) {
