@@ -1,4 +1,4 @@
-package com.mumayank.airchart;
+package com.mumayank.airchart.custom_views;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.github.mikephil.charting.data.Entry
-import com.mumayank.airchart.AdditionalData
+import com.mumayank.airchart.data_classes.AdditionalData
 import com.mumayank.airchart.AirChart
-import com.mumayank.airchart.YLeftItem
+import com.mumayank.airchart.charts.bar.AirChartBar
+import com.mumayank.airchart.data_classes.YLeftItem
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showChart(shouldShowChar2: Boolean = false) {
 
-        val airChart2 = AirChart(this, parentLayout)
+        val airChart = AirChart(this, parentLayout)
 
         AirCoroutine.execute(this, object: AirCoroutine.Callback {
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(viewModel: ViewModel) {
-                airChart2.bar(object: AirChart.BarInterface {
+                airChart.showBarChart(object: AirChartBar.BarInterface {
 
                     override fun getTitle(): String? {
                         return "This is title of the chart"
@@ -61,13 +62,25 @@ class MainActivity : AppCompatActivity() {
                     override fun getYLeftItems(): java.util.ArrayList<YLeftItem> {
                         if (shouldShowChar2) {
                             return arrayListOf(
-                                YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f))
+                                YLeftItem(
+                                    "Legend 1",
+                                    arrayListOf(5f, 5.5f, 3f, 4f)
+                                )
                             )
                         } else {
                             return arrayListOf(
-                                YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f)),
-                                YLeftItem("Legend 2", arrayListOf(5f, 5.5f, 3f, 4f)),
-                                YLeftItem("Legend 3", arrayListOf(5f, 5.5f, 3f, 4f))
+                                YLeftItem(
+                                    "Legend 1",
+                                    arrayListOf(5f, 5.5f, 3f, 4f)
+                                ),
+                                YLeftItem(
+                                    "Legend 2",
+                                    arrayListOf(5f, 5.5f, 3f, 4f)
+                                ),
+                                YLeftItem(
+                                    "Legend 3",
+                                    arrayListOf(5f, 5.5f, 3f, 4f)
+                                )
                             )
                         }
                     }
@@ -82,9 +95,18 @@ class MainActivity : AppCompatActivity() {
 
                     override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
                         return arrayListOf(
-                            AdditionalData("Total turnout", "4.5"),
-                            AdditionalData("Final turnover", "19.5 %"),
-                            AdditionalData("Subtracted value", "As discussed")
+                            AdditionalData(
+                                "Total turnout",
+                                "4.5"
+                            ),
+                            AdditionalData(
+                                "Final turnover",
+                                "19.5 %"
+                            ),
+                            AdditionalData(
+                                "Subtracted value",
+                                "As discussed"
+                            )
                         )
                     }
 

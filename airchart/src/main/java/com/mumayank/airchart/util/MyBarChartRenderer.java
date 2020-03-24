@@ -1,4 +1,4 @@
-package com.mumayank.airchart;
+package com.mumayank.airchart.util;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

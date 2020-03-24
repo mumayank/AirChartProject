@@ -1,4 +1,4 @@
-package com.mumayank.airchart;
+package com.mumayank.airchart.data_classes;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

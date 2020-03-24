@@ -108,7 +108,7 @@
                             app:tint="@android:color/black"
                             tools:ignore="ContentDescription,VectorDrawableCompat" />
 
-                        <com.mumayank.airchart.TextViewVertical
+                        <com.mumayank.airchart.custom_views.TextViewVertical
                             android:id="@+id/yLabelLeft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                             app:tint="@android:color/black"
                             tools:ignore="ContentDescription" />
 
-                        <com.mumayank.airchart.TextViewVertical
+                        <com.mumayank.airchart.custom_views.TextViewVertical
                             android:id="@+id/yLabelRight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -281,7 +281,7 @@
                                 app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
                                 app:tint="@android:color/black" />
 
-                            <com.mumayank.airchart.TextViewVertical
+                            <com.mumayank.airchart.custom_views.TextViewVertical
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
