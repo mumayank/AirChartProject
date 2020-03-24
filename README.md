@@ -29,26 +29,12 @@ where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirChartProject.svg)]
 
 ## Usage
 
-#### STEP 1/3 : Add activity view model
-This library uses the power of ViewModel and Coroutines to do pre-processing in the background, and then display the chart on the UI.
-
-Hence, for your activity (say `MainActivity`), create your view model (say `MainViewModel`):
+In your activity, initialize the library instance before loading data (i.e., before making any API call). This will load the view with beautiful progress UI
 ```
-import androidx.lifecycle.ViewModel
-class MainViewModel : ViewModel()
-```
-(Note that for an activity and all its fragment, same view model can be used. But use different view models for different activities)
-
-#### STEP 2/3 : Init the lib
-
-Then, in your activity, initialize the library instance before loading data (i.e., before making any API call). This will load the view with beautiful progress UI
-```
-val airChart = AirChart(this, MainViewModel::class.java, parentLayout)
+val airChart = AirChart(this, parentLayout)
 ```
 
-#### STEP 3/3 : Use the lib
-
-Finally, when your data is ready, you can call this method to load the bar chart:
+Lastly, when your data is ready, you can call this method to load the bar chart:
 ```
 airChart.bar(object: AirChart.BarInterface {
 
@@ -184,6 +170,13 @@ Expected JSONObject of a chart item from the server to the client is:
 To create Java class object from this JSON, ChartItem, YLeftItem, and AdditionalData classes have been included in this lib.
 
 ## Changelog
+
+#### v.0.3
++ updated the underlying library AirCoroutine. This helps in removing the need to manually create your own view model for doing background tasks.
+
+If you are already using this library, and you decide to upgrade, the change required from your end would be:
++ Remove your activity's `ViewModel`
++ Remove activity's view model as a param of AirChart lib's constructor
 
 #### v.0.2.1
 
