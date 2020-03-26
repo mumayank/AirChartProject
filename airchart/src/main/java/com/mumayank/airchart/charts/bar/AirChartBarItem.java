@@ -1,10 +1,11 @@
-package com.mumayank.airchart.data_classes;
+package com.mumayank.airchart.charts.bar;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mumayank.airchart.data_classes.AdditionalData;
 
-public class ChartItem {
+public class AirChartBarItem {
 
     @SerializedName("title")
     @Expose
@@ -26,7 +27,7 @@ public class ChartItem {
     private String yLeftLabel;
     @SerializedName("yLeftItems")
     @Expose
-    private List<YLeftItem> yLeftItems = null;
+    private List<AirChartBarValueItem> airChartBarValueItems = null;
     @SerializedName("colors")
     @Expose
     private List<String> colors = null;
@@ -41,7 +42,7 @@ public class ChartItem {
      * No args constructor for use in serialization
      *
      */
-    public ChartItem() {
+    public AirChartBarItem() {
     }
 
     /**
@@ -49,7 +50,7 @@ public class ChartItem {
      * @param additionalDatas
      * @param subTitle
      * @param xLabels
-     * @param yLeftItems
+     * @param airChartBarValueItems
      * @param isAnimationRequired
      * @param title
      * @param yLeftLabel
@@ -57,7 +58,7 @@ public class ChartItem {
      * @param xLabel
      * @param colors
      */
-    public ChartItem(String title, String subTitle, String decimalFormatPattern, String xLabel, List<String> xLabels, String yLeftLabel, List<YLeftItem> yLeftItems, List<String> colors, List<AdditionalData> additionalDatas, Boolean isAnimationRequired) {
+    public AirChartBarItem(String title, String subTitle, String decimalFormatPattern, String xLabel, List<String> xLabels, String yLeftLabel, List<AirChartBarValueItem> airChartBarValueItems, List<String> colors, List<AdditionalData> additionalDatas, Boolean isAnimationRequired) {
         super();
         this.title = title;
         this.subTitle = subTitle;
@@ -65,7 +66,7 @@ public class ChartItem {
         this.xLabel = xLabel;
         this.xLabels = xLabels;
         this.yLeftLabel = yLeftLabel;
-        this.yLeftItems = yLeftItems;
+        this.airChartBarValueItems = airChartBarValueItems;
         this.colors = colors;
         this.additionalDatas = additionalDatas;
         this.isAnimationRequired = isAnimationRequired;
@@ -119,12 +120,12 @@ public class ChartItem {
         this.yLeftLabel = yLeftLabel;
     }
 
-    public List<YLeftItem> getYLeftItems() {
-        return yLeftItems;
+    public List<AirChartBarValueItem> getYLeftItems() {
+        return airChartBarValueItems;
     }
 
-    public void setYLeftItems(List<YLeftItem> yLeftItems) {
-        this.yLeftItems = yLeftItems;
+    public void setYLeftItems(List<AirChartBarValueItem> airChartBarValueItems) {
+        this.airChartBarValueItems = airChartBarValueItems;
     }
 
     public List<String> getColors() {

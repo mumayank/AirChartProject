@@ -127,7 +127,7 @@ Expected JSONObject of a chart item from the server to the client is:
     "Lalu"
   ],
   "yLeftLabel": "Progress Value",
-  "yLeftItems": [
+  "airChartBarValueItems": [
     {
       "legendLabel": "Scope",
       "values": [
