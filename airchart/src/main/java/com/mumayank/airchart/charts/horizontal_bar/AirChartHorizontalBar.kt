@@ -1,13 +1,11 @@
 package com.mumayank.airchart.charts.horizontal_bar
 
 import android.app.Activity
-import android.content.Context
 import com.github.mikephil.charting.charts.BarChart
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -24,12 +22,9 @@ import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.air_chart_view.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import mumayank.com.airrecyclerview.AirRv
 import java.text.DecimalFormat
 import android.graphics.Color
 import android.view.*
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.GridLayoutManager
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.mumayank.airchart.R
 import com.mumayank.airchart.charts.bar.AirChartBar
@@ -48,6 +43,7 @@ class AirChartHorizontalBar {
             barInterface: AirChartBar.BarInterface,
             getBarChart: ((barChart: BarChart) -> Unit)? = null
         ) {
+
             // make chart
             val barChart = HorizontalBarChart(activity)
 
@@ -60,17 +56,13 @@ class AirChartHorizontalBar {
                 override suspend fun doTaskInBg(viewModel: ViewModel): Boolean? {
 
                     // label count
-                    for (yItem in barInterface.getYLeftItems()) {
-                        for (value in yItem.values) {
-                            valuesCount++
-                        }
-                    }
+                    valuesCount = AirChartUtil.getValuesCount(valuesCount, barInterface.getYLeftItems())
 
                     // transform colors
                     if (barInterface.getColors() == null) {
                         colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                     } else {
-                        for (color in (barInterface.getColors() as ArrayList<String>)) {
+                        for (color in barInterface.getColors() as ArrayList<String>) {
                             colors.add(Color.parseColor(color))
                         }
                     }
@@ -258,7 +250,7 @@ class AirChartHorizontalBar {
 
                     }
                     // setup chart
-                    /*barChart.description = null
+                    barChart.description = null
                     barChart.setVisibleXRangeMinimum(2f)
                     barChart.setNoDataText("No data to display")
                     barChart.setGridBackgroundColor(
@@ -280,22 +272,76 @@ class AirChartHorizontalBar {
                     barChart.isHighlightPerDragEnabled = false
                     barChart.extraBottomOffset = 8f
                     barChart.legend?.isEnabled = false
-                    barChart.renderer =
-                        MyBarChartRenderer(
-                            barChart,
-                            barChart.animator,
-                            barChart.viewPortHandler,
-                            BAR_RADIUS,
-                            colors
-                        )
+                    barChart.setExtraOffsets(0f, 32f, 0f, 16f)
+                    barChart.setOnChartValueSelectedListener(object :
+                        OnChartValueSelectedListener {
+                        override fun onNothingSelected() {
+                            barInterface.onNoValueSelected()
+                        }
 
+                        override fun onValueSelected(e: Entry?, h: Highlight?) {
+                            if (e == null) {
+                                return
+                            }
+                            barChart.highlightValues(null)
+                            barInterface.onValueSelected(e)
+                        }
+                    })
 
                     // set zoom operations
-                    */
+                    barChart.onChartGestureListener = object : OnChartGestureListener {
+                        override fun onChartGestureEnd(
+                            me: MotionEvent?,
+                            lastPerformedGesture: ChartTouchListener.ChartGesture?
+                        ) {
+                            // do nothing
+                        }
+
+                        override fun onChartFling(
+                            me1: MotionEvent?,
+                            me2: MotionEvent?,
+                            velocityX: Float,
+                            velocityY: Float
+                        ) {
+                            // do nothing
+                        }
+
+                        override fun onChartSingleTapped(me: MotionEvent?) {
+                            // do nothing
+                        }
+
+                        override fun onChartGestureStart(
+                            me: MotionEvent?,
+                            lastPerformedGesture: ChartTouchListener.ChartGesture?
+                        ) {
+                            // do nothing
+                        }
+
+                        override fun onChartScale(
+                            me: MotionEvent?,
+                            scaleX: Float,
+                            scaleY: Float
+                        ) {
+                            AirChartUtil.drawValuesAccordinglyInBarChart(barChart)
+                        }
+
+                        override fun onChartLongPressed(me: MotionEvent?) {
+                            // do nothing
+                        }
+
+                        override fun onChartDoubleTapped(me: MotionEvent?) {
+                            // do nothing
+                        }
+
+                        override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
+                            // do nothing
+                        }
+
+                    }
 
                     // setup spacing
                     if (barChart.data.dataSetCount > 1) {
-                        // val nos = barInterface.getXLabels().size.toFloat()
+                        // val nos = xLabels.size.toFloat()
                         val barSpace = 0f
                         val groupSpace = 0.3f
                         val totalBarWidth = 1f - groupSpace
@@ -339,10 +385,10 @@ class AirChartHorizontalBar {
                         chartHolderViewGroup?.subTitle?.visibility =
                             if (barInterface.getSubTitle().isEmpty().not()) View.VISIBLE else View.GONE
                         chartHolderViewGroup?.xLabel?.text =
-                            barInterface.getXLabel()
+                            barInterface.getYLeftLabel()
                         val yLabelLeft =
                             chartHolderViewGroup?.yLabelLeft as TextView?
-                        yLabelLeft?.text = barInterface.getYLeftLabel()
+                        yLabelLeft?.text = barInterface.getXLabel()
                         chartHolderViewGroup?.yLabelRightLayout?.visibility =
                             View.GONE
 
@@ -371,7 +417,7 @@ class AirChartHorizontalBar {
                         drawValuesAccordingly(barChart)
 
                         // setup legend
-                        AirChartUtil.setupLegend(activity, colors, chartHolderViewGroup?.rvHolderLegends, barInterface.getYLeftItems())
+                        AirChartUtil.setupLegend(activity, colors.reversed() as ArrayList<Int>, chartHolderViewGroup?.rvHolderLegends, barInterface.getYLeftItems())
 
                         // setup additional data
                         AirChartUtil.setupAdditionalData(activity, chartHolderViewGroup?.rvHolderAdditionalData, barInterface.getAdditionalDatas())

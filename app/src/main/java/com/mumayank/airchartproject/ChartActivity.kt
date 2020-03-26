@@ -18,8 +18,8 @@ class ChartActivity : AppCompatActivity() {
     }
 
     enum class ChartType {
-        BAR,
-        HORIZONTAL_BAR
+        BAR
+        // HORIZONTAL_BAR
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,110 +74,11 @@ class ChartActivity : AppCompatActivity() {
                             }
 
                             override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
-                                if (false) {
+                                if (true) {
                                     return arrayListOf(
                                         AirChartValueItem(
                                             "Legend 1",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
-                                        )
-                                    )
-                                } else {
-                                    return arrayListOf(
-                                        AirChartValueItem(
-                                            "Legend 1",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
-                                        ),
-                                        AirChartValueItem(
-                                            "Legend 2",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
-                                        ),
-                                        AirChartValueItem(
-                                            "Legend 3",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
-                                        )
-                                    )
-                                }
-                            }
-
-                            /**
-                             * Additional functions need to be inflated manually:
-                             */
-
-                            override fun getSubTitle(): String {
-                                return "This is a sub title"
-                            }
-
-                            override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-                                return arrayListOf(
-                                    AirChartAdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    )
-                                )
-                            }
-
-                            /*override fun getCustomViewLayoutResId(): Int? {
-                                return R.layout.custom_view
-                            }*/
-
-                            override fun getColors(): ArrayList<String>? {
-                                return arrayListOf("#ffa726", "#2196f3")
-                            }
-
-                            override fun getDecimalFormatPattern(): String {
-                                return "0.00"
-                            }
-
-                            override fun getIsAnimationRequired(): Boolean {
-                                return true
-                            }
-
-                            override fun onValueSelected(e: Entry?) {
-                                // later
-                            }
-
-                            override fun onNoValueSelected() {
-                                // later
-                            }
-
-                        })
-
-                    }
-
-                    ChartType.HORIZONTAL_BAR -> {
-
-                        airChart.showHorizontalBarChart(object: AirChartBar.BarInterface {
-
-                            override fun getTitle(): String? {
-                                return "This is title of the chart"
-                            }
-
-                            override fun getXLabel(): String {
-                                return "This is X label"
-                            }
-
-                            override fun getXLabels(): ArrayList<String> {
-                                return arrayListOf("A", "B", "C", "D")
-                            }
-
-                            override fun getYLeftLabel(): String {
-                                return "This is Y label"
-                            }
-
-                            override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
-                                if (false) {
-                                    return arrayListOf(
-                                        AirChartValueItem(
-                                            "Legend 1",
-                                            arrayListOf(1f, 2.5f, 3f, 4f)
+                                            arrayListOf(5f, 8f, 10f, 12f)
                                         )
                                     )
                                 } else {
@@ -193,6 +94,10 @@ class ChartActivity : AppCompatActivity() {
                                         AirChartValueItem(
                                             "Legend 3",
                                             arrayListOf(10f, 9f, 8f, 7f)
+                                        ),
+                                        AirChartValueItem(
+                                            "Legend 4",
+                                            arrayListOf(1f, 2f, 3f, 4f)
                                         )
                                     )
                                 }
@@ -201,6 +106,7 @@ class ChartActivity : AppCompatActivity() {
                             /**
                              * Additional functions need to be inflated manually:
                              */
+
                             override fun getSubTitle(): String {
                                 return "This is a sub title"
                             }
@@ -208,65 +114,17 @@ class ChartActivity : AppCompatActivity() {
                             override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
                                 return arrayListOf(
                                     AirChartAdditionalData(
-                                        "A",
-                                        "4.5"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "B",
-                                        "19.5 %"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "This is a long text sent by the server so that it goes to multiple lines. let us see how this looks",
-                                        "As discussed"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "D",
-                                        "4.5"
-                                    ),
-                                    AirChartAdditionalData(
-                                        "E",
-                                        "19.5 %"
-                                    )/*,
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
                                         "Total turnout",
                                         "4.5"
                                     ),
-                                    AdditionalData(
-                                        "Final turnover",
+                                    AirChartAdditionalData(
+                                        "Final turnover and suppose this field has a longer text then what?",
                                         "19.5 %"
                                     ),
-                                    AdditionalData(
+                                    AirChartAdditionalData(
                                         "Subtracted value",
                                         "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    )*/
+                                    )
                                 )
                             }
 
@@ -275,7 +133,7 @@ class ChartActivity : AppCompatActivity() {
                             }*/
 
                             override fun getColors(): ArrayList<String>? {
-                                return arrayListOf("#ffa726", "#2196f3", "#6200EE")
+                                return arrayListOf("#E57373", "#7986CB", "#FFD54F", "#AED581")
                             }
 
                             override fun getDecimalFormatPattern(): String {
@@ -297,6 +155,8 @@ class ChartActivity : AppCompatActivity() {
                         })
 
                     }
+
+
 
                 }
 

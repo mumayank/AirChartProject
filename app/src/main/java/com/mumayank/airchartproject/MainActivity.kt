@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         bar.setOnClickListener { startActivity(Intent(this, ChartActivity::class.java).putExtra(ChartActivity.INTENT_EXTRA_CHART_TYPE, ChartActivity.ChartType.BAR.toString())) }
-        horizontalBar.setOnClickListener { startActivity(Intent(this, ChartActivity::class.java).putExtra(ChartActivity.INTENT_EXTRA_CHART_TYPE, ChartActivity.ChartType.HORIZONTAL_BAR.toString())) }
+        //horizontalBar.setOnClickListener { startActivity(Intent(this, ChartActivity::class.java).putExtra(ChartActivity.INTENT_EXTRA_CHART_TYPE, ChartActivity.ChartType.HORIZONTAL_BAR.toString())) }
 
     }
 }

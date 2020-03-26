@@ -1,4 +1,4 @@
-package com.mumayank.airchart.charts.bar
+package com.mumayank.airchart.charts.horizontal_bar
 
 import android.app.Activity
 import com.github.mikephil.charting.charts.BarChart
@@ -27,51 +27,12 @@ import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import android.graphics.Color
 import android.view.*
+import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.mumayank.airchart.R
+import com.mumayank.airchart.charts.bar.AirChartBar
 import com.mumayank.airchart.data_classes.AirChartValueItem
 
-class AirChartBar {
-
-    interface BarInterface {
-        fun getTitle(): String?
-        fun getXLabel(): String
-        fun getXLabels(): ArrayList<String>
-        fun getYLeftLabel(): String
-        fun getYLeftItems(): java.util.ArrayList<AirChartValueItem>
-
-        fun getSubTitle(): String {
-            return ""
-        }
-
-        fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-            return null
-        }
-
-        fun getCustomViewLayoutResId(): Int? {
-            return null
-        }
-
-        fun getColors(): ArrayList<String>? {
-            return null
-        }
-
-        fun getDecimalFormatPattern(): String {
-            return "0.#"
-        }
-
-        fun getIsAnimationRequired(): Boolean {
-            return false
-        }
-
-        fun onValueSelected(e: Entry?) {
-            return
-        }
-
-        fun onNoValueSelected() {
-            return
-        }
-
-    }
+class AirChartHorizontalBar2 {
 
     companion object {
 
@@ -82,11 +43,11 @@ class AirChartBar {
             activity: Activity,
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
-            barInterface: BarInterface,
+            barInterface: AirChartBar.BarInterface,
             getBarChart: ((barChart: BarChart) -> Unit)? = null
         ) {
             // make chart
-            val barChart = BarChart(activity)
+            val barChart = HorizontalBarChart(activity)
 
             // do in BG
             AirCoroutine.execute(activity, object: AirCoroutine.Callback {
@@ -251,14 +212,14 @@ class AirChartBar {
                     barChart.isHighlightPerDragEnabled = false
                     barChart.extraBottomOffset = 8f
                     barChart.legend?.isEnabled = false
-                    barChart.renderer =
+                    /*barChart.renderer =
                         MyBarChartRenderer(
                             barChart,
                             barChart.animator,
                             barChart.viewPortHandler,
                             BAR_RADIUS,
                             colors
-                        )
+                        )*/
                     barChart.setExtraOffsets(0f, 32f, 0f, 16f)
                     barChart.setOnChartValueSelectedListener(object :
                         OnChartValueSelectedListener {
@@ -420,7 +381,14 @@ class AirChartBar {
                             barChart.invalidate()
                         }
 
-                        chartHolderViewGroup?.yesData?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+                        /*chartHolderViewGroup?.yesData?.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+                        chartHolderViewGroup?.yesData?.rotation = 90f
+                        val layoutParams = chartHolderViewGroup?.chart?.layoutParams
+                        layoutParams?.height = AirChartUtil.getPixelsFromDps(activity, 280)
+                        layoutParams?.width = AirChartUtil.getPixelsFromDps(activity, (layoutParams?.width ?: 0) - AirChartUtil.getPixelsFromDps(activity, 20))
+                        chartHolderViewGroup?.chart?.layoutParams = layoutParams
+                        chartHolderViewGroup?.chart?.requestLayout()*/
+
                         getBarChart?.invoke(barChart)
                     }
 

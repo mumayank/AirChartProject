@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.charts.BarChart
 import com.mumayank.airchart.R
-import com.mumayank.airchart.data_classes.AirChartValueItem
 import com.mumayank.airchart.data_classes.AirChartAdditionalData
+import com.mumayank.airchart.data_classes.AirChartValueItem
 import kotlinx.android.synthetic.main.air_chart_view_rv_item_additional_data.view.*
 import kotlinx.android.synthetic.main.air_chart_view_rv_item_legends.view.*
 import mumayank.com.airrecyclerview.AirRv
@@ -237,6 +238,33 @@ class AirChartUtil {
                 )
                 customView?.visibility = View.VISIBLE
             }
+        }
+
+        fun getValuesCount(
+            valuesCount: Int,
+            airChartValueItems: java.util.ArrayList<AirChartValueItem>
+        ): Int {
+            var valuesCountTemp = valuesCount
+            for (yItem in airChartValueItems) {
+                for (value in yItem.values) {
+                    valuesCountTemp++
+                }
+            }
+            return valuesCountTemp
+        }
+
+        fun drawValuesAccordinglyInBarChart(barChart: BarChart) {
+            if (barChart.visibleXRange > 20) {
+                barChart.xAxis.setDrawLabels(false)
+            } else {
+                barChart.xAxis.setDrawLabels(true)
+            }
+        }
+
+        fun getPixelsFromDps(activity: Activity, dps: Int): Int {
+            val scale: Float = activity.resources.displayMetrics.density
+            val pixels = (dps * scale + 0.5f).toInt()
+            return pixels
         }
 
     }
