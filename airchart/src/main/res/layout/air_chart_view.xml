@@ -1,14 +1,12 @@
-<FrameLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
         <TextView
@@ -16,14 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rectangle_rounded_corner_grey2"
             android:gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
             tools:text="This is chart title but what if it goes beyond a line" />
@@ -34,37 +32,38 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
-            android:textSize="12sp"
             android:gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@android:color/black"
+            android:textSize="12sp"
             tools:text="This is chart sub title only for noobs" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_height="1dp"
+            android:background="@color/grey300" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey300" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:fadeScrollbars="false"
+                android:padding="1dp">
 
                 <LinearLayout
+                    android:paddingTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/rvHolderAdditionalData"
-                        android:layout_marginTop="8dp"
                         android:background="@drawable/rectangle_rounded_corner_outline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -76,15 +75,17 @@
                         android:id="@+id/customView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
                         android:layout_marginBottom="8dp"
                         android:orientation="vertical" />
 
                     <LinearLayout
                         android:id="@+id/rvHolderLegends"
-                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:orientation="vertical" />
 
@@ -99,13 +100,13 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:baselineAligned="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginBottom="8dp"
                                 android:layout_weight="1"
+                                android:baselineAligned="false"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -144,9 +145,9 @@
                                 <LinearLayout
                                     android:id="@+id/chart"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="300dp"
                                     android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical"
                                     tools:ignore="NestedWeights" />
 
@@ -244,9 +245,9 @@
 
     <FrameLayout
         android:id="@+id/progressView"
-        android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_width="match_parent"
@@ -261,7 +262,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -271,9 +271,10 @@
                     android:gravity="center"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
+                    android:text="Loading"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@android:color/black"
-                    android:text="Loading" />
+                    android:visibility="invisible" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -320,16 +321,16 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="32dp"
                             android:layout_marginRight="32dp"
-                            android:layout_marginBottom="32dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_marginBottom="32dp">
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -352,8 +353,8 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -376,8 +377,8 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -400,8 +401,8 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -424,8 +425,8 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight="1"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical">
 
                                 <LinearLayout
@@ -446,10 +447,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginBottom="32dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="32dp"
                         android:background="@drawable/rectangle_rounded_corner_grey2"
                         android:gravity="center"
                         android:paddingStart="16dp"

@@ -3,7 +3,7 @@ package com.mumayank.airchart.data_classes;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AdditionalData {
+public class AirChartAdditionalData {
 
     @SerializedName("key")
     @Expose
@@ -16,7 +16,7 @@ public class AdditionalData {
      * No args constructor for use in serialization
      *
      */
-    public AdditionalData() {
+    public AirChartAdditionalData() {
     }
 
     /**
@@ -24,7 +24,7 @@ public class AdditionalData {
      * @param value
      * @param key
      */
-    public AdditionalData(String key, String value) {
+    public AirChartAdditionalData(String key, String value) {
         super();
         this.key = key;
         this.value = value;

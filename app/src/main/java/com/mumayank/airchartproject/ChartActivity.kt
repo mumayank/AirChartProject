@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import com.github.mikephil.charting.data.Entry
-import com.mumayank.airchart.data_classes.AdditionalData
+import com.mumayank.airchart.data_classes.AirChartAdditionalData
 import com.mumayank.airchart.AirChart
 import com.mumayank.airchart.charts.bar.AirChartBar
-import com.mumayank.airchart.charts.bar.AirChartBarValueItem
-import com.mumayank.airchart.charts.horizontal_bar.AirChartHorizontalBar
+import com.mumayank.airchart.data_classes.AirChartValueItem
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.chart_activity.*
-import kotlinx.coroutines.delay
 
 class ChartActivity : AppCompatActivity() {
 
@@ -75,25 +73,25 @@ class ChartActivity : AppCompatActivity() {
                                 return "This is Y label"
                             }
 
-                            override fun getYLeftItems(): java.util.ArrayList<AirChartBarValueItem> {
+                            override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
                                 if (false) {
                                     return arrayListOf(
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 1",
                                             arrayListOf(5f, 5.5f, 3f, 4f)
                                         )
                                     )
                                 } else {
                                     return arrayListOf(
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 1",
                                             arrayListOf(5f, 5.5f, 3f, 4f)
                                         ),
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 2",
                                             arrayListOf(5f, 5.5f, 3f, 4f)
                                         ),
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 3",
                                             arrayListOf(5f, 5.5f, 3f, 4f)
                                         )
@@ -105,28 +103,28 @@ class ChartActivity : AppCompatActivity() {
                              * Additional functions need to be inflated manually:
                              */
 
-                            /*override fun getSubTitle(): String {
+                            override fun getSubTitle(): String {
                                 return "This is a sub title"
-                            }*/
+                            }
 
-                            /*override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
+                            override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
                                 return arrayListOf(
-                                    AdditionalData(
+                                    AirChartAdditionalData(
                                         "Total turnout",
                                         "4.5"
                                     ),
-                                    AdditionalData(
+                                    AirChartAdditionalData(
                                         "Final turnover",
                                         "19.5 %"
                                     ),
-                                    AdditionalData(
+                                    AirChartAdditionalData(
                                         "Subtracted value",
                                         "As discussed"
                                     )
                                 )
                             }
 
-                            override fun getCustomViewLayoutResId(): Int? {
+                            /*override fun getCustomViewLayoutResId(): Int? {
                                 return R.layout.custom_view
                             }*/
 
@@ -174,25 +172,25 @@ class ChartActivity : AppCompatActivity() {
                                 return "This is Y label"
                             }
 
-                            override fun getYLeftItems(): java.util.ArrayList<AirChartBarValueItem> {
+                            override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
                                 if (false) {
                                     return arrayListOf(
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 1",
                                             arrayListOf(1f, 2.5f, 3f, 4f)
                                         )
                                     )
                                 } else {
                                     return arrayListOf(
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 1",
                                             arrayListOf(5f, 4f, 2f, 1f)
                                         ),
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 2",
                                             arrayListOf(5f, 5.5f, 3f, 4f)
                                         ),
-                                        AirChartBarValueItem(
+                                        AirChartValueItem(
                                             "Legend 3",
                                             arrayListOf(10f, 9f, 8f, 7f)
                                         )
@@ -203,101 +201,32 @@ class ChartActivity : AppCompatActivity() {
                             /**
                              * Additional functions need to be inflated manually:
                              */
-/*
                             override fun getSubTitle(): String {
                                 return "This is a sub title"
                             }
 
-                            override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
+                            override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
                                 return arrayListOf(
-                                    AdditionalData(
-                                        "Total turnout",
+                                    AirChartAdditionalData(
+                                        "A",
                                         "4.5"
                                     ),
-                                    AdditionalData(
-                                        "Final turnover",
+                                    AirChartAdditionalData(
+                                        "B",
                                         "19.5 %"
                                     ),
-                                    AdditionalData(
-                                        "Subtracted value",
+                                    AirChartAdditionalData(
+                                        "This is a long text sent by the server so that it goes to multiple lines. let us see how this looks",
                                         "As discussed"
                                     ),
-                                    AdditionalData(
-                                        "Total turnout",
+                                    AirChartAdditionalData(
+                                        "D",
                                         "4.5"
                                     ),
-                                    AdditionalData(
-                                        "Final turnover",
+                                    AirChartAdditionalData(
+                                        "E",
                                         "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
+                                    )/*,
                                     AdditionalData(
                                         "Subtracted value",
                                         "As discussed"
@@ -337,127 +266,11 @@ class ChartActivity : AppCompatActivity() {
                                     AdditionalData(
                                         "Subtracted value",
                                         "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    ),
-                                    AdditionalData(
-                                        "Total turnout",
-                                        "4.5"
-                                    ),
-                                    AdditionalData(
-                                        "Final turnover",
-                                        "19.5 %"
-                                    ),
-                                    AdditionalData(
-                                        "Subtracted value",
-                                        "As discussed"
-                                    )
+                                    )*/
                                 )
                             }
 
-                            override fun getCustomViewLayoutResId(): Int? {
+                            /*override fun getCustomViewLayoutResId(): Int? {
                                 return R.layout.custom_view
                             }*/
 

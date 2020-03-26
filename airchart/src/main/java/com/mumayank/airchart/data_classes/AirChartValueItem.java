@@ -1,11 +1,11 @@
-package com.mumayank.airchart.charts.bar;
+package com.mumayank.airchart.data_classes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class AirChartBarValueItem {
+public class AirChartValueItem {
 
     @SerializedName("legendLabel")
     @Expose
@@ -18,7 +18,7 @@ public class AirChartBarValueItem {
      * No args constructor for use in serialization
      *
      */
-    public AirChartBarValueItem() {
+    public AirChartValueItem() {
     }
 
     /**
@@ -26,7 +26,7 @@ public class AirChartBarValueItem {
      * @param legendLabel
      * @param values
      */
-    public AirChartBarValueItem(String legendLabel, ArrayList<Float> values) {
+    public AirChartValueItem(String legendLabel, ArrayList<Float> values) {
         super();
         this.legendLabel = legendLabel;
         this.values = values;
