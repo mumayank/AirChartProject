@@ -26,6 +26,12 @@
             android:layout_height="wrap_content"
             android:text="Horizontal Bar" />
 
+<!--        <com.github.mikephil.charting.charts.HorizontalBarChart-->
+<!--            android:id="@+id/horizontalBarChart"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="400dp" />-->
+
     </LinearLayout>
 
 </ScrollView>

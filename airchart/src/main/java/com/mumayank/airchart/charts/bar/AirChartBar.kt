@@ -34,6 +34,7 @@ import java.text.DecimalFormat
 import android.graphics.Color
 import android.view.*
 import android.widget.LinearLayout
+import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.mumayank.airchart.R
 
 class AirChartBar {
@@ -84,7 +85,7 @@ class AirChartBar {
         const val STANDARD_BAR_WIDTH = 0.5f
         const val BAR_RADIUS = 10f
 
-        fun showBarChart(
+        fun show(
             activity: Activity,
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
@@ -176,7 +177,6 @@ class AirChartBar {
 
                     barChart.xAxis.valueFormatter =
                         IndexAxisValueFormatter(barInterface.getXLabels())
-
                     barChart.xAxis?.textColor =
                         ContextCompat.getColor(
                             activity,
@@ -187,7 +187,6 @@ class AirChartBar {
                     barChart.xAxis?.position = XAxis.XAxisPosition.BOTTOM
                     barChart.xAxis?.isGranularityEnabled = true
                     barChart.xAxis?.granularity = 1f
-                    barChart.xAxis?.labelCount = barInterface.getXLabels().size
                     barChart.xAxis?.setDrawLabels(true)
                     barChart.xAxis.labelRotationAngle = -90f
                     barChart.xAxis.enableGridDashedLine(8f, 10f, 0f)
@@ -197,11 +196,6 @@ class AirChartBar {
                             R.color.colorLightGray
                         )
                     barChart.xAxis.textSize = 12f
-                    barChart.xAxis.textColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
                     barChart.xAxis.axisLineColor =
                         ContextCompat.getColor(
                             activity,
@@ -211,47 +205,39 @@ class AirChartBar {
                     barChart.xAxis.labelCount =
                         if (barInterface.getXLabels().size > 20) 20 else barInterface.getXLabels().size
 
-                    barChart.axisRight?.textColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
                     barChart.axisRight?.setDrawAxisLine(true)
                     barChart.axisRight?.setDrawGridLines(false)
-                    barChart.axisRight?.isGranularityEnabled = true
-                    barChart.axisRight?.granularity = 1f
                     barChart.axisRight?.setDrawLabels(false)
-                    barChart.axisRight?.axisMinimum = barData.xMin - 0.5f
-                    barChart.axisRight?.axisMaximum = barData.xMax + 0.5f
                     barChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
 
-                    barChart.axisLeft?.axisMinimum = 0f
-                    barChart.axisLeft?.textColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
-                    barChart.axisLeft.textSize = 12f
-                    barChart.axisLeft?.setDrawAxisLine(true)
-                    barChart.axisLeft?.setDrawGridLines(false)
-                    barChart.axisLeft?.isGranularityEnabled = true
-                    barChart.axisLeft?.granularity = 1f
-                    barChart.axisLeft?.setDrawLabels(true)
-                    barChart.axisLeft.setDrawTopYLabelEntry(true)
-                    barChart.axisLeft.axisLineColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
                     barChart.axisLeft?.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             return value.toInt().toString()
                         }
                     }
+                    barChart.axisLeft?.textColor =
+                        ContextCompat.getColor(
+                            activity,
+                            android.R.color.black
+                        )
+                    barChart.axisLeft?.setDrawAxisLine(true)
+                    barChart.axisLeft?.setDrawGridLines(false)
+                    barChart.axisLeft?.isGranularityEnabled = true
+                    barChart.axisLeft?.granularity = 1f
+                    barChart.axisLeft?.setDrawLabels(true)
+                    barChart.axisLeft.textSize = 12f
+                    barChart.axisLeft.axisLineColor =
+                        ContextCompat.getColor(
+                            activity,
+                            android.R.color.black
+                        )
+                    barChart.axisLeft?.axisMinimum = 0f
+                    barChart.axisLeft.setDrawTopYLabelEntry(true)
+
 
                     // setup chart
                     barChart.description = null
@@ -394,6 +380,8 @@ class AirChartBar {
                             barInterface.getSubTitle()
                         chartHolderViewGroup?.title?.visibility =
                             if (barInterface.getTitle() != null) View.VISIBLE else View.GONE
+                        chartHolderViewGroup?.subTitle?.visibility =
+                            if (barInterface.getSubTitle().isEmpty().not()) View.VISIBLE else View.GONE
                         chartHolderViewGroup?.xLabel?.text =
                             barInterface.getXLabel()
                         val yLabelLeft =

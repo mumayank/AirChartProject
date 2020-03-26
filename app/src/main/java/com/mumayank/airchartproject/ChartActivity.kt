@@ -31,14 +31,14 @@ class ChartActivity : AppCompatActivity() {
         showChart()
     }
 
-    private fun showChart(isGroupedChartRequired: Boolean = false) {
+    private fun showChart() {
 
         val airChart = AirChart(this, parentLayout)
 
         AirCoroutine.execute(this, object: AirCoroutine.Callback {
 
             override suspend fun doTaskInBg(viewModel: ViewModel): Boolean? {
-                delay(2000)
+                // delay(2000)
                 return true
             }
 
@@ -76,7 +76,7 @@ class ChartActivity : AppCompatActivity() {
                             }
 
                             override fun getYLeftItems(): java.util.ArrayList<AirChartBarValueItem> {
-                                if (isGroupedChartRequired.not()) {
+                                if (false) {
                                     return arrayListOf(
                                         AirChartBarValueItem(
                                             "Legend 1",
@@ -105,11 +105,11 @@ class ChartActivity : AppCompatActivity() {
                              * Additional functions need to be inflated manually:
                              */
 
-                            override fun getSubTitle(): String {
+                            /*override fun getSubTitle(): String {
                                 return "This is a sub title"
-                            }
+                            }*/
 
-                            override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
+                            /*override fun getAdditionalDatas(): java.util.ArrayList<AdditionalData>? {
                                 return arrayListOf(
                                     AdditionalData(
                                         "Total turnout",
@@ -128,7 +128,7 @@ class ChartActivity : AppCompatActivity() {
 
                             override fun getCustomViewLayoutResId(): Int? {
                                 return R.layout.custom_view
-                            }
+                            }*/
 
                             override fun getColors(): ArrayList<String>? {
                                 return arrayListOf("#ffa726", "#2196f3")
@@ -156,37 +156,37 @@ class ChartActivity : AppCompatActivity() {
 
                     ChartType.HORIZONTAL_BAR -> {
 
-                        airChart.showHorizontalBarChart(object: AirChartHorizontalBar.HorizontalBarInterface {
+                        airChart.showHorizontalBarChart(object: AirChartBar.BarInterface {
 
                             override fun getTitle(): String? {
                                 return "This is title of the chart"
-                            }
-
-                            override fun getYLeftLabel(): String {
-                                return "This is Y label"
-                            }
-
-                            override fun getYLeftLabels(): ArrayList<String> {
-                                return arrayListOf("A", "B", "C", "D")
                             }
 
                             override fun getXLabel(): String {
                                 return "This is X label"
                             }
 
-                            override fun getXItems(): java.util.ArrayList<AirChartBarValueItem> {
-                                if (isGroupedChartRequired.not()) {
+                            override fun getXLabels(): ArrayList<String> {
+                                return arrayListOf("A", "B", "C", "D")
+                            }
+
+                            override fun getYLeftLabel(): String {
+                                return "This is Y label"
+                            }
+
+                            override fun getYLeftItems(): java.util.ArrayList<AirChartBarValueItem> {
+                                if (false) {
                                     return arrayListOf(
                                         AirChartBarValueItem(
                                             "Legend 1",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
+                                            arrayListOf(1f, 2.5f, 3f, 4f)
                                         )
                                     )
                                 } else {
                                     return arrayListOf(
                                         AirChartBarValueItem(
                                             "Legend 1",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
+                                            arrayListOf(5f, 4f, 2f, 1f)
                                         ),
                                         AirChartBarValueItem(
                                             "Legend 2",
@@ -194,7 +194,7 @@ class ChartActivity : AppCompatActivity() {
                                         ),
                                         AirChartBarValueItem(
                                             "Legend 3",
-                                            arrayListOf(5f, 5.5f, 3f, 4f)
+                                            arrayListOf(10f, 9f, 8f, 7f)
                                         )
                                     )
                                 }
@@ -203,7 +203,7 @@ class ChartActivity : AppCompatActivity() {
                             /**
                              * Additional functions need to be inflated manually:
                              */
-
+/*
                             override fun getSubTitle(): String {
                                 return "This is a sub title"
                             }
@@ -221,16 +221,248 @@ class ChartActivity : AppCompatActivity() {
                                     AdditionalData(
                                         "Subtracted value",
                                         "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
+                                    ),
+                                    AdditionalData(
+                                        "Total turnout",
+                                        "4.5"
+                                    ),
+                                    AdditionalData(
+                                        "Final turnover",
+                                        "19.5 %"
+                                    ),
+                                    AdditionalData(
+                                        "Subtracted value",
+                                        "As discussed"
                                     )
                                 )
                             }
 
                             override fun getCustomViewLayoutResId(): Int? {
                                 return R.layout.custom_view
-                            }
+                            }*/
 
                             override fun getColors(): ArrayList<String>? {
-                                return arrayListOf("#ffa726", "#2196f3")
+                                return arrayListOf("#ffa726", "#2196f3", "#6200EE")
                             }
 
                             override fun getDecimalFormatPattern(): String {
