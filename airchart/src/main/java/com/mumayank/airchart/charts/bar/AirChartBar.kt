@@ -19,7 +19,6 @@ import com.github.mikephil.charting.listener.OnChartGestureListener
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.mumayank.airchart.data_classes.AirChartAdditionalData
 import com.mumayank.airchart.util.AirChartUtil
-import com.mumayank.airchart.util.MyBarChartRenderer
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.air_chart_view.view.*
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +26,11 @@ import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import android.graphics.Color
 import android.view.*
+import com.github.mikephil.charting.components.LimitLine
 import com.mumayank.airchart.R
 import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.util.CustomBarChartRenderer
+import kotlin.math.abs
 
 class AirChartBar {
 
@@ -252,14 +254,19 @@ class AirChartBar {
                     barChart.extraBottomOffset = 8f
                     barChart.legend?.isEnabled = false
                     barChart.renderer =
+                        CustomBarChartRenderer(
+                            barChart,
+                            barChart.animator,
+                            barChart.viewPortHandler
+                        )/*
                         MyBarChartRenderer(
                             barChart,
                             barChart.animator,
                             barChart.viewPortHandler,
                             BAR_RADIUS,
                             colors
-                        )
-                    barChart.setExtraOffsets(0f, 32f, 0f, 16f)
+                        )*/
+                    barChart.setExtraOffsets(0f, 50f, 0f, 16f)
                     barChart.setOnChartValueSelectedListener(object :
                         OnChartValueSelectedListener {
                         override fun onNothingSelected() {
@@ -327,8 +334,18 @@ class AirChartBar {
                     }
 
                     // setup spacing
+                    val min = barData.yMin
+                    val max = barData.yMax
+                    barChart.axisLeft.axisMaximum = max + 2f
+                    if (min < 0) {
+                        val limitLine = LimitLine(0f, "")
+                        limitLine.lineColor = Color.BLACK
+                        limitLine.lineWidth = 0.5f
+                        barChart.axisLeft.addLimitLine(limitLine)
+                        barChart.axisLeft.axisMinimum = min + ( min - max ) * 0.2.toFloat()
+                    }
+
                     if (barChart.data.dataSetCount > 1) {
-                        // val nos = barInterface.getXLabels().size.toFloat()
                         val barSpace = 0f
                         val groupSpace = 0.3f
                         val totalBarWidth = 1f - groupSpace
@@ -338,12 +355,13 @@ class AirChartBar {
                         barChart.xAxis.setCenterAxisLabels(true)
                         barChart.xAxis.granularity = 1f
                         barChart.xAxis.isGranularityEnabled = true
+
                         barChart.xAxis?.axisMinimum = barData.xMin
                         barChart.xAxis?.axisMaximum = barData.xMax + 1f
                     } else {
-                        barChart.setFitBars(true)
                         barChart.xAxis?.axisMinimum = barData.xMin - 0.5f
                         barChart.xAxis?.axisMaximum = barData.xMax + 0.5f
+                        barChart.setFitBars(true)
                     }
                     barChart.setMaxVisibleValueCount(20)
 

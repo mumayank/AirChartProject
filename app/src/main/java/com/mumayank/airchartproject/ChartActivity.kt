@@ -74,11 +74,11 @@ class ChartActivity : AppCompatActivity() {
                             }
 
                             override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
-                                if (false) {
+                                if (true) {
                                     return arrayListOf(
                                         AirChartValueItem(
                                             "Series A",
-                                            arrayListOf(1f, 1f, 1f)
+                                            arrayListOf(1f, 120f, -5f)
                                         )
                                     )
                                 } else {
@@ -89,11 +89,11 @@ class ChartActivity : AppCompatActivity() {
                                         ),
                                         AirChartValueItem(
                                             "Series C",
-                                            arrayListOf(6f, 6f, 6f)
+                                            arrayListOf(3f, 3f, 3f)
                                         ),
                                         AirChartValueItem(
                                             "Series D",
-                                            arrayListOf(10f, 10f,10f)
+                                            arrayListOf(1f, 1f, -1f)
                                         )
                                     )
                                 }
@@ -165,7 +165,7 @@ class ChartActivity : AppCompatActivity() {
                             }
 
                             override fun getXLabels(): ArrayList<String> {
-                                return arrayListOf("Row 1", "Row 2", "Row 3", "Row 4", "Row 5", "Row 6")
+                                return arrayListOf("Row 1", "Row 2", "Row 3")
                             }
 
                             override fun getYLeftLabel(): String {
@@ -177,27 +177,31 @@ class ChartActivity : AppCompatActivity() {
                                     return arrayListOf(
                                         AirChartValueItem(
                                             "Series A",
-                                            arrayListOf(8f, -16f, 24f, 11f, 4f, 5f)
+                                            arrayListOf(8f, 6f, 20f, -11f, 4f, 5f)
                                         )
                                     )
                                 } else {
                                     return arrayListOf(
                                         AirChartValueItem(
                                             "Series A",
-                                            arrayListOf(1f, 2f, 3f)
+                                            arrayListOf(-10f, 20f, 30f)
                                         ),
                                         AirChartValueItem(
                                             "Series B",
-                                            arrayListOf(3f, 4f, 5f)
+                                            arrayListOf(10f, -20f, 30f)
                                         ),
                                         AirChartValueItem(
                                             "Series C",
-                                            arrayListOf(5f, 6f, 7f)
+                                            arrayListOf(10f, 20f, -30f)
+                                        )/*,
+                                        AirChartValueItem(
+                                            "Series C",
+                                            arrayListOf(1f, -2f, 3f)
                                         ),
                                         AirChartValueItem(
                                             "Series D",
                                             arrayListOf(7f, 8f, 9f)
-                                        )
+                                        )*/
                                     )
                                 }
                             }
@@ -224,11 +228,11 @@ class ChartActivity : AppCompatActivity() {
                             }*/
 
                             override fun getColors(): ArrayList<String>? {
-                                return arrayListOf("#E57373", "#7986CB", "#FFD54F", "#AED581")
+                                return arrayListOf("#E57373", "#7986CB", "#FFD54F")//, "#AED581")
                             }
 
                             override fun getDecimalFormatPattern(): String {
-                                return "0.#"
+                                return "0.00"
                             }
 
                             override fun getIsAnimationRequired(): Boolean {
