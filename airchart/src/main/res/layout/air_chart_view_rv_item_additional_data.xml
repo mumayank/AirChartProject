@@ -4,41 +4,34 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:baselineAligned="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/key1TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical">
+                android:text="Some text"
+                android:textColor="@color/blueGrey400"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/key1TV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Some text"
-                    android:textColor="@color/blueGrey400"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/value1TV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-4dp"
-                    android:text="Some text which may extend to the next line "
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/value1TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-4dp"
+                android:text="Some text which may extend to the next line "
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -55,31 +48,24 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/key2TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:gravity="end"
+                android:text="Some text which may also extend to the next line even further"
+                android:textColor="@color/blueGrey400"
+                android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/key2TV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:text="Some text which may also extend to the next line even further"
-                    android:textColor="@color/blueGrey400"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/value2TV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-4dp"
-                    android:gravity="end"
-                    android:text="Some text which will go to the next line even"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/value2TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-4dp"
+                android:gravity="end"
+                android:text="Some text which will go to the next line even"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

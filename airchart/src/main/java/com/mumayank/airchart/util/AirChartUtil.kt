@@ -146,10 +146,31 @@ class AirChartUtil {
             activity: Activity,
             colors: ArrayList<Int>,
             rvHolderLegends: LinearLayout?,
-            airChartValueItems: java.util.ArrayList<AirChartValueItem>
+            airChartValueItems: java.util.ArrayList<AirChartValueItem>,
+            isReverseLayoutRequired: Boolean = false
         ) {
             if (airChartValueItems.size > 1) {
-                rvHolderLegends?.visibility = View.VISIBLE
+
+                if (isReverseLayoutRequired) {
+                    val airChartValueItemsTemp = java.util.ArrayList<AirChartValueItem>()
+                    for (i in airChartValueItems.size-1 downTo 0) {
+                        airChartValueItemsTemp.add(airChartValueItems[i])
+                    }
+                    airChartValueItems.clear()
+                    airChartValueItems.addAll(airChartValueItemsTemp)
+                }
+
+                val gridLayoutManager = object :
+                    GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false) {
+                    override fun canScrollVertically(): Boolean {
+                        return false
+                    }
+
+                    override fun canScrollHorizontally(): Boolean {
+                        return false
+                    }
+                }
+
                 val airRv = AirRv(object: AirRv.Callback {
                     override fun getAppContext(): Context? {
                         return activity
@@ -178,16 +199,7 @@ class AirChartUtil {
                     }
 
                     override fun getLayoutManager(appContext: Context?): RecyclerView.LayoutManager? {
-                        return object :
-                            GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false) {
-                            override fun canScrollVertically(): Boolean {
-                                return false
-                            }
-
-                            override fun canScrollHorizontally(): Boolean {
-                                return false
-                            }
-                        }
+                        return gridLayoutManager
                     }
 
                     override fun getRvHolderViewGroup(): ViewGroup? {
@@ -211,6 +223,9 @@ class AirChartUtil {
                     }
 
                 })
+                airRv.rv.isNestedScrollingEnabled = false
+                airRv.rv.setHasFixedSize(true)
+                rvHolderLegends?.visibility = View.VISIBLE
             } else {
                 rvHolderLegends?.visibility = View.GONE
             }

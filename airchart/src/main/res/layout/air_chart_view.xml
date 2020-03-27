@@ -17,27 +17,31 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/rectangle_rounded_corner_grey2"
             android:gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black"
-            tools:text="This is chart title but what if it goes beyond a line" />
+            android:text="This is chart title but what if it goes beyond a line" />
 
         <TextView
             android:id="@+id/subTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@android:color/black"
             android:textSize="12sp"
-            tools:text="This is chart sub title only for noobs" />
+            android:text="This is chart sub title only for noobs" />
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +53,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fadeScrollbars="false"
             android:padding="1dp">
 
             <LinearLayout
@@ -122,12 +125,13 @@
                                 android:paddingBottom="8dp">
 
                                 <ImageView
+                                    android:id="@+id/arrowTop"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8dp"
+                                    tools:ignore="ContentDescription,VectorDrawableCompat"
                                     app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
-                                    app:tint="@android:color/black"
-                                    tools:ignore="ContentDescription,VectorDrawableCompat" />
+                                    app:tint="@android:color/black" />
 
                                 <com.mumayank.airchart.custom_views.TextViewVertical
                                     android:id="@+id/yLabelLeft"
@@ -140,6 +144,17 @@
                                     android:textAlignment="center"
                                     android:textColor="@android:color/black"
                                     android:textSize="12sp" />
+
+                                <ImageView
+                                    android:id="@+id/arrowBottom"
+                                    android:visibility="gone"
+                                    tools:ignore="ContentDescription,VectorDrawableCompat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:rotation="180"
+                                    app:srcCompat="@drawable/ic_arrow_upward_black_24dp"
+                                    app:tint="@android:color/black" />
 
                             </LinearLayout>
 
