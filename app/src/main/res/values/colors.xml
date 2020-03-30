@@ -1,6 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="red50" tools:keep="@color/red50">#ffebee</color>
+    <color name="red100" tools:keep="@color/red100">#ffcdd2</color>
+    <color name="red200" tools:keep="@color/red200">#ef9a9a</color>
+    <color name="red300" tools:keep="@color/red300">#e57373</color>
+    <color name="red400">#ef5350</color>
+    <color name="red500">#f44336</color>
+    <color name="redTrans5">#0DF44336</color>
+    <color name="redTrans10" tools:keep="@color/redTrans10">#1AF44336</color>
+    <color name="redTrans20" tools:keep="@color/redTrans20">#33F44336</color>
+    <color name="redTrans30" tools:keep="@color/redTrans30">#4DF44336</color>
+    <color name="red600" tools:keep="@color/red600">#e53935</color>
+    <color name="red700" tools:keep="@color/red700">#d32f2f</color>
+    <color name="red800" tools:keep="@color/red800">#c62828</color>
+    <color name="red900" tools:keep="@color/red900">#b71b1c</color>
+
+    <color name="pink50" tools:keep="@color/pink50">#fce4ec</color>
+    <color name="pink100" tools:keep="@color/pink100">#f8bbd0</color>
+    <color name="pink200" tools:keep="@color/pink200">#f48fb1</color>
+    <color name="pink300" tools:keep="@color/pink300">#f06292</color>
+    <color name="pink400" tools:keep="@color/pink400">#ec407a</color>
+    <color name="pink500" tools:keep="@color/pink500">#e91e63</color>
+    <color name="pinkTrans5" tools:keep="@color/pinkTrans5">#0DE91E63</color>
+    <color name="pinkTrans10" tools:keep="@color/pinkTrans10">#1AE91E63</color>
+    <color name="pinkTrans20" tools:keep="@color/pinkTrans20">#33E91E63</color>
+    <color name="pinkTrans30" tools:keep="@color/pinkTrans30">#4DE91E63</color>
+    <color name="pink600" tools:keep="@color/pink600">#d81b60</color>
+    <color name="pink700" tools:keep="@color/pink700">#c2185b</color>
+    <color name="pink800" tools:keep="@color/pink800">#ad1457</color>
+    <color name="pink900" tools:keep="@color/pink900">#880e4f</color>
+
+    <color name="purple50" tools:keep="@color/purple50">#f3e5f5</color>
+    <color name="purple100" tools:keep="@color/purple100">#e1bee7</color>
+    <color name="purple200" tools:keep="@color/purple200">#ce93d8</color>
+    <color name="purple300" tools:keep="@color/purple300">#ba68c8</color>
+    <color name="purple400" tools:keep="@color/purple400">#ab47bc</color>
+    <color name="purple500" tools:keep="@color/purple500">#9c27b0</color>
+    <color name="purpleTrans5" tools:keep="@color/purpleTrans5">#0D9C27B0</color>
+    <color name="purpleTrans10" tools:keep="@color/purpleTrans10">#1A9C27B0</color>
+    <color name="purpleTrans20" tools:keep="@color/purpleTrans20">#339C27B0</color>
+    <color name="purpleTrans30" tools:keep="@color/purpleTrans30">#4D9C27B0</color>
+    <color name="purple600" tools:keep="@color/purple600">#8e24aa</color>
+    <color name="purple700" tools:keep="@color/purple700">#7b1fa2</color>
+    <color name="purple800" tools:keep="@color/purple800">#6a1b9a</color>
+    <color name="purple900" tools:keep="@color/purple900">#6a1b9a</color>
+
+    <color name="deepPurple50" tools:keep="@color/deepPurple50">#ede7f6</color>
+    <color name="deepPurple100" tools:keep="@color/deepPurple100">#d1c4e9</color>
+    <color name="deepPurple200" tools:keep="@color/deepPurple200">#b39ddb</color>
+    <color name="deepPurple300" tools:keep="@color/deepPurple300">#9575cd</color>
+    <color name="deepPurple400" tools:keep="@color/deepPurple400">#7e57c2</color>
+    <color name="deepPurple500" tools:keep="@color/deepPurple500">#673ab7</color>
+    <color name="deepPurpleTrans5" tools:keep="@color/deepPurpleTrans5">#0D673AB7</color>
+    <color name="deepPurpleTrans10" tools:keep="@color/deepPurpleTrans10">#1A673AB7</color>
+    <color name="deepPurpleTrans20" tools:keep="@color/deepPurpleTrans20">#33673AB7</color>
+    <color name="deepPurpleTrans30" tools:keep="@color/deepPurpleTrans30">#4D673AB7</color>
+    <color name="deepPurple600" tools:keep="@color/deepPurple600">#5e35b1</color>
+    <color name="deepPurple700" tools:keep="@color/deepPurple700">#512da8</color>
+    <color name="deepPurple800" tools:keep="@color/deepPurple800">#4527a0</color>
+    <color name="deepPurple900" tools:keep="@color/deepPurple900">#311b92</color>
+
+    <color name="indigo50" tools:keep="@color/indigo50">#e8eaf6</color>
+    <color name="indigo100" tools:keep="@color/indigo100">#c5cae9</color>
+    <color name="indigo200">#9fa8da</color>
+    <color name="indigo300" tools:keep="@color/indigo300">#7986cb</color>
+    <color name="indigo400" tools:keep="@color/indigo400">#5c6bc0</color>
+    <color name="indigo500">#3f51b5</color>
+    <color name="indigoTrans5" tools:keep="@color/indigoTrans5">#0D3F51B5</color>
+    <color name="indigoTrans10" tools:keep="@color/indigoTrans10">#1A3F51B5</color>
+    <color name="indigoTrans20" tools:keep="@color/indigoTrans20">#333F51B5</color>
+    <color name="indigoTrans30" tools:keep="@color/indigoTrans30">#4D3F51B5</color>
+    <color name="indigo600" tools:keep="@color/indigo600">#3949ab</color>
+    <color name="indigo700" tools:keep="@color/indigo700">#303f9f</color>
+    <color name="indigo800" tools:keep="@color/indigo800">#283593</color>
+    <color name="indigo900" tools:keep="@color/indigo900">#1a237e</color>
+
+    <color name="blue50" tools:keep="@color/blue50">#e3f2fd</color>
+    <color name="blue100" tools:keep="@color/blue100">#bbdefb</color>
+    <color name="blue200" tools:keep="@color/blue200">#90caf9</color>
+    <color name="blue300" tools:keep="@color/blue300">#64b5f6</color>
+    <color name="blue400" tools:keep="@color/blue400">#42a5f5</color>
+    <color name="blue500" tools:keep="@color/blue500">#2196f3</color>
+    <color name="blueTrans5" tools:keep="@color/blueTrans5">#0D2196F3</color>
+    <color name="blueTrans10" tools:keep="@color/blueTrans10">#1A2196F3</color>
+    <color name="blueTrans20" tools:keep="@color/blueTrans20">#332196F3</color>
+    <color name="blueTrans30" tools:keep="@color/blueTrans30">#4D2196F3</color>
+    <color name="blue600" tools:keep="@color/blue600">#1e88e5</color>
+    <color name="blue700" tools:keep="@color/blue700">#1976d2</color>
+    <color name="blue800" tools:keep="@color/blue800">#1565c0</color>
+    <color name="blue900" tools:keep="@color/blue900">#0d47a1</color>
+
+    <color name="lightBlue50" tools:keep="@color/lightBlue50">#e1f5fe</color>
+    <color name="lightBlue100" tools:keep="@color/lightBlue100">#b3e5fc</color>
+    <color name="lightBlue200" tools:keep="@color/lightBlue200">#81d4fa</color>
+    <color name="lightBlue300" tools:keep="@color/lightBlue300">#4fc3f7</color>
+    <color name="lightBlue400" tools:keep="@color/lightBlue400">#29b6f6</color>
+    <color name="lightBlue500" tools:keep="@color/lightBlue500">#03a9f4</color>
+    <color name="lightBlueTrans5" tools:keep="@color/lightBlueTrans5">#0D03A9F4</color>
+    <color name="lightBlueTrans10" tools:keep="@color/lightBlueTrans10">#1A03A9F4</color>
+    <color name="lightBlueTrans20" tools:keep="@color/lightBlueTrans20">#3303A9F4</color>
+    <color name="lightBlueTrans30" tools:keep="@color/lightBlueTrans30">#4D03A9F4</color>
+    <color name="lightBlue600" tools:keep="@color/lightBlue600">#039be5</color>
+    <color name="lightBlue700" tools:keep="@color/lightBlue700">#0288d1</color>
+    <color name="lightBlue800" tools:keep="@color/lightBlue800">#0277bd</color>
+    <color name="lightBlue900" tools:keep="@color/lightBlue900">#01579b</color>
+
+    <color name="cyan50" tools:keep="@color/cyan50">#e0f7fa</color>
+    <color name="cyan100" tools:keep="@color/cyan100">#b2ebf2</color>
+    <color name="cyan200" tools:keep="@color/cyan200">#80deea</color>
+    <color name="cyan300" tools:keep="@color/cyan300">#4dd0e1</color>
+    <color name="cyan400" tools:keep="@color/cyan400">#26c6da</color>
+    <color name="cyan500" tools:keep="@color/cyan500">#00bcd4</color>
+    <color name="cyanTrans5" tools:keep="@color/cyanTrans5">#0D00BCD4</color>
+    <color name="cyanTrans10" tools:keep="@color/cyanTrans10">#1A00BCD4</color>
+    <color name="cyanTrans20" tools:keep="@color/cyanTrans20">#3300BCD4</color>
+    <color name="cyanTrans30" tools:keep="@color/cyanTrans30">#4D00BCD4</color>
+    <color name="cyan600" tools:keep="@color/cyan600">#00acc1</color>
+    <color name="cyan700" tools:keep="@color/cyan700">#0097a7</color>
+    <color name="cyan800" tools:keep="@color/cyan800">#00838f</color>
+    <color name="cyan900" tools:keep="@color/cyan900">#006064</color>
+
+    <color name="teal50">#e0f2f1</color>
+    <color name="teal100">#b2dfdb</color>
+    <color name="teal200" tools:keep="@color/teal200">#80cbc4</color>
+    <color name="teal300" tools:keep="@color/teal300">#4db6ac</color>
+    <color name="teal400" tools:keep="@color/teal400">#26a69a</color>
+    <color name="teal500">#009688</color>
+    <color name="tealTrans5" tools:keep="@color/tealTrans5">#0D009688</color>
+    <color name="tealTrans10" tools:keep="@color/tealTrans10">#1A009688</color>
+    <color name="tealTrans20" tools:keep="@color/tealTrans20">#33009688</color>
+    <color name="tealTrans30" tools:keep="@color/tealTrans30">#4D009688</color>
+    <color name="teal600" tools:keep="@color/teal600">#00897b</color>
+    <color name="teal700" tools:keep="@color/teal700">#00796b</color>
+    <color name="teal800">#00695c</color>
+    <color name="teal900" tools:keep="@color/teal900">#004d40</color>
+
+    <color name="green50" tools:keep="@color/green50">#e8f5e9</color>
+    <color name="green100" tools:keep="@color/green100">#c8e6c9</color>
+    <color name="green200">#a5d6a7</color>
+    <color name="green300" tools:keep="@color/green300">#81c784</color>
+    <color name="green400" tools:keep="@color/green400">#66bb6a</color>
+    <color name="green500">#4caf50</color>
+    <color name="greenTrans5" tools:keep="@color/greenTrans5">#0D4CAF50</color>
+    <color name="greenTrans10" tools:keep="@color/greenTrans10">#1A4CAF50</color>
+    <color name="greenTrans20" tools:keep="@color/greenTrans20">#334CAF50</color>
+    <color name="greenTrans30" tools:keep="@color/greenTrans30">#4D4CAF50</color>
+    <color name="green600" tools:keep="@color/green600">#43a047</color>
+    <color name="green700" tools:keep="@color/green700">#388e3c</color>
+    <color name="green800" tools:keep="@color/green800">#2e7d32</color>
+    <color name="green900" tools:keep="@color/green900">#1b5e20</color>
+
+    <color name="lightGreen50" tools:keep="@color/lightGreen50">#f1f8e9</color>
+    <color name="lightGreen100" tools:keep="@color/lightGreen100">#dcedc8</color>
+    <color name="lightGreen200" tools:keep="@color/lightGreen200">#c5e1a5</color>
+    <color name="lightGreen300" tools:keep="@color/lightGreen300">#aed581</color>
+    <color name="lightGreen400" tools:keep="@color/lightGreen400">#9ccc65</color>
+    <color name="lightGreen500" tools:keep="@color/lightGreen500">#8bc34a</color>
+    <color name="lightGreenTrans5" tools:keep="@color/lightGreenTrans5">#0D8BC34A</color>
+    <color name="lightGreenTrans10" tools:keep="@color/lightGreenTrans10">#1A8BC34A</color>
+    <color name="lightGreenTrans20" tools:keep="@color/lightGreenTrans20">#338BC34A</color>
+    <color name="lightGreenTrans30" tools:keep="@color/lightGreenTrans30">#4D8BC34A</color>
+    <color name="lightGreen600" tools:keep="@color/lightGreen600">#7cb342</color>
+    <color name="lightGreen700" tools:keep="@color/lightGreen700">#689f38</color>
+    <color name="lightGreen800" tools:keep="@color/lightGreen800">#558b2f</color>
+    <color name="lightGreen900" tools:keep="@color/lightGreen900">#33691e</color>
+
+    <color name="lime50" tools:keep="@color/lime50">#f9fbe7</color>
+    <color name="lime100" tools:keep="@color/lime100">#f0f4c3</color>
+    <color name="lime200" tools:keep="@color/lime200">#e6ee9c</color>
+    <color name="lime300" tools:keep="@color/lime300">#dce775</color>
+    <color name="lime400" tools:keep="@color/lime400">#d4e157</color>
+    <color name="lime500" tools:keep="@color/lime500">#cddc39</color>
+    <color name="limeTrans5" tools:keep="@color/limeTrans5">#0DCDDC39</color>
+    <color name="limeTrans10" tools:keep="@color/limeTrans10">#1ACDDC39</color>
+    <color name="limeTrans20" tools:keep="@color/limeTrans20">#33CDDC39</color>
+    <color name="limeTrans30" tools:keep="@color/limeTrans30">#4DCDDC39</color>
+    <color name="lime600" tools:keep="@color/lime600">#c0ca33</color>
+    <color name="lime700" tools:keep="@color/lime700">#afb42b</color>
+    <color name="lime800" tools:keep="@color/lime800">#9e9d24</color>
+    <color name="lime900" tools:keep="@color/lime900">#827717</color>
+
+    <color name="yellow50" tools:keep="@color/yellow50">#fffde7</color>
+    <color name="yellow100" tools:keep="@color/yellow100">#fff9c4</color>
+    <color name="yellow200" tools:keep="@color/yellow200">#fff59d</color>
+    <color name="yellow300" tools:keep="@color/yellow300">#fff176</color>
+    <color name="yellow400" tools:keep="@color/yellow400">#ffee58</color>
+    <color name="yellow500">#ffeb3b</color>
+    <color name="yellowTrans5" tools:keep="@color/yellowTrans5">#0DFFEB3B</color>
+    <color name="yellowTrans10" tools:keep="@color/yellowTrans10">#1AFFEB3B</color>
+    <color name="yellowTrans20" tools:keep="@color/yellowTrans20">#33FFEB3B</color>
+    <color name="yellowTrans30" tools:keep="@color/yellowTrans30">#4DFFEB3B</color>
+    <color name="yellow600" tools:keep="@color/yellow600">#fdd835</color>
+    <color name="yellow700" tools:keep="@color/yellow700">#fbc02d</color>
+    <color name="yellow800" tools:keep="@color/yellow800">#f9a825</color>
+    <color name="yellow900" tools:keep="@color/yellow900">#f57f17</color>
+
+    <color name="amber50" tools:keep="@color/amber50">#fff8e1</color>
+    <color name="amber100" tools:keep="@color/amber100">#ffecb3</color>
+    <color name="amber200" tools:keep="@color/amber200">#ffe082</color>
+    <color name="amber300" tools:keep="@color/amber300">#ffd54f</color>
+    <color name="amber400" tools:keep="@color/amber400">#ffca28</color>
+    <color name="amber500">#ffc107</color>
+    <color name="amberTrans5" tools:keep="@color/amberTrans5">#0DFFC107</color>
+    <color name="amberTrans10" tools:keep="@color/amberTrans10">#1AFFC107</color>
+    <color name="amberTrans20">#33FFC107</color>
+    <color name="amberTrans30" tools:keep="@color/amberTrans30">#4DFFC107</color>
+    <color name="amber600" tools:keep="@color/amber600">#ffb300</color>
+    <color name="amber700" tools:keep="@color/amber700">#ffa000</color>
+    <color name="amber800" tools:keep="@color/amber800">#ff8f00</color>
+    <color name="amber900" tools:keep="@color/amber900">#ff6f00</color>
+
+    <color name="orange50" tools:keep="@color/orange50">#fff3e0</color>
+    <color name="orange100" tools:keep="@color/orange100">#ffe0b2</color>
+    <color name="orange200" tools:keep="@color/orange200">#ffcc80</color>
+    <color name="orange300" tools:keep="@color/orange300">#ffb74d</color>
+    <color name="orange400" tools:keep="@color/orange400">#ffa726</color>
+    <color name="orange500">#ff9800</color>
+    <color name="orangeTrans5" tools:keep="@color/orangeTrans5">#0DFF9800</color>
+    <color name="orangeTrans10" tools:keep="@color/orangeTrans10">#1AFF9800</color>
+    <color name="orangeTrans20" tools:keep="@color/orangeTrans20">#33FF9800</color>
+    <color name="orangeTrans30" tools:keep="@color/orangeTrans30">#4DFF9800</color>
+    <color name="orange600" tools:keep="@color/orange600">#fb8c00</color>
+    <color name="orange700" tools:keep="@color/orange700">#f57c00</color>
+    <color name="orange800" tools:keep="@color/orange800">#ef6c00</color>
+    <color name="orange900" tools:keep="@color/orange900">#e65100</color>
+
+    <color name="deepOrange50" tools:keep="@color/deepOrange50">#fbe9e7</color>
+    <color name="deepOrange100" tools:keep="@color/deepOrange100">#ffccbc</color>
+    <color name="deepOrange200" tools:keep="@color/deepOrange200">#ffab91</color>
+    <color name="deepOrange300" tools:keep="@color/deepOrange300">#ff8a65</color>
+    <color name="deepOrange400" tools:keep="@color/deepOrange400">#ff7043</color>
+    <color name="deepOrange500" tools:keep="@color/deepOrange500">#ff7043</color>
+    <color name="deepOrangeTrans5" tools:keep="@color/deepOrangeTrans5">#0DFF7043</color>
+    <color name="deepOrangeTrans10" tools:keep="@color/deepOrangeTrans10">#1AFF7043</color>
+    <color name="deepOrangeTrans20" tools:keep="@color/deepOrangeTrans20">#33FF7043</color>
+    <color name="deepOrangeTrans30" tools:keep="@color/deepOrangeTrans30">#4DFF7043</color>
+    <color name="deepOrange600" tools:keep="@color/deepOrange600">#f4511e</color>
+    <color name="deepOrange700" tools:keep="@color/deepOrange700">#e64a19</color>
+    <color name="deepOrange800" tools:keep="@color/deepOrange800">#d84315</color>
+    <color name="deepOrange900" tools:keep="@color/deepOrange900">#bf360c</color>
+
+    <color name="brown50" tools:keep="@color/brown50">#efebe9</color>
+    <color name="brown100" tools:keep="@color/brown100">#d7ccc8</color>
+    <color name="brown200" tools:keep="@color/brown200">#bcaaa4</color>
+    <color name="brown300" tools:keep="@color/brown300">#a1887f</color>
+    <color name="brown400" tools:keep="@color/brown400">#8d6e63</color>
+    <color name="brown500" tools:keep="@color/brown500">#795548</color>
+    <color name="brownTrans5" tools:keep="@color/brownTrans5">#0D795548</color>
+    <color name="brownTrans10" tools:keep="@color/brownTrans10">#1A795548</color>
+    <color name="brownTrans20" tools:keep="@color/brownTrans20">#33795548</color>
+    <color name="brownTrans30" tools:keep="@color/brownTrans30">#4D795548</color>
+    <color name="brown600" tools:keep="@color/brown600">#6d4c41</color>
+    <color name="brown700" tools:keep="@color/brown700">#5d4037</color>
+    <color name="brown800" tools:keep="@color/brown800">#4e342e</color>
+    <color name="brown900" tools:keep="@color/brown900">#3e2723</color>
+
+    <color name="grey50" tools:keep="@color/grey50">#fafafa</color>
+    <color name="grey100">#f5f5f5</color>
+    <color name="grey200" tools:keep="@color/grey200">#eeeeee</color>
+    <color name="grey300">#e0e0e0</color>
+    <color name="grey400" tools:keep="@color/grey400">#bdbdbd</color>
+    <color name="grey500">#9e9e9e</color>
+    <color name="greyTrans5">#0D9E9E9E</color>
+    <color name="greyTrans10">#1A9E9E9E</color>
+    <color name="greyTrans20">#339E9E9E</color>
+    <color name="greyTrans30">#4D9E9E9E</color>
+    <color name="greyTrans40">#669E9E9E</color>
+    <color name="greyTrans50">#809E9E9E</color>
+    <color name="greyTrans60">#999E9E9E</color>
+    <color name="greyTrans70">#B39E9E9E</color>
+    <color name="greyTrans80">#CC9E9E9E</color>
+    <color name="grey600">#757575</color>
+    <color name="grey700" tools:keep="@color/grey700">#616161</color>
+    <color name="grey800" tools:keep="@color/grey800">#424242</color>
+    <color name="grey900" tools:keep="@color/grey900">#212121</color>
+
+    <color name="blueGrey50" tools:keep="@color/blueGrey50">#eceff1</color>
+    <color name="blueGrey100" tools:keep="@color/blueGrey100">#cfd8dc</color>
+    <color name="blueGrey200" tools:keep="@color/blueGrey200">#b0bec5</color>
+    <color name="blueGrey300" tools:keep="@color/blueGrey300">#90a4ae</color>
+    <color name="blueGrey400" tools:keep="@color/blueGrey400">#78909c</color>
+    <color name="blueGrey500" tools:keep="@color/blueGrey500">#607d8b</color>
+    <color name="blueGreyTrans5" tools:keep="@color/blueGreyTrans5">#0D607D8B</color>
+    <color name="blueGreyTrans10" tools:keep="@color/blueGreyTrans10">#1A607D8B</color>
+    <color name="blueGreyTrans20" tools:keep="@color/blueGreyTrans20">#33607D8B</color>
+    <color name="blueGreyTrans30" tools:keep="@color/blueGreyTrans30">#4D607D8B</color>
+    <color name="blueGrey600" tools:keep="@color/blueGrey600">#546e7a</color>
+    <color name="blueGrey700" tools:keep="@color/blueGrey700">#455a64</color>
+    <color name="blueGrey800" tools:keep="@color/blueGrey800">#37474f</color>
+    <color name="blueGrey900" tools:keep="@color/blueGrey900">#263238</color>
+
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
 </resources>

@@ -334,8 +334,8 @@ class AirChartBar {
                     }
 
                     // setup spacing
-                    val min = barData.yMin
-                    val max = barData.yMax
+                    val min = if (barData.yMin < 0) barData.yMin else 0f
+                    val max = if (barData.yMax > 0) barData.yMax else 0f
                     barChart.axisLeft.axisMaximum = max + 2f
                     if (min < 0) {
                         val limitLine = LimitLine(0f, "")
