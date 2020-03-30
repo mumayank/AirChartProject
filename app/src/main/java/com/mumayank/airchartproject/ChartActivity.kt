@@ -38,22 +38,12 @@ class ChartActivity : AppCompatActivity() {
         setContentView(R.layout.chart_activity)
 
         val string = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
-
         when (ChartType.valueOf(string)) {
-            ChartType.BAR -> {
+            ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
                 showBarCharts()
-            }
-            ChartType.HORIZONTAL_BAR -> {
-                showHorizontalBarCharts()
             }
         }
     }
-
-    class BarData(
-        val title: String,
-        val xLabels: ArrayList<String>,
-        val yLeftItems: java.util.ArrayList<AirChartValueItem>
-    )
 
     private fun showBarCharts() {
         showCharts(arrayListOf(
@@ -240,12 +230,18 @@ class ChartActivity : AppCompatActivity() {
             ) {
                 val customViewHolder = viewHolder as CustomViewHolder
                 val barData = barDatas[position]
-                showBarChartsInternal(
-                    customViewHolder.chartHolder,
-                    barData.title,
-                    barData.xLabels,
-                    barData.yLeftItems
-                )
+
+                val string = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
+                when (ChartType.valueOf(string)) {
+                    ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
+                        showBarChartsInternal(
+                            customViewHolder.chartHolder,
+                            barData.title,
+                            barData.xLabels,
+                            barData.yLeftItems
+                        )
+                    }
+                }
             }
 
             override fun getEmptyView(): View? {
@@ -277,11 +273,12 @@ class ChartActivity : AppCompatActivity() {
             }
 
         })
-        
+
     }
 
     private fun showBarChartsInternal(viewGroup: ViewGroup, title: String, xLabels: ArrayList<String>, yLeftItems: java.util.ArrayList<AirChartValueItem>) {
-        AirChart(this, viewGroup).showBarChart(object: AirChartBar.BarInterface {
+
+        val barInterface = object: AirChartBar.BarInterface {
             override fun getTitle(): String? {
                 return title
             }
@@ -314,14 +311,27 @@ class ChartActivity : AppCompatActivity() {
                 )
             }
 
-        })
-    }
+        }
 
-    private fun showHorizontalBarCharts() {
+        val string = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
 
+        when (ChartType.valueOf(string)) {
+            ChartType.BAR -> {
+                AirChart(this, viewGroup).showBarChart(barInterface)
+            }
+            ChartType.HORIZONTAL_BAR -> {
+                AirChart(this, viewGroup).showHorizontalBarChart(barInterface)
+            }
+        }
     }
 
     class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val chartHolder: LinearLayout = view.chartHolder
     }
+
+    class BarData(
+        val title: String,
+        val xLabels: ArrayList<String>,
+        val yLeftItems: java.util.ArrayList<AirChartValueItem>
+    )
 }
