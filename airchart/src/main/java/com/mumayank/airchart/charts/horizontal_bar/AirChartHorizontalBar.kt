@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
@@ -29,7 +28,6 @@ import com.mumayank.airchart.R
 import com.mumayank.airchart.charts.bar.AirChartBar
 import com.mumayank.airchart.data_classes.AirChartValueItem
 import com.mumayank.airchart.util.AirChartUtil
-import com.mumayank.airchart.util.CustomBarChartRenderer
 import com.mumayank.airchart.util.CustomHorizontalBarChartRenderer
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.air_chart_view.view.*
@@ -57,10 +55,10 @@ class AirChartHorizontalBar {
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
             barInterface: AirChartBar.BarInterface,
-            getBarChart: ((barChart: BarChart) -> Unit)? = null
+            getBarChart: ((horizontalBarChart: HorizontalBarChart) -> Unit)? = null
         ) {
             // make chart
-            val barChart = HorizontalBarChart(activity)
+            val horizontalBarChart = HorizontalBarChart(activity)
             val airChartValueItems = arrayListOf<AirChartValueItem>()
 
             // do in BG
@@ -153,98 +151,98 @@ class AirChartHorizontalBar {
                         barDataSetList.add(barDataSet)
                     }
                     val barData = BarData(barDataSetList.toList())
-                    barChart.data = barData
+                    horizontalBarChart.data = barData
 
-                    barChart.xAxis.valueFormatter =
+                    horizontalBarChart.xAxis.valueFormatter =
                         IndexAxisValueFormatter(xLabels)
-                    barChart.xAxis?.textColor =
+                    horizontalBarChart.xAxis?.textColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
-                    barChart.xAxis?.setDrawAxisLine(true)
-                    barChart.xAxis?.setDrawGridLines(false)
-                    barChart.xAxis?.position = XAxis.XAxisPosition.BOTTOM
-                    barChart.xAxis?.isGranularityEnabled = true
-                    barChart.xAxis?.granularity = 1f
-                    barChart.xAxis?.setDrawLabels(true)
-                    barChart.xAxis.enableGridDashedLine(8f, 10f, 0f)
-                    barChart.xAxis.gridColor =
+                    horizontalBarChart.xAxis?.setDrawAxisLine(true)
+                    horizontalBarChart.xAxis?.setDrawGridLines(false)
+                    horizontalBarChart.xAxis?.position = XAxis.XAxisPosition.BOTTOM
+                    horizontalBarChart.xAxis?.isGranularityEnabled = true
+                    horizontalBarChart.xAxis?.granularity = 1f
+                    horizontalBarChart.xAxis?.setDrawLabels(true)
+                    horizontalBarChart.xAxis.enableGridDashedLine(8f, 10f, 0f)
+                    horizontalBarChart.xAxis.gridColor =
                         ContextCompat.getColor(
                             activity,
                             R.color.colorLightGray
                         )
-                    barChart.xAxis.textSize = 12f
-                    barChart.xAxis.axisLineColor =
+                    horizontalBarChart.xAxis.textSize = 12f
+                    horizontalBarChart.xAxis.axisLineColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
-                    barChart.xAxis.setAvoidFirstLastClipping(false)
-                    barChart.xAxis.labelCount =
+                    horizontalBarChart.xAxis.setAvoidFirstLastClipping(false)
+                    horizontalBarChart.xAxis.labelCount =
                         if (xLabels.size > 20) 20 else xLabels.size
 
-                    barChart.axisLeft?.setDrawAxisLine(true)
-                    barChart.axisLeft?.setDrawGridLines(false)
-                    barChart.axisLeft?.setDrawLabels(false)
-                    barChart.axisLeft.axisLineColor =
+                    horizontalBarChart.axisLeft?.setDrawAxisLine(true)
+                    horizontalBarChart.axisLeft?.setDrawGridLines(false)
+                    horizontalBarChart.axisLeft?.setDrawLabels(false)
+                    horizontalBarChart.axisLeft.axisLineColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
 
-                    barChart.axisRight?.valueFormatter = object : ValueFormatter() {
+                    horizontalBarChart.axisRight?.valueFormatter = object : ValueFormatter() {
                         override fun getFormattedValue(value: Float): String {
                             return value.toInt().toString()
                         }
                     }
-                    barChart.axisRight?.textColor =
+                    horizontalBarChart.axisRight?.textColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
-                    barChart.axisRight?.setDrawAxisLine(true)
-                    barChart.axisRight?.setDrawGridLines(false)
-                    barChart.axisRight?.isGranularityEnabled = true
-                    barChart.axisRight?.granularity = 1f
-                    barChart.axisRight?.setDrawLabels(false)
-                    barChart.axisRight.textSize = 12f
-                    barChart.axisRight.axisLineColor =
+                    horizontalBarChart.axisRight?.setDrawAxisLine(true)
+                    horizontalBarChart.axisRight?.setDrawGridLines(false)
+                    horizontalBarChart.axisRight?.isGranularityEnabled = true
+                    horizontalBarChart.axisRight?.granularity = 1f
+                    horizontalBarChart.axisRight?.setDrawLabels(false)
+                    horizontalBarChart.axisRight.textSize = 12f
+                    horizontalBarChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
                             activity,
                             android.R.color.black
                         )
-                    barChart.axisRight?.axisMinimum = 0f
-                    barChart.axisRight.setDrawTopYLabelEntry(true)
+                    horizontalBarChart.axisRight?.axisMinimum = 0f
+                    horizontalBarChart.axisRight.setDrawTopYLabelEntry(true)
 
                     // setup chart
-                    barChart.description = null
-                    barChart.setVisibleXRangeMinimum(2f)
-                    barChart.setNoDataText("No data to display")
-                    barChart.setGridBackgroundColor(
+                    horizontalBarChart.description = null
+                    horizontalBarChart.setVisibleXRangeMinimum(2f)
+                    horizontalBarChart.setNoDataText("No data to display")
+                    horizontalBarChart.setGridBackgroundColor(
                         ContextCompat.getColor(
                             activity,
                             android.R.color.white
                         )
                     )
-                    barChart.setPinchZoom(false)
-                    barChart.isDoubleTapToZoomEnabled = false
-                    barChart.setDrawBorders(false)
-                    barChart.setBorderWidth(.4f)
-                    barChart.dragDecelerationFrictionCoef = 1f
-                    barChart.isAutoScaleMinMaxEnabled = false
-                    barChart.setHardwareAccelerationEnabled(false)
-                    barChart.isFocusableInTouchMode = false
-                    barChart.isFocusable = false
-                    barChart.isLongClickable = false
-                    barChart.isHighlightPerDragEnabled = false
-                    barChart.extraBottomOffset = 8f
-                    barChart.legend?.isEnabled = false
-                    barChart.renderer =
+                    horizontalBarChart.setPinchZoom(false)
+                    horizontalBarChart.isDoubleTapToZoomEnabled = false
+                    horizontalBarChart.setDrawBorders(false)
+                    horizontalBarChart.setBorderWidth(.4f)
+                    horizontalBarChart.dragDecelerationFrictionCoef = 1f
+                    horizontalBarChart.isAutoScaleMinMaxEnabled = false
+                    horizontalBarChart.setHardwareAccelerationEnabled(false)
+                    horizontalBarChart.isFocusableInTouchMode = false
+                    horizontalBarChart.isFocusable = false
+                    horizontalBarChart.isLongClickable = false
+                    horizontalBarChart.isHighlightPerDragEnabled = false
+                    horizontalBarChart.extraBottomOffset = 8f
+                    horizontalBarChart.legend?.isEnabled = false
+                    horizontalBarChart.renderer =
                         CustomHorizontalBarChartRenderer(
-                            barChart,
-                            barChart.animator,
-                            barChart.viewPortHandler
+                            horizontalBarChart,
+                            horizontalBarChart.animator,
+                            horizontalBarChart.viewPortHandler
                         )
                     /*barChart.renderer =
                         MyBarChartRenderer(
@@ -254,8 +252,8 @@ class AirChartHorizontalBar {
                             BAR_RADIUS,
                             colors
                         )*/
-                    barChart.setExtraOffsets(0f, 32f, 50f, 16f)
-                    barChart.setOnChartValueSelectedListener(object :
+                    horizontalBarChart.setExtraOffsets(0f, 32f, 50f, 16f)
+                    horizontalBarChart.setOnChartValueSelectedListener(object :
                         OnChartValueSelectedListener {
                         override fun onNothingSelected() {
                             barInterface.onNoValueSelected()
@@ -265,13 +263,13 @@ class AirChartHorizontalBar {
                             if (e == null) {
                                 return
                             }
-                            barChart.highlightValues(null)
+                            horizontalBarChart.highlightValues(null)
                             barInterface.onValueSelected(e)
                         }
                     })
 
                     // set zoom operations - not in scope for now
-                    barChart.onChartGestureListener = object : OnChartGestureListener {
+                    horizontalBarChart.onChartGestureListener = object : OnChartGestureListener {
                         override fun onChartGestureEnd(
                             me: MotionEvent?,
                             lastPerformedGesture: ChartTouchListener.ChartGesture?
@@ -304,7 +302,7 @@ class AirChartHorizontalBar {
                             scaleX: Float,
                             scaleY: Float
                         ) {
-                            AirChartUtil.drawValuesAccordinglyInBarChart(barChart)
+                            AirChartUtil.drawValuesAccordinglyInBarChart(horizontalBarChart)
                         }
 
                         override fun onChartLongPressed(me: MotionEvent?) {
@@ -324,35 +322,35 @@ class AirChartHorizontalBar {
                     // setup spacing
                     val min = barData.yMin
                     val max = barData.yMax
-                    barChart.axisLeft.axisMaximum = max
-                    barChart.axisLeft.axisMinimum = min
+                    horizontalBarChart.axisLeft.axisMaximum = max
+                    horizontalBarChart.axisLeft.axisMinimum = min
                     if (min < 0) {
                         val limitLine = LimitLine(0f, "")
                         limitLine.lineColor = Color.BLACK
                         limitLine.lineWidth = 0.5f
-                        barChart.axisLeft.addLimitLine(limitLine)
+                        horizontalBarChart.axisLeft.addLimitLine(limitLine)
                     } else {
-                        if (barChart.data.dataSetCount > 1) {
-                            barChart.xAxis.axisMinimum = barData.xMin
-                            barChart.xAxis.axisMaximum = barData.xMax + 1f
+                        if (horizontalBarChart.data.dataSetCount > 1) {
+                            horizontalBarChart.xAxis.axisMinimum = barData.xMin
+                            horizontalBarChart.xAxis.axisMaximum = barData.xMax + 1f
                         } else {
-                            barChart.xAxis.axisMinimum = barData.xMin - 0.5f
-                            barChart.xAxis.axisMaximum = barData.xMax + 0.5f
+                            horizontalBarChart.xAxis.axisMinimum = barData.xMin - 0.5f
+                            horizontalBarChart.xAxis.axisMaximum = barData.xMax + 0.5f
                         }
                     }
 
-                    if (barChart.data.dataSetCount > 1) {
+                    if (horizontalBarChart.data.dataSetCount > 1) {
                         val barSpace = 0f
                         val groupSpace = 0.3f
                         val totalBarWidth = 1f - groupSpace
-                        val barWidth = totalBarWidth / barChart.data.dataSetCount
-                        barChart.barData.barWidth = barWidth
-                        barChart.groupBars(0f, groupSpace, barSpace)
-                        barChart.xAxis.setCenterAxisLabels(true)
-                        barChart.xAxis.granularity = 1f
-                        barChart.xAxis.isGranularityEnabled = true
+                        val barWidth = totalBarWidth / horizontalBarChart.data.dataSetCount
+                        horizontalBarChart.barData.barWidth = barWidth
+                        horizontalBarChart.groupBars(0f, groupSpace, barSpace)
+                        horizontalBarChart.xAxis.setCenterAxisLabels(true)
+                        horizontalBarChart.xAxis.granularity = 1f
+                        horizontalBarChart.xAxis.isGranularityEnabled = true
                     } else {
-                        barChart.setFitBars(true)
+                        horizontalBarChart.setFitBars(true)
                     }
 
                     return true
@@ -400,16 +398,16 @@ class AirChartHorizontalBar {
                         // add chart
                         chartHolderViewGroup?.chart?.removeAllViews()
                         chartHolderViewGroup?.chart?.addView(
-                            barChart,
+                            horizontalBarChart,
                             ViewGroup.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT
                             )
                         )
 
-                        barChart.isDragEnabled = true
-                        barChart.setScaleEnabled(false)
-                        barChart.setDrawValueAboveBar(true)
+                        horizontalBarChart.isDragEnabled = true
+                        horizontalBarChart.setScaleEnabled(false)
+                        horizontalBarChart.setDrawValueAboveBar(true)
                         //barChart.isScaleXEnabled = false
                         /*if (valuesCount > 15) {
                             barChart.zoom(valuesCount / 15f, 1f, 0f, 0f)
@@ -434,9 +432,9 @@ class AirChartHorizontalBar {
                         chartHolderViewGroup?.progressView?.visibility = View.GONE
 
                         if (barInterface.getIsAnimationRequired()) {
-                            barChart.animateXY(AirChartUtil.ANIMATION_TIME, AirChartUtil.ANIMATION_TIME)
+                            horizontalBarChart.animateXY(AirChartUtil.ANIMATION_TIME, AirChartUtil.ANIMATION_TIME)
                         } else {
-                            barChart.invalidate()
+                            horizontalBarChart.invalidate()
                         }
 
                         val layoutParams = chartHolderViewGroup?.chart?.layoutParams as LinearLayout.LayoutParams
@@ -444,7 +442,7 @@ class AirChartHorizontalBar {
                         chartHolderViewGroup.chart?.layoutParams = layoutParams
                         chartHolderViewGroup.chart?.requestLayout()
 
-                        getBarChart?.invoke(barChart)
+                        getBarChart?.invoke(horizontalBarChart)
                     }
 
                 }

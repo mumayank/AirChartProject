@@ -55,7 +55,7 @@ public class CustomBarChartRenderer extends BarChartRenderer {
         c.restore();
     }
 
-    @Override
+    /*@Override
     public void drawValues(Canvas c) {
 
         // if values are drawn
@@ -149,5 +149,5 @@ public class CustomBarChartRenderer extends BarChartRenderer {
                 MPPointF.recycleInstance(iconsOffset);
             }
         }
-    }
+    }*/
 }
