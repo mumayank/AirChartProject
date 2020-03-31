@@ -108,6 +108,39 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/topTitleTextLayout"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rectangle_rounded_corner_grey2"
+                            android:gravity="center"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp">
+
+                            <TextView
+                                android:id="@+id/xLabelTop"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text=""
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
+                                app:tint="@android:color/black"
+                                tools:ignore="ContentDescription,VectorDrawableCompat" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginBottom="8dp"

@@ -40,47 +40,6 @@ class AirChartUtil {
         val legendLabelTV: TextView = view.legendLabelTV
     }
 
-    interface BarInterface {
-        fun getTitle(): String?
-        fun getXLabel(): String
-        fun getXLabels(): ArrayList<String>
-        fun getYLeftLabel(): String
-        fun getYLeftItems(): java.util.ArrayList<AirChartValueItem>
-
-        fun getSubTitle(): String {
-            return ""
-        }
-
-        fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-            return null
-        }
-
-        fun getCustomViewLayoutResId(): Int? {
-            return null
-        }
-
-        fun getColors(): ArrayList<String>? {
-            return null
-        }
-
-        fun getDecimalFormatPattern(): String {
-            return "0.#"
-        }
-
-        fun getIsAnimationRequired(): Boolean {
-            return false
-        }
-
-        fun onValueSelected(e: Entry?) {
-            return
-        }
-
-        fun onNoValueSelected() {
-            return
-        }
-
-    }
-
     companion object {
 
         const val ANIMATION_TIME = 500

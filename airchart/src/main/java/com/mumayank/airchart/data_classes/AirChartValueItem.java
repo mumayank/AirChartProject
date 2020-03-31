@@ -12,7 +12,7 @@ public class AirChartValueItem {
     private String legendLabel;
     @SerializedName("values")
     @Expose
-    private ArrayList<Float> values = null;
+    private ArrayList<ArrayList<Float>> valuesList = null;
 
     /**
      * No args constructor for use in serialization
@@ -24,12 +24,12 @@ public class AirChartValueItem {
     /**
      *
      * @param legendLabel
-     * @param values
+     * @param valuesList
      */
-    public AirChartValueItem(String legendLabel, ArrayList<Float> values) {
+    public AirChartValueItem(String legendLabel, ArrayList<ArrayList<Float>> valuesList) {
         super();
         this.legendLabel = legendLabel;
-        this.values = values;
+        this.valuesList = valuesList;
     }
 
     public String getLegendLabel() {
@@ -40,12 +40,12 @@ public class AirChartValueItem {
         this.legendLabel = legendLabel;
     }
 
-    public ArrayList<Float> getValues() {
-        return values;
+    public ArrayList<ArrayList<Float>> getValues() {
+        return valuesList;
     }
 
-    public void setValues(ArrayList<Float> values) {
-        this.values = values;
+    public void setValues(ArrayList<ArrayList<Float>> values) {
+        this.valuesList = values;
     }
 
 }

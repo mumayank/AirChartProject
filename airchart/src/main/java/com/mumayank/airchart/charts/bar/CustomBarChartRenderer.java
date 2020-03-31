@@ -46,8 +46,17 @@ public class CustomBarChartRenderer extends BarChartRenderer {
         mValuePaint.setColor(color);
         c.save();
         if (Float.parseFloat(valueText) > 0) {
-            c.rotate(-90f, x+10, y-30);
-            c.drawText(valueText, x+10, y-30, mValuePaint);
+            int length = 0;
+            for (int i=0; i<valueText.length(); i++) {
+                char character = valueText.charAt(i);
+                if (character == '.') {
+                    continue;
+                }
+                length++;
+            }
+            int space = 5 * length;
+            c.rotate(-90f, x+10, y-space);
+            c.drawText(valueText, x+10, y-space, mValuePaint);
         } else {
             c.rotate(-90f, x+10, y);
             c.drawText(valueText, x+10, y, mValuePaint);

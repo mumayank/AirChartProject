@@ -1,4 +1,4 @@
-package com.mumayank.airchart.charts.horizontal_bar;
+package com.mumayank.airchart.charts.bar;
 
 import android.graphics.Canvas;
 
@@ -29,7 +29,7 @@ public class CustomHorizontalBarChartRenderer extends HorizontalBarChartRenderer
                 }
                 length++;
             }
-            int space = 20 * length;
+            int space = 18 * length;
             c.drawText(valueText, x+space, y, mValuePaint);
         }
         c.restore();
