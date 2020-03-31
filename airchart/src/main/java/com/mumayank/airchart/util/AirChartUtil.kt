@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.Entry
 import com.mumayank.airchart.R
 import com.mumayank.airchart.data_classes.AirChartAdditionalData
 import com.mumayank.airchart.data_classes.AirChartValueItem
@@ -37,6 +38,47 @@ class AirChartUtil {
     class LegendsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val legendColorLayout: LinearLayout = view.legendColorLayout
         val legendLabelTV: TextView = view.legendLabelTV
+    }
+
+    interface BarInterface {
+        fun getTitle(): String?
+        fun getXLabel(): String
+        fun getXLabels(): ArrayList<String>
+        fun getYLeftLabel(): String
+        fun getYLeftItems(): java.util.ArrayList<AirChartValueItem>
+
+        fun getSubTitle(): String {
+            return ""
+        }
+
+        fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
+            return null
+        }
+
+        fun getCustomViewLayoutResId(): Int? {
+            return null
+        }
+
+        fun getColors(): ArrayList<String>? {
+            return null
+        }
+
+        fun getDecimalFormatPattern(): String {
+            return "0.#"
+        }
+
+        fun getIsAnimationRequired(): Boolean {
+            return false
+        }
+
+        fun onValueSelected(e: Entry?) {
+            return
+        }
+
+        fun onNoValueSelected() {
+            return
+        }
+
     }
 
     companion object {

@@ -29,51 +29,8 @@ import android.view.*
 import com.github.mikephil.charting.components.LimitLine
 import com.mumayank.airchart.R
 import com.mumayank.airchart.data_classes.AirChartValueItem
-import com.mumayank.airchart.util.CustomBarChartRenderer
-import kotlin.math.abs
 
 class AirChartBar {
-
-    interface BarInterface {
-        fun getTitle(): String?
-        fun getXLabel(): String
-        fun getXLabels(): ArrayList<String>
-        fun getYLeftLabel(): String
-        fun getYLeftItems(): java.util.ArrayList<AirChartValueItem>
-
-        fun getSubTitle(): String {
-            return ""
-        }
-
-        fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-            return null
-        }
-
-        fun getCustomViewLayoutResId(): Int? {
-            return null
-        }
-
-        fun getColors(): ArrayList<String>? {
-            return null
-        }
-
-        fun getDecimalFormatPattern(): String {
-            return "0.#"
-        }
-
-        fun getIsAnimationRequired(): Boolean {
-            return false
-        }
-
-        fun onValueSelected(e: Entry?) {
-            return
-        }
-
-        fun onNoValueSelected() {
-            return
-        }
-
-    }
 
     companion object {
 
@@ -84,7 +41,7 @@ class AirChartBar {
             activity: Activity,
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
-            barInterface: BarInterface,
+            barInterface: AirChartUtil.BarInterface,
             getBarChart: ((barChart: BarChart) -> Unit)? = null
         ) {
             // make chart

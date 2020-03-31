@@ -1,4 +1,4 @@
-package com.mumayank.airchart.util;
+package com.mumayank.airchart.charts.horizontal_bar;
 
 import android.graphics.Canvas;
 

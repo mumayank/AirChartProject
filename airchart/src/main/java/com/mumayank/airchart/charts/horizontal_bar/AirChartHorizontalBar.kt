@@ -28,7 +28,6 @@ import com.mumayank.airchart.R
 import com.mumayank.airchart.charts.bar.AirChartBar
 import com.mumayank.airchart.data_classes.AirChartValueItem
 import com.mumayank.airchart.util.AirChartUtil
-import com.mumayank.airchart.util.CustomHorizontalBarChartRenderer
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.air_chart_view.view.*
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +53,7 @@ class AirChartHorizontalBar {
             activity: Activity,
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
-            barInterface: AirChartBar.BarInterface,
+            barInterface: AirChartUtil.BarInterface,
             getBarChart: ((horizontalBarChart: HorizontalBarChart) -> Unit)? = null
         ) {
             // make chart

@@ -15,6 +15,7 @@ import com.mumayank.airchart.data_classes.AirChartAdditionalData
 import com.mumayank.airchart.AirChart
 import com.mumayank.airchart.charts.bar.AirChartBar
 import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.util.AirChartUtil
 import com.mumayank.aircoroutine.AirCoroutine
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
@@ -278,7 +279,7 @@ class ChartActivity : AppCompatActivity() {
 
     private fun showBarChartsInternal(viewGroup: ViewGroup, title: String, xLabels: ArrayList<String>, yLeftItems: java.util.ArrayList<AirChartValueItem>) {
 
-        val barInterface = object: AirChartBar.BarInterface {
+        val barInterface = object: AirChartUtil.BarInterface {
             override fun getTitle(): String? {
                 return title
             }
