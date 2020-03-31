@@ -84,6 +84,7 @@ class AirChartUtil {
     companion object {
 
         const val ANIMATION_TIME = 500
+        const val STANDARD_BAR_WIDTH = 0.5f
 
         fun <T> getItemFromArrayAtIndexCyclically(arrayList: ArrayList<T>, index: Int): T {
             return if (index > arrayList.size - 1) {

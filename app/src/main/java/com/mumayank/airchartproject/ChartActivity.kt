@@ -40,8 +40,11 @@ class ChartActivity : AppCompatActivity() {
 
         val string = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
         when (ChartType.valueOf(string)) {
-            ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
+            ChartType.BAR -> {
                 showBarCharts()
+            }
+            ChartType.HORIZONTAL_BAR -> {
+                showHorizontalBarCharts()
             }
         }
     }
@@ -159,11 +162,6 @@ class ChartActivity : AppCompatActivity() {
              */
 
             BarData(
-                "1 grouped",
-                arrayListOf<String>("val1"),
-                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f)), AirChartValueItem("legend2", arrayListOf(8f)))
-            ),
-            BarData(
                 "2 grouped",
                 arrayListOf<String>("val1", "val2"),
                 arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f)), AirChartValueItem("legend2", arrayListOf(8f, 16f)))
@@ -212,6 +210,131 @@ class ChartActivity : AppCompatActivity() {
                 "many grouped - negative",
                 arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16"),
                 arrayListOf(AirChartValueItem("legend1", arrayListOf(9f,-20f,4f,4f,16f,8f,28f,17f,19f,12f,9f,12f,14f,2f,15f,24f,11f,5f,18f,6f,3f,26f,3f,22f,2f,20f,21f,14f,23f,4f,0f,19f)), AirChartValueItem("legend2", arrayListOf(4f,-25f,15f,11f,13f,22f,27f,4f,8f,19f,3f,16f,11f,21f,23f,13f,22f,24f,27f,7f,19f,15f,26f,21f,0f,22f,13f,12f,0f,5f,19f)), AirChartValueItem("legend3", arrayListOf(16f,7f,21f,13f,20f,19f,6f,10f,15f,21f,3f,22f,1f,6f,4f,16f,11f,11f,4f,8f,8f,14f,21f,20f,13f,15f,12f,28f,9f,26f,5f,1f)), AirChartValueItem("legend4", arrayListOf(26f,0f,3f,16f,25f,0f,15f,3f,23f,11f,5f,8f,7f,21f,11f,29f,13f,14f,24f,11f,19f,12f,5f,12f,15f,22f,24f,4f,6f,21f,2f,0f)))
+            )
+        ))
+    }
+
+    private fun showHorizontalBarCharts() {
+        showCharts(arrayListOf(
+
+            /**
+             * todo: POSITIVE VALUES
+             */
+
+            BarData(
+                "No value",
+                arrayListOf(),
+                arrayListOf()
+            ),
+            BarData(
+                "2 values (min no. of vals supported)",
+                arrayListOf<String>("val1", "val2"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f)))
+            ),
+            BarData(
+                "3 values",
+                arrayListOf<String>("val1", "val2", "val3"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f, 9f)))
+            ),
+            BarData(
+                "4 values",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f, 9f, 1f)))
+            ),
+            BarData(
+                "8 values",
+                arrayListOf<String>("val1", "val2", "val3", "val4", "val5", "val6", "val7", "val8"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f, 9f, 1f, 2f, 3f, 8f, 7.5f)))
+            ),
+            BarData(
+                "16 values",
+                arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(19f,0f,0f,17f,23f,29f,2f,25f,15f,29f,5f,29f,17f,14f,17f,10f)))
+            ),
+            BarData(
+                "16 values - far apart",
+                arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(190f,0f,0f,17f,23f,290f,2f,25f,15f,29f,5f,29f,170f,14f,17f,10f)))
+            ),
+            BarData(
+                "19 values (max no. of vals supported)",
+                arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16","val17","val18","val19"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(19f,0f,0f,17f,23f,29f,2f,25f,15f,29f,5f,29f,17f,14f,17f,10f,17f,19f,20f)))
+            ),
+
+            /**
+             * todo: NEGATIVE VALUES
+             */
+
+            BarData(
+                "2 values - negative",
+                arrayListOf<String>("val1", "val2"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, -8f)))
+            ),
+            BarData(
+                "3 values - negative",
+                arrayListOf<String>("val1", "val2", "val3"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f, -9f)))
+            ),
+            BarData(
+                "4 values - negative",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f, -1f, 1f)))
+            ),
+            BarData(
+                "8 values - negative",
+                arrayListOf<String>("val1", "val2", "val3", "val4", "val5", "val6", "val7", "val8"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(-5f, -8f, -9f, -1f, -2f, -3f, -8f, -7.5f)))
+            ),
+            BarData(
+                "16 values - negative",
+                arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(19f,0f,0f,17f,23f,-29f,2f,25f,-15f,29f,-5f,29f,17f,14f,-17f,10f)))
+            ),
+            BarData(
+                "16 values - negative - far apart",
+                arrayListOf<String>("val1","val2","val3","val4","val5","val6","val7","val8","val9","val10","val11","val12","val13","val14","val15","val16"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(190f,0f,0f,17f,23f,-290f,2f,25f,150f,29f,5f,29f,-170f,14f,17f,10f)))
+            ),
+
+            /**
+             * todo: GROUPED POSITIVE
+             */
+
+            BarData(
+                "2 grouped",
+                arrayListOf<String>("val1", "val2"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 8f)), AirChartValueItem("legend2", arrayListOf(8f, 16f)))
+            ),
+            BarData(
+                "some grouped",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 9f, 4f, 0f)), AirChartValueItem("legend2", arrayListOf(8f, 9f, 10f, 9f)), AirChartValueItem("legend3", arrayListOf(8f, 5f, 3f, 1f)), AirChartValueItem("legend4", arrayListOf(8f, 9.1f, 1f, 1f)))
+            ),
+            BarData(
+                "some grouped - far apart",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, 200f, 4f, 0f)), AirChartValueItem("legend2", arrayListOf(8f, 9f, 10f, 9f)), AirChartValueItem("legend3", arrayListOf(8f, 5f, 3f, 1f)), AirChartValueItem("legend4", arrayListOf(8f, 9.1f, 1f, 1f)))
+            ),
+
+            /**
+             * todo: GROUPED NEGATIVE
+             */
+
+            BarData(
+                "2 grouped - negative",
+                arrayListOf<String>("val1", "val2"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(5f, -8f)), AirChartValueItem("legend2", arrayListOf(-8f, 16f)))
+            ),
+            BarData(
+                "some grouped - negative",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(-5f, -9f, -4f, 0f)), AirChartValueItem("legend2", arrayListOf(-8f, 9f, 10f, 9f)), AirChartValueItem("legend3", arrayListOf(-8f, 5f, 3f, 1f)), AirChartValueItem("legend4", arrayListOf(-8f, -9.1f, 1f, 1f)))
+            ),
+            BarData(
+                "some grouped - negative - far apart",
+                arrayListOf<String>("val1", "val2", "val3", "val4"),
+                arrayListOf(AirChartValueItem("legend1", arrayListOf(-5f, -200f, -4f, 0f)), AirChartValueItem("legend2", arrayListOf(-8f, 200f, 10f, 9f)), AirChartValueItem("legend3", arrayListOf(-8f, 5f, 3f, 1f)), AirChartValueItem("legend4", arrayListOf(-8f, -9.1f, 1f, 1f)))
             )
         ))
     }
@@ -311,6 +434,14 @@ class ChartActivity : AppCompatActivity() {
                     resources.getString(R.color.indigo400)
                 )
             }
+
+           /* override fun getSubTitle(): String {
+                return "this is subitle"
+            }
+
+            override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
+                return arrayListOf(AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"))
+            }*/
 
         }
 

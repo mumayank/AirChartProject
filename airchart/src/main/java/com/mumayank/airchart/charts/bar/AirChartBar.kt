@@ -29,13 +29,11 @@ import android.view.*
 import com.github.mikephil.charting.components.LimitLine
 import com.mumayank.airchart.R
 import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.util.AirChartUtil.Companion.STANDARD_BAR_WIDTH
 
 class AirChartBar {
 
     companion object {
-
-        const val STANDARD_BAR_WIDTH = 0.5f
-        const val BAR_RADIUS = 10f
 
         fun show(
             activity: Activity,
@@ -215,14 +213,7 @@ class AirChartBar {
                             barChart,
                             barChart.animator,
                             barChart.viewPortHandler
-                        )/*
-                        MyBarChartRenderer(
-                            barChart,
-                            barChart.animator,
-                            barChart.viewPortHandler,
-                            BAR_RADIUS,
-                            colors
-                        )*/
+                        )
                     barChart.setExtraOffsets(0f, 50f, 0f, 16f)
                     barChart.setOnChartValueSelectedListener(object :
                         OnChartValueSelectedListener {
@@ -323,7 +314,6 @@ class AirChartBar {
                     barChart.setMaxVisibleValueCount(20)
 
                     return true
-
                 }
 
                 override fun isTaskTypeCalculation(): Boolean {

@@ -15,19 +15,22 @@ public class CustomHorizontalBarChartRenderer extends HorizontalBarChartRenderer
     }
 
     @Override
-    public void drawValues(Canvas c) {
-        super.drawValues(c);
-    }
-
-    @Override
     public void drawValue(Canvas c, String valueText, float x, float y, int color) {
         mValuePaint.setColor(color);
         c.save();
-        if (Float.parseFloat(valueText) > 0) {
+        if (Float.parseFloat(valueText) >= 0) {
             c.drawText(valueText, x, y, mValuePaint);
         } else {
-            int multiple = 15 * valueText.length();
-            c.drawText(valueText, x + multiple, y, mValuePaint);
+            int length = 0;
+            for (int i=0; i<valueText.length(); i++) {
+                char character = valueText.charAt(i);
+                if (character == '.') {
+                    continue;
+                }
+                length++;
+            }
+            int space = 20 * length;
+            c.drawText(valueText, x+space, y, mValuePaint);
         }
         c.restore();
     }
