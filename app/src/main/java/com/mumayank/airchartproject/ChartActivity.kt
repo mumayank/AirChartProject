@@ -24,18 +24,13 @@ class ChartActivity : AppCompatActivity() {
     companion object {
         const val INTENT_EXTRA_CHART_TYPE = "INTENT_EXTRA_CHART_TYPE"
 
-        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int, minStackSize: Int, maxStackSize: Int): ArrayList<AirChartValueItem> {
+        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int): ArrayList<AirChartValueItem> {
             val legendsArrayList = arrayListOf<AirChartValueItem>()
             for (k in 1..noOfLegends) {
-                val arrayList = arrayListOf<ArrayList<Float>>()
+                val arrayList = arrayListOf<Float>()
                 for (i in 1..noOfDataItems) {
-                    val nextRandomStackSize = kotlin.random.Random.nextInt(minStackSize, maxStackSize+1)
-                    val arrayListInternal = arrayListOf<Float>()
-                    for (j in 1..nextRandomStackSize) {
-                        val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toFloat()
-                        arrayListInternal.add(nextRandomFloat)
-                    }
-                    arrayList.add(arrayListInternal)
+                    val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toFloat()
+                    arrayList.add(nextRandomFloat)
                 }
                 legendsArrayList.add(AirChartValueItem("lengend$k", arrayList))
             }
@@ -82,72 +77,67 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "1 value",
                         getLabels(1),
-                        getData(1, 1, 10, 30, 1,1)
+                        getData(1, 1, 10, 30)
                     ),
                     BarData(
                         "2 values",
                         getLabels(2),
-                        getData(1, 2, 10, 30, 1,1)
+                        getData(1, 2, 10, 30)
                     ),
                     BarData(
                         "3 values",
                         getLabels(3),
-                        getData(1, 3, 0, 30, 1,1)
+                        getData(1, 3, 0, 30)
                     ),
                     BarData(
                         "4 values",
                         getLabels(4),
-                        getData(1, 4, 0, 30, 1,1)
-                    ),
-                    BarData(
-                        "4 values - stacked",
-                        getLabels(4),
-                        getData(1, 4, 0, 30, 1,3)
+                        getData(1, 4, 0, 30)
                     ),
                     BarData(
                         "8 values",
                         getLabels(8),
-                        getData(1, 8, 0, 30, 1,1)
+                        getData(1, 8, 0, 30)
                     ),
                     BarData(
                         "8 values - large",
                         getLabels(8),
-                        getData(1, 8, 100, 3000, 1,1)
+                        getData(1, 8, 100, 3000)
                     ),
                     BarData(
                         "16 values",
                         getLabels(16),
-                        getData(1, 16, 0, 30, 1,1)
+                        getData(1, 16, 0, 30)
                     ),
                     BarData(
                         "32 values",
                         getLabels(32),
-                        getData(1, 32, 0, 30, 1,1)
+                        getData(1, 32, 0, 30)
                     ),
                     BarData(
                         "32 values - far apart",
                         getLabels(32),
-                        getData(1, 32, 0, 30000, 1,1)
+                        getData(1, 32, 0, 30000)
                     ),
                     BarData(
                         "50 values",
                         getLabels(50),
-                        getData(1, 50, 0, 30, 1,1)
+                        getData(1, 50, 0, 30)
                     ),
                     BarData(
                         "100 values",
                         getLabels(100),
-                        getData(1, 100, 0, 30, 1,1)
+                        getData(1, 100, 0, 30)
                     ),
                     BarData(
                         "500 values",
                         getLabels(500),
-                        getData(1, 500, 0, 30, 1,1)
+                        getData(1, 500, 0, 30)
                     ),
                     BarData(
                         "1000 values",
                         getLabels(1000),
-                        getData(1, 1000, 0, 30, 1,1)
+                        getData(1, 1000, 0, 30)
                     ),
 
                     /**
@@ -156,42 +146,37 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "1 value - nagative",
                         getLabels(1),
-                        getData(1, 1, -30, -10, 1,1)
+                        getData(1, 1, -30, -10)
                     ),
                     BarData(
                         "2 values - nagative",
                         getLabels(2),
-                        getData(1, 2, -30, -10, 1,1)
+                        getData(1, 2, -30, -10)
                     ),
                     BarData(
                         "3 values - nagative",
                         getLabels(3),
-                        getData(1, 3, -30, -10, 1,1)
+                        getData(1, 3, -30, -10)
                     ),
                     BarData(
                         "4 values - nagative",
                         getLabels(4),
-                        getData(1, 4, -30, 5, 1,1)
-                    ),
-                    BarData(
-                        "4 values - stacked - nagative",
-                        getLabels(4),
-                        getData(1, 4, -30, 5, 1,3)
+                        getData(1, 4, -30, 5)
                     ),
                     BarData(
                         "8 values - nagative",
                         getLabels(8),
-                        getData(1, 8, -30, 10, 1,1)
+                        getData(1, 8, -30, 10)
                     ),
                     BarData(
                         "8 values - nagative - large",
                         getLabels(8),
-                        getData(1, 8, -3000, -100, 1,1)
+                        getData(1, 8, -3000, -100)
                     ),
                     BarData(
                         "32 values - far apart - negative",
                         getLabels(32),
-                        getData(1, 32, -3000, 3000, 1,1)
+                        getData(1, 32, -3000, 3000)
                     ),
 
                     /**
@@ -201,27 +186,22 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 grouped",
                         getLabels(2),
-                        getData(2, 2, 10, 30, 1,1)
+                        getData(2, 2, 10, 30)
                     ),
                     BarData(
                         "some grouped",
                         getLabels(4),
-                        getData(4, 4, 0, 30, 1,1)
-                    ),
-                    BarData(
-                        "some grouped - stacked",
-                        getLabels(4),
-                        getData(4, 4, 0, 30, 1,3)
+                        getData(4, 4, 0, 30)
                     ),
                     BarData(
                         "some grouped - far apart",
                         getLabels(4),
-                        getData(4, 4, 0, 3000, 1,1)
+                        getData(4, 4, 0, 3000)
                     ),
                     BarData(
                         "many grouped",
                         getLabels(16),
-                        getData(4, 16, 0, 30, 1,1)
+                        getData(4, 16, 0, 30)
                     ),
 
                     /**
@@ -231,27 +211,22 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 grouped - negative",
                         getLabels(2),
-                        getData(2, 2, -30, -10, 1,1)
+                        getData(2, 2, -30, -10)
                     ),
                     BarData(
                         "some grouped - negative",
                         getLabels(4),
-                        getData(4, 4, -30, 10, 1,1)
-                    ),
-                    BarData(
-                        "some grouped - stacked - negative",
-                        getLabels(4),
-                        getData(4, 4, -30, 10, 1,3)
+                        getData(4, 4, -30, 10)
                     ),
                     BarData(
                         "some grouped - far apart - negative",
                         getLabels(4),
-                        getData(4, 4, -3000, 3000, 1,1)
+                        getData(4, 4, -3000, 3000)
                     ),
                     BarData(
                         "many grouped - negative",
                         getLabels(16),
-                        getData(4, 16, -30, 30, 1,1)
+                        getData(4, 16, -30, 30)
                     )
                 )
 
@@ -283,7 +258,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 values",
                         getLabels(2),
-                        getData(1, 2, 10, 30, 1,1),
+                        getData(1, 2, 10, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400)
@@ -292,7 +267,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "3 values",
                         getLabels(3),
-                        getData(1, 3, 0, 30, 1,1),
+                        getData(1, 3, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -302,18 +277,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "4 values",
                         getLabels(4),
-                        getData(1, 4, 0, 30, 1,1),
-                        arrayListOf(
-                            resources.getString(R.color.red400),
-                            resources.getString(R.color.purple400),
-                            resources.getString(R.color.amber400),
-                            resources.getString(R.color.green400)
-                        )
-                    ),
-                    BarData(
-                        "4 values - stacked",
-                        getLabels(4),
-                        getData(1, 4, 0, 30, 1,3),
+                        getData(1, 4, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -324,7 +288,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "8 values",
                         getLabels(8),
-                        getData(1, 8, 0, 30, 1,1),
+                        getData(1, 8, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -339,7 +303,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "8 values - large",
                         getLabels(8),
-                        getData(1, 8, 100, 3000, 1,1),
+                        getData(1, 8, 100, 3000),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -354,7 +318,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "16 values",
                         getLabels(16),
-                        getData(1, 16, 0, 30, 1,1),
+                        getData(1, 16, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -377,7 +341,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "16 values - far apart",
                         getLabels(16),
-                        getData(1, 16, 0, 30000, 1,1),
+                        getData(1, 16, 0, 30000),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -400,7 +364,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "19 values",
                         getLabels(19),
-                        getData(1, 19, 0, 30, 1,1),
+                        getData(1, 19, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -430,7 +394,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 values - nagative",
                         getLabels(2),
-                        getData(1, 2, -30, -10, 1,1),
+                        getData(1, 2, -30, -10),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400)
@@ -439,7 +403,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "3 values - nagative",
                         getLabels(3),
-                        getData(1, 3, -30, -10, 1,1),
+                        getData(1, 3, -30, -10),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -449,18 +413,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "4 values - nagative",
                         getLabels(4),
-                        getData(1, 4, -30, 5, 1,1),
-                        arrayListOf(
-                            resources.getString(R.color.red400),
-                            resources.getString(R.color.purple400),
-                            resources.getString(R.color.amber400),
-                            resources.getString(R.color.green400)
-                        )
-                    ),
-                    BarData(
-                        "4 values - stacked - nagative",
-                        getLabels(4),
-                        getData(1, 4, -30, 5, 1,3),
+                        getData(1, 4, -30, 5),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -471,7 +424,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "8 values - nagative",
                         getLabels(8),
-                        getData(1, 8, -30, 10, 1,1),
+                        getData(1, 8, -30, 10),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -486,7 +439,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "16 values - nagative - large",
                         getLabels(16),
-                        getData(1, 16, -3000, -100, 1,1),
+                        getData(1, 16, -3000, -100),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -509,7 +462,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "16 values - far apart - negative",
                         getLabels(16),
-                        getData(1, 16, -3000, 3000, 1,1),
+                        getData(1, 16, -3000, 3000),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -537,7 +490,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 grouped",
                         getLabels(2),
-                        getData(2, 2, 10, 30, 1,1),
+                        getData(2, 2, 10, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400)
@@ -546,18 +499,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "some grouped",
                         getLabels(4),
-                        getData(4, 4, 0, 30, 1,1),
-                        arrayListOf(
-                            resources.getString(R.color.red400),
-                            resources.getString(R.color.purple400),
-                            resources.getString(R.color.amber400),
-                            resources.getString(R.color.green400)
-                        )
-                    ),
-                    BarData(
-                        "some grouped - stacked",
-                        getLabels(4),
-                        getData(4, 4, 0, 30, 1,3),
+                        getData(4, 4, 0, 30),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -568,7 +510,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "some grouped - far apart",
                         getLabels(4),
-                        getData(4, 4, 0, 3000, 1,1),
+                        getData(4, 4, 0, 3000),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -585,7 +527,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "2 grouped - negative",
                         getLabels(2),
-                        getData(2, 2, -30, -10, 1,1),
+                        getData(2, 2, -30, -10),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400)
@@ -594,18 +536,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "some grouped - negative",
                         getLabels(4),
-                        getData(4, 4, -30, 10, 1,1),
-                        arrayListOf(
-                            resources.getString(R.color.red400),
-                            resources.getString(R.color.purple400),
-                            resources.getString(R.color.amber400),
-                            resources.getString(R.color.green400)
-                        )
-                    ),
-                    BarData(
-                        "some grouped - stacked - negative",
-                        getLabels(4),
-                        getData(4, 4, -30, 10, 1,3),
+                        getData(4, 4, -30, 10),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),
@@ -616,7 +547,7 @@ class ChartActivity : AppCompatActivity() {
                     BarData(
                         "some grouped - far apart - negative",
                         getLabels(4),
-                        getData(4, 4, -3000, 3000, 1,1),
+                        getData(4, 4, -3000, 3000),
                         arrayListOf(
                             resources.getString(R.color.red400),
                             resources.getString(R.color.purple400),

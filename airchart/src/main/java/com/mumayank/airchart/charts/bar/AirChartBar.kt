@@ -127,7 +127,7 @@ class AirChartBar {
                         // reverse data
                         for (i in barInterface.getYLeftItems().size-1 downTo 0) {
                             val airChartValueItem = barInterface.getYLeftItems()[i]
-                            val values = arrayListOf<ArrayList<Float>>()
+                            val values = arrayListOf<Float>()
                             for (j in airChartValueItem.values.size-1 downTo 0) {
                                 values.add(airChartValueItem.values[j])
                             }
@@ -157,11 +157,7 @@ class AirChartBar {
                     for ((index, value) in airChartValueItems.withIndex()) {
                         val barEntries = arrayListOf<BarEntry>()
                         for ((index2, value2) in value.values.withIndex()) {
-                            if (value2.size == 1) {
-                                barEntries.add(BarEntry(index2.toFloat(), value2[0]))
-                            } else {
-                                barEntries.add(BarEntry(index2.toFloat(), value2.toFloatArray()))
-                            }
+                            barEntries.add(BarEntry(index2.toFloat(), value2))
                         }
                         val barDataSet = BarDataSet(barEntries, value.legendLabel)
                         barDataSet.valueTextSize = 12f
@@ -195,10 +191,10 @@ class AirChartBar {
                         val barData = BarData(barDataSet)
                         when (valuesCount) {
                             1 -> {
-                                barData.barWidth = 0.2f
+                                barData.barWidth = 0.4f
                             }
                             2 -> {
-                                barData.barWidth = 0.3f
+                                barData.barWidth = 0.4f
                             }
                             3 -> {
                                 barData.barWidth = 0.4f
