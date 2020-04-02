@@ -218,7 +218,6 @@ Note:
  - Set `title` or `subTitle` as an empty string (`""`) to hide them from the view
  - If any `JSONArray` has no values, send an empty array (`[]`)
 
-___
 [Click here to find the Java POJO classes corresponding to the above JSON](https://github.com/mumayank/AirChartProject/tree/master/airchart/src/main/java/com/mumayank/airchart/data_classes)
 
 ___
