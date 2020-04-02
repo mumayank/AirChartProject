@@ -53,7 +53,7 @@ Here,
 ___
 
 ### Show loading UI
-As stated above, if you want the library to show loading progress, you can simply split the declaration and the function call:
+As stated above, if you want the library to show loading progress, you can simply split the initialization and the function call:
 
 - Before making the REST API call, write this code:
 ```kotlin
