@@ -57,12 +57,12 @@ As stated above, if you want the library to show loading progress, you can simpl
 
 - Before making the REST API call, write this code:
 ```kotlin
-		val airChart = AirChart(activity, viewGroup)
+	val airChart = AirChart(activity, viewGroup)
 ```
 
 - After receiving response, write this code:
 ```kotlin
-		airChart.showBarChart(jsonString)
+	airChart.showBarChart(jsonString)
 ```
 ___
 
@@ -70,80 +70,80 @@ ___
 
 ```kotlin
 airChart.showBarChart(object: AirChartBar.IBar {  
-  
+
 	override fun getTitle(): String {  
-	    return "title of the chart"  
+		return "title of the chart"  
 	}  
-  
+
 	override fun getXAxisTitle(): String {  
-	    return "this is X-axis"  
+		return "this is X-axis"  
 	}  
-  
+
 	override fun getXAxisLabels(): ArrayList<String> {  
-	    return arrayListOf("Student1", "Student2", "Student3")  
+		return arrayListOf("Student1", "Student2", "Student3")  
 	}  
-  
+
 	override fun getYLeftAxisTitle(): String {  
-	    return "this is Y-axis"  
+		return "this is Y-axis"  
 	}  
-  
-    override fun getYLeftAxisValues(): ArrayList<Value> {  
-        return arrayListOf(  
-            Value(  
-                "marks in sem 1",  
-                arrayListOf(50.0, 40.0, 49.5)  
-            ),  
-            Value(  
-                "marks in sem 2",  
-                arrayListOf(100.0, 30.0, 31.0)  
-            )  
-        )  
-    }  
-  
-    override fun getColors(): ArrayList<String> {  
-        return arrayListOf("#ffa726", "#2196f3")  
-    }  
-  
+
+	override fun getYLeftAxisValues(): ArrayList<Value> {  
+		return arrayListOf(  
+			Value(  
+				"marks in sem 1",  
+				arrayListOf(50.0, 40.0, 49.5)  
+			),  
+			Value(  
+				"marks in sem 2",  
+				arrayListOf(100.0, 30.0, 31.0)  
+			)  
+		)  
+	}  
+
+	override fun getColors(): ArrayList<String> {  
+		return arrayListOf("#ffa726", "#2196f3")  
+	}  
+
 	/*  
 	Additional optional functions that can be overridden on demand:     
 	*/  
-  
+
 	override fun getSubTitle(): String? {  
-	      return "this is subtitle of the chart"  
+		return "this is subtitle of the chart"  
 	}  
-  
+
 	override fun getDecimalFormatPattern(): String? {  
-	    return "0.#"  
+		return "0.#"  
 	}  
-  
-    override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {  
-        return arrayListOf(  
-            AdditionalValue("Key1", "Value1"),  
-            AdditionalValue("Key2", "Value2"),  
-            AdditionalValue("Key3", "Value3")  
-        )  
-    }  
-  
+
+	override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {  
+		return arrayListOf(  
+			AdditionalValue("Key1", "Value1"),  
+			AdditionalValue("Key2", "Value2"),  
+			AdditionalValue("Key3", "Value3")  
+		)  
+	}  
+
 	override fun getIsHorizontal(): Boolean {  
-	    return false  
+		return false  
 	}  
-  
+
 	override fun getCustomViewLayoutResId(): Int? {  
-	    return R.layout.custom_view  
+		return R.layout.custom_view  
 	}  
-  
+
 	override fun getIsAnimationRequired(): Boolean? {  
-	    return true  
+		return true  
 	}  
-  
+
 	override fun onValueSelected(e: Entry?) {  
-	    // do something  
+		// do something  
 	}  
-  
+
 	override fun onNoValueSelected() {  
-	    // do something  
+		// do something  
 	}  
-  
+
 })
 ```
 
@@ -157,58 +157,60 @@ ___
 
 ### JSON format (this info is for the backend dev)
 
-    {
-      "title": "Student records",
-      "xAxisTitle": "Projects",
-      "xAxisLabels": [
-        "Narendra",
-        "Rahul",
-        "Prakash",
-        "Sonia",
-        "Lalu"
-      ],
-      "yLeftAxisTitle": "Progress Value",
-      "yLeftAxisValues": [
-        {
-          "legendLabel": "Scope",
-          "values": [
-            24.3,
-            12.1,
-            13.5,
-            12.7,
-            17.8
-          ]
-        },
-        {
-          "legendLabel": "Taken up",
-          "values": [
-            13.1,
-            5.9,
-            2.4,
-            9.3,
-            5.3
-          ]
-        }
-      ],
-      "colors": [
-        "#2196f3",
-        "#ff9800"
-      ],
-      "subTitle": "Subtitle of the chart",
-      "decimalFormatPattern": "0.0",
-      "additionalValues": [
-        {
-          "key": "Key1",
-          "value": "Value1"
-        },
-        {
-          "key": "Key2",
-          "value": "Value2"
-        }
-      ],
-      "isHorizontal": false,
-      "isAnimationRequired": true
-    }
+```json
+{
+  "title": "Student records",
+  "xAxisTitle": "Projects",
+  "xAxisLabels": [
+	"Narendra",
+	"Rahul",
+	"Prakash",
+	"Sonia",
+	"Lalu"
+  ],
+  "yLeftAxisTitle": "Progress Value",
+  "yLeftAxisValues": [
+	{
+	  "legendLabel": "Scope",
+	  "values": [
+		24.3,
+		12.1,
+		13.5,
+		12.7,
+		17.8
+	  ]
+	},
+	{
+	  "legendLabel": "Taken up",
+	  "values": [
+		13.1,
+		5.9,
+		2.4,
+		9.3,
+		5.3
+	  ]
+	}
+  ],
+  "colors": [
+	"#2196f3",
+	"#ff9800"
+  ],
+  "subTitle": "Subtitle of the chart",
+  "decimalFormatPattern": "0.0",
+  "additionalValues": [
+	{
+	  "key": "Key1",
+	  "value": "Value1"
+	},
+	{
+	  "key": "Key2",
+	  "value": "Value2"
+	}
+  ],
+  "isHorizontal": false,
+  "isAnimationRequired": true
+}
+```
 
 Note:
 
