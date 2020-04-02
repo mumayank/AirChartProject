@@ -1,35 +1,34 @@
 package com.mumayank.airchart.data_classes;
 
+import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
-public class AirChartValueItem {
+public class Value {
 
     @SerializedName("legendLabel")
     @Expose
     private String legendLabel;
     @SerializedName("values")
     @Expose
-    private ArrayList<Float> valuesList = null;
+    private ArrayList<Double> values = null;
 
     /**
      * No args constructor for use in serialization
      *
      */
-    public AirChartValueItem() {
+    public Value() {
     }
 
     /**
      *
      * @param legendLabel
-     * @param valuesList
+     * @param values
      */
-    public AirChartValueItem(String legendLabel, ArrayList<Float> valuesList) {
+    public Value(String legendLabel, ArrayList<Double> values) {
         super();
         this.legendLabel = legendLabel;
-        this.valuesList = valuesList;
+        this.values = values;
     }
 
     public String getLegendLabel() {
@@ -40,12 +39,12 @@ public class AirChartValueItem {
         this.legendLabel = legendLabel;
     }
 
-    public ArrayList<Float> getValues() {
-        return valuesList;
+    public ArrayList<Double> getValues() {
+        return values;
     }
 
-    public void setValues(ArrayList<Float> values) {
-        this.valuesList = values;
+    public void setValues(ArrayList<Double> values) {
+        this.values = values;
     }
 
 }

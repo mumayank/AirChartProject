@@ -19,6 +19,14 @@
             android:text="Bar" />
 
         <Button
+            android:id="@+id/supplyJson"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="input json and show bar" />
+
+        <Button
             android:id="@+id/horizontalBar"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"

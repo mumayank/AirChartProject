@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.LinearLayout
 import com.github.mikephil.charting.charts.BarChart
 import com.mumayank.airchart.charts.bar.AirChartBar
-import com.mumayank.airchart.util.AirChartUtil
 
 class AirChart(
     val activity: Activity,
@@ -32,10 +31,10 @@ class AirChart(
     }
 
     fun showBarChart(
-        barInterface: AirChartBar.BarInterface,
+        IBar: AirChartBar.IBar,
         getBarChart: ((barChart: BarChart) -> Unit)? = null
     ) {
-        AirChartBar.show(activity, layoutInflater, chartHolderViewGroup, barInterface, getBarChart)
+        AirChartBar.show(activity, layoutInflater, chartHolderViewGroup, IBar, getBarChart)
     }
 
 }

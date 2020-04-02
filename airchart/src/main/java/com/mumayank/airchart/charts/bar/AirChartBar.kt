@@ -28,40 +28,43 @@ import android.view.*
 import android.widget.LinearLayout
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.LimitLine
-import com.github.mikephil.charting.components.YAxis
 import com.mumayank.airchart.R
-import com.mumayank.airchart.data_classes.AirChartAdditionalData
-import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.data_classes.AdditionalValue
+import com.mumayank.airchart.data_classes.Value
 import com.mumayank.airchart.util.AirChartUtil.Companion.STANDARD_BAR_WIDTH
 import kotlin.math.absoluteValue
 
 class AirChartBar {
 
-    interface BarInterface {
+    interface IBar {
         fun getTitle(): String?
-        fun getXLabel(): String
-        fun getXLabels(): ArrayList<String>
-        fun getYLeftLabel(): String
-        fun getYLeftItems(): java.util.ArrayList<AirChartValueItem>
-
-        fun getSubTitle(): String {
-            return ""
-        }
-
-        fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-            return null
-        }
-
-        fun getCustomViewLayoutResId(): Int? {
-            return null
-        }
+        fun getXAxisTitle(): String
+        fun getXAxisLabels(): java.util.ArrayList<String>
+        fun getYLeftAxisTitle(): String
+        fun getYLeftAxisValues(): java.util.ArrayList<Value>
 
         fun getColors(): ArrayList<String>? {
             return null
         }
 
+        fun getSubTitle(): String {
+            return ""
+        }
+
         fun getDecimalFormatPattern(): String {
             return "0.#"
+        }
+
+        fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
+            return null
+        }
+
+        fun getIsHorizontal(): Boolean {
+            return false
+        }
+
+        fun getCustomViewLayoutResId(): Int? {
+            return null
         }
 
         fun getIsAnimationRequired(): Boolean {
@@ -76,10 +79,6 @@ class AirChartBar {
             return
         }
 
-        fun getIsHorizontal(): Boolean {
-            return false
-        }
-
     }
 
     companion object {
@@ -88,12 +87,12 @@ class AirChartBar {
             activity: Activity,
             layoutInflater: LayoutInflater?,
             chartHolderViewGroup: ViewGroup?,
-            barInterface: BarInterface,
+            IBar: IBar,
             getBarChart: ((barChart: BarChart) -> Unit)? = null
         ) {
             // make chart
-            val barChart = if (barInterface.getIsHorizontal().not()) BarChart(activity) else HorizontalBarChart(activity)
-            val airChartValueItems = arrayListOf<AirChartValueItem>()
+            val barChart = if (IBar.getIsHorizontal().not()) BarChart(activity) else HorizontalBarChart(activity)
+            val airChartValueItems = arrayListOf<Value>()
 
             // do in BG
             AirCoroutine.execute(activity, object: AirCoroutine.Callback {
@@ -104,47 +103,52 @@ class AirChartBar {
 
                 override suspend fun doTaskInBg(viewModel: ViewModel): Boolean? {
 
-                    if (barInterface.getIsHorizontal().not()) {
+                    if (IBar.getIsHorizontal().not()) {
                         // add data
-                        for (i in barInterface.getYLeftItems()) {
+                        for (i in IBar.getYLeftAxisValues()) {
                             airChartValueItems.add(i)
                         }
 
                         // add x labels
-                        for (i in barInterface.getXLabels()) {
+                        for (i in IBar.getXAxisLabels()) {
                             xLabels.add(i)
                         }
 
                         // transform colors
-                        if (barInterface.getColors() == null) {
+                        if (IBar.getColors() == null) {
                             colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                         } else {
-                            for (color in (barInterface.getColors() as ArrayList<String>)) {
+                            for (color in (IBar.getColors() as ArrayList<String>)) {
                                 colors.add(Color.parseColor(color))
                             }
                         }
                     } else {
                         // reverse data
-                        for (i in barInterface.getYLeftItems().size-1 downTo 0) {
-                            val airChartValueItem = barInterface.getYLeftItems()[i]
-                            val values = arrayListOf<Float>()
+                        for (i in IBar.getYLeftAxisValues().size-1 downTo 0) {
+                            val airChartValueItem = IBar.getYLeftAxisValues()[i]
+                            val values = arrayListOf<Double>()
                             for (j in airChartValueItem.values.size-1 downTo 0) {
                                 values.add(airChartValueItem.values[j])
                             }
-                            airChartValueItems.add(AirChartValueItem(airChartValueItem.legendLabel, values))
+                            airChartValueItems.add(
+                                Value(
+                                    airChartValueItem.legendLabel,
+                                    values
+                                )
+                            )
                         }
 
                         // reverse x labels
-                        for (i in barInterface.getXLabels().size-1 downTo 0) {
-                            xLabels.add(barInterface.getXLabels()[i])
+                        for (i in IBar.getXAxisLabels().size-1 downTo 0) {
+                            xLabels.add(IBar.getXAxisLabels()[i])
                         }
 
                         // transform colors - reversed
-                        if (barInterface.getColors() == null) {
+                        if (IBar.getColors() == null) {
                             colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                         } else {
-                            for (i in (barInterface.getColors() as ArrayList<String>).size-1 downTo 0) {
-                                colors.add(Color.parseColor((barInterface.getColors() as ArrayList<String>)[i]))
+                            for (i in (IBar.getColors() as ArrayList<String>).size-1 downTo 0) {
+                                colors.add(Color.parseColor((IBar.getColors() as ArrayList<String>)[i]))
                             }
                         }
                     }
@@ -157,7 +161,7 @@ class AirChartBar {
                     for ((index, value) in airChartValueItems.withIndex()) {
                         val barEntries = arrayListOf<BarEntry>()
                         for ((index2, value2) in value.values.withIndex()) {
-                            barEntries.add(BarEntry(index2.toFloat(), value2))
+                            barEntries.add(BarEntry(index2.toFloat(), value2.toFloat()))
                         }
                         val barDataSet = BarDataSet(barEntries, value.legendLabel)
                         barDataSet.valueTextSize = 12f
@@ -169,11 +173,11 @@ class AirChartBar {
                         barDataSet.valueFormatter = object : ValueFormatter() {
                             override fun getFormattedValue(value: Float): String {
                                 val mFormat =
-                                    DecimalFormat(barInterface.getDecimalFormatPattern())
+                                    DecimalFormat(IBar.getDecimalFormatPattern())
                                 return mFormat.format(value.toDouble())
                             }
                         }
-                        if (barInterface.getColors().isNullOrEmpty().not()) {
+                        if (IBar.getColors().isNullOrEmpty().not()) {
                             if (airChartValueItems.size > 1) {
                                 barDataSet.color =
                                     AirChartUtil.getItemFromArrayAtIndexCyclically(colors, index)
@@ -208,7 +212,7 @@ class AirChartBar {
                     val barData = BarData(barDataSetList.toList())
                     barChart.data = barData
 
-                    if (barInterface.getIsHorizontal().not()) {
+                    if (IBar.getIsHorizontal().not()) {
                         barChart.xAxis.valueFormatter =
                             IndexAxisValueFormatter(xLabels)
                         barChart.xAxis?.textColor =
@@ -426,7 +430,7 @@ class AirChartBar {
                     barChart.setOnChartValueSelectedListener(object :
                         OnChartValueSelectedListener {
                         override fun onNothingSelected() {
-                            barInterface.onNoValueSelected()
+                            IBar.onNoValueSelected()
                         }
 
                         override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -434,12 +438,12 @@ class AirChartBar {
                                 return
                             }
                             barChart.highlightValues(null)
-                            barInterface.onValueSelected(e)
+                            IBar.onValueSelected(e)
                         }
                     })
 
                     // setup spacing
-                    val times = if (barInterface.getIsHorizontal().not()) 0.2f else 0.05f
+                    val times = if (IBar.getIsHorizontal().not()) 0.2f else 0.05f
                     val min = if (barData.yMin < 0) barData.yMin else 0f
                     val max = if (barData.yMax > 0) barData.yMax else 0f
                     barChart.axisLeft.axisMaximum = max + (max - min).absoluteValue * times
@@ -489,22 +493,22 @@ class AirChartBar {
                     viewModel.viewModelScope.launch(Dispatchers.Main) {
                         // setup views
                         chartHolderViewGroup?.title?.text =
-                            barInterface.getTitle() ?: ""
+                            IBar.getTitle() ?: ""
                         chartHolderViewGroup?.subTitle?.text =
-                            barInterface.getSubTitle()
+                            IBar.getSubTitle()
                         chartHolderViewGroup?.title?.visibility =
-                            if (barInterface.getTitle() != null) View.VISIBLE else View.GONE
+                            if (IBar.getTitle() != null) View.VISIBLE else View.GONE
                         chartHolderViewGroup?.subTitle?.visibility =
-                            if (barInterface.getSubTitle().isEmpty().not()) View.VISIBLE else View.GONE
+                            if (IBar.getSubTitle().isEmpty().not()) View.VISIBLE else View.GONE
                         chartHolderViewGroup?.yLabelRightLayout?.visibility =
                             View.GONE
 
                         // add chart
-                        if (barInterface.getIsHorizontal().not()) {
-                            chartHolderViewGroup?.xLabel?.text = barInterface.getXLabel()
+                        if (IBar.getIsHorizontal().not()) {
+                            chartHolderViewGroup?.xLabel?.text = IBar.getXAxisTitle()
                             val yLabelLeft =
                                 chartHolderViewGroup?.yLabelLeft as TextView?
-                            yLabelLeft?.text = barInterface.getYLeftLabel()
+                            yLabelLeft?.text = IBar.getYLeftAxisTitle()
 
                             barChart.setScaleEnabled(true)
                             barChart.isScaleYEnabled = false
@@ -517,10 +521,10 @@ class AirChartBar {
                         } else {
                             chartHolderViewGroup?.topTitleTextLayout?.visibility = View.VISIBLE
                             chartHolderViewGroup?.bottomTitleTextLayout?.visibility = View.GONE
-                            chartHolderViewGroup?.xLabelTop?.text = barInterface.getYLeftLabel()
+                            chartHolderViewGroup?.xLabelTop?.text = IBar.getYLeftAxisTitle()
                             val yLabelLeft =
                                 chartHolderViewGroup?.yLabelLeft as TextView?
-                            yLabelLeft?.text = barInterface.getXLabel()
+                            yLabelLeft?.text = IBar.getXAxisTitle()
                             chartHolderViewGroup?.arrowTop?.visibility = View.GONE
                             chartHolderViewGroup?.arrowBottom?.visibility = View.VISIBLE
                             val layoutParamsTemp = chartHolderViewGroup?.yLabelLeft?.layoutParams as LinearLayout.LayoutParams
@@ -551,23 +555,23 @@ class AirChartBar {
                         for (i in colors.size-1 downTo 0) {
                             colorsTemp.add(colors[i])
                         }
-                        AirChartUtil.setupLegend(activity, if (barInterface.getIsHorizontal().not()) colors else colorsTemp, chartHolderViewGroup?.rvHolderLegends, airChartValueItems, barInterface.getIsHorizontal())
+                        AirChartUtil.setupLegend(activity, if (IBar.getIsHorizontal().not()) colors else colorsTemp, chartHolderViewGroup?.rvHolderLegends, airChartValueItems, IBar.getIsHorizontal())
 
                         // setup additional data
-                        AirChartUtil.setupAdditionalData(activity, chartHolderViewGroup?.rvHolderAdditionalData, barInterface.getAdditionalDatas())
+                        AirChartUtil.setupAdditionalData(activity, chartHolderViewGroup?.rvHolderAdditionalData, IBar.getAdditionalValues())
 
                         // setup custom view
-                        AirChartUtil.setupCustomView(activity, layoutInflater, barInterface.getCustomViewLayoutResId(), chartHolderViewGroup?.customView)
+                        AirChartUtil.setupCustomView(activity, layoutInflater, IBar.getCustomViewLayoutResId(), chartHolderViewGroup?.customView)
 
                         chartHolderViewGroup?.progressView?.visibility = View.GONE
 
-                        if (barInterface.getIsAnimationRequired()) {
+                        if (IBar.getIsAnimationRequired()) {
                             barChart.animateXY(AirChartUtil.ANIMATION_TIME, AirChartUtil.ANIMATION_TIME)
                         } else {
                             barChart.invalidate()
                         }
 
-                        if (barInterface.getIsHorizontal()) {
+                        if (IBar.getIsHorizontal()) {
                             val layoutParams = chartHolderViewGroup?.chart?.layoutParams as LinearLayout.LayoutParams
                             layoutParams.topMargin = AirChartUtil.getPixelsFromDps(activity, 22) * -1
                             chartHolderViewGroup.chart?.layoutParams = layoutParams

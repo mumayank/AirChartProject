@@ -37,4 +37,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation project(":airchart")
     implementation 'com.github.mumayank:AirRecyclerView:2.2'
+    implementation "com.google.code.gson:gson:2.8.6"
 }

@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.data.Entry
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mumayank.airchart.R
-import com.mumayank.airchart.data_classes.AirChartAdditionalData
-import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.data_classes.AdditionalValue
+import com.mumayank.airchart.data_classes.Value
 import kotlinx.android.synthetic.main.air_chart_view_rv_item_additional_data.view.*
 import kotlinx.android.synthetic.main.air_chart_view_rv_item_legends.view.*
 import mumayank.com.airrecyclerview.AirRv
@@ -57,21 +58,21 @@ class AirChartUtil {
         fun setupAdditionalData(
             activity: Activity,
             rvHolderAdditionalData: LinearLayout?,
-            airChartAdditionalData: java.util.ArrayList<AirChartAdditionalData>?
+            additionalDatumItems: java.util.ArrayList<AdditionalValue>?
         ) {
-            if (airChartAdditionalData == null) {
+            if (additionalDatumItems == null) {
                 rvHolderAdditionalData?.visibility = View.GONE
             } else {
                 val additionalDataInternalList = arrayListOf<AdditionalDataInternal>()
-                for (i in 0 until airChartAdditionalData.size step 2) {
-                    val additionalData1 = airChartAdditionalData[i]
-                    var airChartAdditionalData2: AirChartAdditionalData? = null
-                    if (i != airChartAdditionalData.size - 1) {
-                        airChartAdditionalData2 = airChartAdditionalData[i + 1]
+                for (i in 0 until additionalDatumItems.size step 2) {
+                    val additionalData1 = additionalDatumItems[i]
+                    var additionalDataItem2: AdditionalValue? = null
+                    if (i != additionalDatumItems.size - 1) {
+                        additionalDataItem2 = additionalDatumItems[i + 1]
                     }
-                    if (airChartAdditionalData2 == null) {
-                        airChartAdditionalData2 =
-                            AirChartAdditionalData(
+                    if (additionalDataItem2 == null) {
+                        additionalDataItem2 =
+                            AdditionalValue(
                                 "-",
                                 ""
                             )
@@ -80,8 +81,8 @@ class AirChartUtil {
                         AdditionalDataInternal(
                             additionalData1.key,
                             additionalData1.value,
-                            airChartAdditionalData2.key,
-                            airChartAdditionalData2.value
+                            additionalDataItem2.key,
+                            additionalDataItem2.value
                         )
                     )
                 }
@@ -148,18 +149,18 @@ class AirChartUtil {
             activity: Activity,
             colors: ArrayList<Int>,
             rvHolderLegends: LinearLayout?,
-            airChartValueItems: java.util.ArrayList<AirChartValueItem>,
+            valueItems: java.util.ArrayList<Value>,
             isReverseLayoutRequired: Boolean = false
         ) {
-            if (airChartValueItems.size > 1) {
+            if (valueItems.size > 1) {
 
                 if (isReverseLayoutRequired) {
-                    val airChartValueItemsTemp = java.util.ArrayList<AirChartValueItem>()
-                    for (i in airChartValueItems.size-1 downTo 0) {
-                        airChartValueItemsTemp.add(airChartValueItems[i])
+                    val airChartValueItemsTemp = java.util.ArrayList<Value>()
+                    for (i in valueItems.size-1 downTo 0) {
+                        airChartValueItemsTemp.add(valueItems[i])
                     }
-                    airChartValueItems.clear()
-                    airChartValueItems.addAll(airChartValueItemsTemp)
+                    valueItems.clear()
+                    valueItems.addAll(airChartValueItemsTemp)
                 }
 
                 val gridLayoutManager = object :
@@ -183,7 +184,7 @@ class AirChartUtil {
                         viewType: Int,
                         position: Int
                     ) {
-                        val airChartValueItem = airChartValueItems[position]
+                        val airChartValueItem = valueItems[position]
                         val legendsViewHolder = viewHolder as LegendsViewHolder
                         legendsViewHolder.legendLabelTV.text = airChartValueItem.legendLabel
 
@@ -209,7 +210,7 @@ class AirChartUtil {
                     }
 
                     override fun getSize(): Int? {
-                        return airChartValueItems.size
+                        return valueItems.size
                     }
 
                     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
@@ -246,7 +247,7 @@ class AirChartUtil {
                 customView?.removeAllViews()
                 customView?.addView(
                     layoutInflater?.inflate(
-                        customViewLayoutResId as Int,
+                        customViewLayoutResId,
                         LinearLayout(activity)
                     ), ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -259,10 +260,10 @@ class AirChartUtil {
 
         fun getValuesCount(
             valuesCount: Int,
-            airChartValueItems: java.util.ArrayList<AirChartValueItem>
+            valueItems: java.util.ArrayList<Value>
         ): Int {
             var valuesCountTemp = valuesCount
-            for (yItem in airChartValueItems) {
+            for (yItem in valueItems) {
                 for (value in yItem.values) {
                     valuesCountTemp++
                 }
@@ -282,6 +283,10 @@ class AirChartUtil {
             val scale: Float = activity.resources.displayMetrics.density
             val pixels = (dps * scale + 0.5f).toInt()
             return pixels
+        }
+
+        fun <T> getObjectFromJson(string: String): T {
+            return Gson().fromJson<T>(string, object: TypeToken<T>() {}.type)
         }
 
     }

@@ -54,7 +54,7 @@ airChart.bar(object: AirChart.BarInterface {
       return "This is Y label"
   }
 
-  override fun getYLeftItems(): java.util.ArrayList<YLeftItem> {
+  override fun getYLefts(): java.util.ArrayList<YLeftItem> {
       return arrayListOf(
           YLeftItem("Legend 1", arrayListOf(5f, 5.5f, 3f, 4f)),
           YLeftItem("Legend 2", arrayListOf(5f, 5.5f, 3f, 4f)),
@@ -127,10 +127,10 @@ Expected JSONObject of a chart item from the server to the client is:
     "Lalu"
   ],
   "yLeftLabel": "Progress Value",
-  "airChartValueItems": [
+  "valueItems": [
     {
       "legendLabel": "Scope",
-      "values": [
+      "valueItems": [
         24,
         12,
         13,
@@ -140,7 +140,7 @@ Expected JSONObject of a chart item from the server to the client is:
     },
     {
       "legendLabel": "Taken up",
-      "values": [
+      "valueItems": [
         13,
         5,
         2,
@@ -153,7 +153,7 @@ Expected JSONObject of a chart item from the server to the client is:
     "#2196f3",
     "#ff9800"
   ],
-  "airChartAdditionalData": [
+  "additionalDatumItems": [
     {
       "key": "Key1",
       "value": "Value1"

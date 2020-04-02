@@ -10,10 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mumayank.airchart.AirChart
 import com.mumayank.airchart.charts.bar.AirChartBar
-import com.mumayank.airchart.data_classes.AirChartValueItem
+import com.mumayank.airchart.data_classes.AdditionalValue
+import com.mumayank.airchart.data_classes.Bar
+import com.mumayank.airchart.data_classes.Value
+import com.mumayank.airchart.util.AirChartUtil
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
 import mumayank.com.airrecyclerview.AirRv
@@ -23,16 +27,22 @@ class ChartActivity : AppCompatActivity() {
 
     companion object {
         const val INTENT_EXTRA_CHART_TYPE = "INTENT_EXTRA_CHART_TYPE"
+        const val INTENT_EXTRA_DATA = "INTENT_EXTRA_DATA"
 
-        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int): ArrayList<AirChartValueItem> {
-            val legendsArrayList = arrayListOf<AirChartValueItem>()
+        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int): ArrayList<Value> {
+            val legendsArrayList = java.util.ArrayList<Value>()
             for (k in 1..noOfLegends) {
-                val arrayList = arrayListOf<Float>()
+                val arrayList = java.util.ArrayList<Double>()
                 for (i in 1..noOfDataItems) {
-                    val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toFloat()
+                    val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toDouble()
                     arrayList.add(nextRandomFloat)
                 }
-                legendsArrayList.add(AirChartValueItem("lengend$k", arrayList))
+                legendsArrayList.add(
+                    Value(
+                        "lengend$k",
+                        arrayList
+                    )
+                )
             }
             return legendsArrayList
         }
@@ -57,6 +67,34 @@ class ChartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chart_activity)
+
+        val intentExtraData = intent.getStringExtra(INTENT_EXTRA_DATA) ?: ""
+
+        if (intentExtraData.isEmpty()) {
+            AssetHelper.readFile(
+                this,
+                "chart_data",
+                fun(string: String) {
+                    val bar = Gson().fromJson<Bar>(string, Bar::class.java)
+                    showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                        showBarChartsInternal(
+                            chartLayout,
+                            Bar(bar.title, bar.xAxisTitle, bar.xAxisLabels, bar.yLeftAxisTitle, bar.yLeftAxisValues, bar.colors, bar.subTitle, bar.decimalFormatPattern, bar.additionalValues, bar.isHorizontal, bar.isAnimationRequired)
+                        )
+                    })
+                }
+            )
+        } else {
+            val bar = Gson().fromJson<Bar>(intentExtraData, Bar::class.java)
+            showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                showBarChartsInternal(
+                    chartLayout,
+                    Bar(bar.title, bar.xAxisTitle, bar.xAxisLabels, bar.yLeftAxisTitle, bar.yLeftAxisValues, bar.colors, bar.subTitle, bar.decimalFormatPattern, bar.additionalValues, bar.isHorizontal, bar.isAnimationRequired)
+                )
+            })
+        }
+
+        return
 
         val intentExtraString = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
         chartType = ChartType.valueOf(intentExtraString)
@@ -234,10 +272,7 @@ class ChartActivity : AppCompatActivity() {
                     val barData = barDatas[position]
                     showBarChartsInternal(
                         chartLayout,
-                        barData.title,
-                        barData.xLabels,
-                        barData.yLeftItems,
-                        barData.colors
+                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
                     )
                 })
 
@@ -561,10 +596,7 @@ class ChartActivity : AppCompatActivity() {
                     val barData = barDatas[position]
                     showBarChartsInternal(
                         chartLayout,
-                        barData.title,
-                        barData.xLabels,
-                        barData.yLeftItems,
-                        barData.colors
+                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
                     )
                 })
 
@@ -622,32 +654,32 @@ class ChartActivity : AppCompatActivity() {
         LinearSnapHelper().attachToRecyclerView(airRv.rv)
     }
 
-    private fun showBarChartsInternal(viewGroup: ViewGroup, title: String, xLabels: ArrayList<String>, yLeftItems: java.util.ArrayList<AirChartValueItem>, colors: ArrayList<String>? = null) {
+    private fun showBarChartsInternal(viewGroup: ViewGroup, bar: Bar) {
 
-        val barInterface = object: AirChartBar.BarInterface {
+        val barInterface = object: AirChartBar.IBar {
             override fun getTitle(): String? {
-                return title
+                return bar.title
             }
 
-            override fun getXLabel(): String {
-                return "x label"
+            override fun getXAxisTitle(): String {
+                return bar.xAxisTitle
             }
 
-            override fun getYLeftLabel(): String {
-                return "y label"
+            override fun getYLeftAxisTitle(): String {
+                return bar.yLeftAxisTitle
             }
 
-            override fun getXLabels(): ArrayList<String> {
-                return xLabels
+            override fun getXAxisLabels(): ArrayList<String> {
+                return bar.xAxisLabels
             }
 
-            override fun getYLeftItems(): java.util.ArrayList<AirChartValueItem> {
-                return yLeftItems
+            override fun getYLeftAxisValues(): java.util.ArrayList<Value> {
+                return bar.yLeftAxisValues
             }
 
             @SuppressLint("ResourceType")
             override fun getColors(): ArrayList<String>? {
-                return colors
+                return bar.colors
                     ?: arrayListOf(
                         resources.getString(R.color.red400),
                         resources.getString(R.color.purple400),
@@ -659,16 +691,24 @@ class ChartActivity : AppCompatActivity() {
             }
 
             override fun getIsHorizontal(): Boolean {
-                return chartType != ChartType.BAR
+                return bar.isHorizontal
             }
 
-            /* override fun getSubTitle(): String {
-                 return "this is subitle"
+             override fun getSubTitle(): String {
+                 return bar.subTitle
              }
 
-             override fun getAdditionalDatas(): java.util.ArrayList<AirChartAdditionalData>? {
-                 return arrayListOf(AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"), AirChartAdditionalData("key3", "value3"),AirChartAdditionalData("key1", "value1"), AirChartAdditionalData("key2", "value2"), AirChartAdditionalData("key3", "value3"))
-             }*/
+            override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
+                return bar.additionalValues
+            }
+
+            override fun getDecimalFormatPattern(): String {
+                return bar.decimalFormatPattern
+            }
+
+            override fun getIsAnimationRequired(): Boolean {
+                return bar.isAnimationRequired
+            }
 
         }
 
@@ -686,7 +726,7 @@ class ChartActivity : AppCompatActivity() {
     class BarData(
         val title: String,
         val xLabels: ArrayList<String>,
-        val yLeftItems: java.util.ArrayList<AirChartValueItem>,
+        val yLefts: java.util.ArrayList<Value>,
         val colors: ArrayList<String>? = null
     )
 }
