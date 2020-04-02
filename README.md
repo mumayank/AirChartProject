@@ -2,6 +2,14 @@
 # AirChart
 [![](https://jitpack.io/v/mumayank/AirChartProject.svg)](https://jitpack.io/#mumayank/AirChartProject)
 
+## About
+
+Charts are nothing but graphical representation of the data. As Android app developers, most of the times, we get this data from the REST APIs. And due to the time taken in getting a response from an API, we need to show a loading UI to the app user. Thus, this library takes care of:
+
+ - Show loading UI while the data loads
+ - Allowing the dev to directly supply JSON received in the API response to show a chart
+ - Allowing the dev to set chart parameters via code
+ 
 ## Setup
 
 Add this line in your `root build.gradle` at the end of repositories:
@@ -28,15 +36,8 @@ dependencies {
 ```
 where LATEST_VERSION is [![](https://jitpack.io/v/mumayank/AirChartProject.svg)](https://jitpack.io/#mumayank/AirChartProject)
 
+
 ## Usage
-
-Charts are nothing but graphical representation of the data. As Android app developers, most of the times, we get this data from the REST APIs. And due to the time taken in getting a response from an API, we need to show a loading UI to the app user. Thus, this library takes care of:
-
- - Show loading UI while the data loads
- - Allowing the dev to directly supply JSON received in the API response to show a chart
- - Allowing the dev to set chart parameters via code
-
-___
 
 ### Set chart data from REST API
 If your REST APIs are returning the correctly-formatted JSONObject for a chart, you can simply pass it to the library. The library will take care of the rest, making the Android developer's job almost negligible. In this case, you only have to include this one line of code:
@@ -217,6 +218,8 @@ Note:
  - All fields are compulsory
  - Set `title` or `subTitle` as an empty string (`""`) to hide them from the view
  - If any `JSONArray` has no values, send an empty array (`[]`)
+ - If you want a simple bar chart, put only 1 `JSONObject` in the `yLeftAxisValues` `JSONArray`. If you want grouped bar chart, put multiple `JSONObject` in it.
+ - If you want a `HorizontalBarChart`, simply put `true` in `getIsHorizontal`
 
 [Click here to find the Java POJO classes corresponding to the above JSON](https://github.com/mumayank/AirChartProject/tree/master/airchart/src/main/java/com/mumayank/airchart/data_classes)
 
@@ -228,6 +231,12 @@ ___
 
 - No. of minimum and maximum bars supported in the horizontal bar chart are 2 and 16 respectively (Due to the above, if there is no zoom, and we embed a lot of bars, the data will become unreadable)
 
+___
+
+### Additional Information
+- Most of the times, we need to show the user some extra information in the chart. Hence, the library provides an easy provision to do so. Simply put your title and value in the form of a key-value pair in `additionalValues` field. The library will generate a table on top of the chart to show such values.
+
+- Ideally, keep the width as `MATCH_PARENT` and height as `WRAP_CONTENT` of the layout that you supply to the `AirChart` library during init (let's call it `parentLayout`). In case the UI of the `parentLayout` has a height constraint, you can keep the height as a fixed value (say `500dp`). In this case, if there is a lot of data (like additional data, custom view etc) the library will automatically convert the view into a `ScrollView` so that all the items are shown to the user properly.
 ___
 
 Please star this repository if it has helped you :)
