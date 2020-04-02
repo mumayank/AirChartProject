@@ -481,4 +481,13 @@ ___
     }
 
 ___
+
+### Limits
+
+- The horizontal bar chart does not support zoom (When you embed this chart in any app, most likely the app content will scroll vertically. If zoom is supported in the chart, and you zoom in, now if you scroll vertically, the chart scroll will fight with the app scroll)
+
+- No. of minimum and maximum bars supported are 2 and 16 respectively (Due to the above, if there is no zoom, and we embed a lot of bars, the data will become unreadable)
+
+___
+
 Please star this repository if it has helped you :)
