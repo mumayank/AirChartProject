@@ -14,13 +14,11 @@ public class AdditionalValue {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public AdditionalValue() {
     }
 
     /**
-     *
      * @param value
      * @param key
      */

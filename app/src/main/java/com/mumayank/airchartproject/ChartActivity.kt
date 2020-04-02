@@ -75,21 +75,19 @@ class ChartActivity : AppCompatActivity() {
                 this,
                 "chart_data",
                 fun(string: String) {
-                    val bar = Gson().fromJson<Bar>(string, Bar::class.java)
                     showRv(1, fun(chartLayout: LinearLayout, position: Int) {
                         showBarChartsInternal(
                             chartLayout,
-                            Bar(bar.title, bar.xAxisTitle, bar.xAxisLabels, bar.yLeftAxisTitle, bar.yLeftAxisValues, bar.colors, bar.subTitle, bar.decimalFormatPattern, bar.additionalValues, bar.isHorizontal, bar.isAnimationRequired)
+                            string
                         )
                     })
                 }
             )
         } else {
-            val bar = Gson().fromJson<Bar>(intentExtraData, Bar::class.java)
             showRv(1, fun(chartLayout: LinearLayout, position: Int) {
                 showBarChartsInternal(
                     chartLayout,
-                    Bar(bar.title, bar.xAxisTitle, bar.xAxisLabels, bar.yLeftAxisTitle, bar.yLeftAxisValues, bar.colors, bar.subTitle, bar.decimalFormatPattern, bar.additionalValues, bar.isHorizontal, bar.isAnimationRequired)
+                    intentExtraData
                 )
             })
         }
@@ -270,10 +268,10 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    showBarChartsInternal(
+                    /*showBarChartsInternal(
                         chartLayout,
                         Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )
+                    )*/
                 })
 
             }
@@ -594,10 +592,10 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    showBarChartsInternal(
+                    /*showBarChartsInternal(
                         chartLayout,
                         Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )
+                    )*/
                 })
 
             }
@@ -654,9 +652,9 @@ class ChartActivity : AppCompatActivity() {
         LinearSnapHelper().attachToRecyclerView(airRv.rv)
     }
 
-    private fun showBarChartsInternal(viewGroup: ViewGroup, bar: Bar) {
+    private fun showBarChartsInternal(viewGroup: ViewGroup, jsonString: String) {
 
-        val barInterface = object: AirChartBar.IBar {
+        /*val barInterface = object: AirChartBar.IBar {
             override fun getTitle(): String? {
                 return bar.title
             }
@@ -710,11 +708,11 @@ class ChartActivity : AppCompatActivity() {
                 return bar.isAnimationRequired
             }
 
-        }
+        }*/
 
         when (chartType) {
             ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
-                AirChart(this, viewGroup).showBarChart(barInterface)
+                AirChart(this, viewGroup).showBarChart(jsonString)
             }
         }
     }

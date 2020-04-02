@@ -1,8 +1,9 @@
 package com.mumayank.airchart.data_classes;
 
-import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Value {
 
@@ -15,13 +16,11 @@ public class Value {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Value() {
     }
 
     /**
-     *
      * @param legendLabel
      * @param values
      */

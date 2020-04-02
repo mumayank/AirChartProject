@@ -1,8 +1,9 @@
 package com.mumayank.airchart.data_classes;
 
-import java.util.ArrayList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Bar {
 
@@ -42,13 +43,11 @@ public class Bar {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Bar() {
     }
 
     /**
-     *
      * @param yLeftAxisValues
      * @param xAxisLabels
      * @param subTitle

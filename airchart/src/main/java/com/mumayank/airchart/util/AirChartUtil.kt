@@ -156,7 +156,7 @@ class AirChartUtil {
 
                 if (isReverseLayoutRequired) {
                     val airChartValueItemsTemp = java.util.ArrayList<Value>()
-                    for (i in valueItems.size-1 downTo 0) {
+                    for (i in valueItems.size - 1 downTo 0) {
                         airChartValueItemsTemp.add(valueItems[i])
                     }
                     valueItems.clear()
@@ -174,7 +174,7 @@ class AirChartUtil {
                     }
                 }
 
-                val airRv = AirRv(object: AirRv.Callback {
+                val airRv = AirRv(object : AirRv.Callback {
                     override fun getAppContext(): Context? {
                         return activity
                     }
@@ -286,7 +286,7 @@ class AirChartUtil {
         }
 
         fun <T> getObjectFromJson(string: String): T {
-            return Gson().fromJson<T>(string, object: TypeToken<T>() {}.type)
+            return Gson().fromJson<T>(string, object : TypeToken<T>() {}.type)
         }
 
     }
