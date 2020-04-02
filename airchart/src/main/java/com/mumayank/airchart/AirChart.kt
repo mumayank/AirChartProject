@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.Entry
 import com.google.gson.Gson
 import com.mumayank.airchart.charts.bar.AirChartBar
 import com.mumayank.airchart.data_classes.AdditionalValue
 import com.mumayank.airchart.data_classes.Bar
 import com.mumayank.airchart.data_classes.Value
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AirChart(
     val activity: Activity,
@@ -66,9 +68,9 @@ class AirChart(
                     bar.isHorizontal,
                     bar.isAnimationRequired
                 )
-                showBarChart(object : AirChartBar.IBar {
+                showBarChart(object: AirChartBar.IBar {
 
-                    override fun getTitle(): String? {
+                    override fun getTitle(): String {
                         return bar.title
                     }
 
@@ -88,15 +90,15 @@ class AirChart(
                         return bar.yLeftAxisValues
                     }
 
-                    override fun getColors(): ArrayList<String>? {
+                    override fun getColors(): ArrayList<String> {
                         return bar.colors
                     }
 
-                    override fun getSubTitle(): String {
+                    override fun getSubTitle(): String? {
                         return bar.subTitle
                     }
 
-                    override fun getDecimalFormatPattern(): String {
+                    override fun getDecimalFormatPattern(): String? {
                         return bar.decimalFormatPattern
                     }
 
@@ -108,11 +110,23 @@ class AirChart(
                         return bar.isHorizontal
                     }
 
-                    override fun getIsAnimationRequired(): Boolean {
+                    override fun getCustomViewLayoutResId(): Int? {
+                        return R.layout.custom_view
+                    }
+
+                    override fun getIsAnimationRequired(): Boolean? {
                         return bar.isAnimationRequired
                     }
 
-                }, getBarChart)
+                    override fun onValueSelected(e: Entry?) {
+                        // do something
+                    }
+
+                    override fun onNoValueSelected() {
+                        // do something
+                    }
+
+                })
             }
         } catch (e: Exception) {
             Log.e("AirChart", e.message ?: "Some error occurred")
