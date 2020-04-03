@@ -110,20 +110,8 @@ class AirChart(
                         return bar.isHorizontal
                     }
 
-                    override fun getCustomViewLayoutResId(): Int? {
-                        return R.layout.custom_view
-                    }
-
                     override fun getIsAnimationRequired(): Boolean? {
                         return bar.isAnimationRequired
-                    }
-
-                    override fun onValueSelected(e: Entry?) {
-                        // do something
-                    }
-
-                    override fun onNoValueSelected() {
-                        // do something
                     }
 
                 })
