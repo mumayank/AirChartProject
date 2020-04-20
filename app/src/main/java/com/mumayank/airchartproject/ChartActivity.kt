@@ -47,7 +47,7 @@ class ChartActivity : AppCompatActivity() {
             return legendsArrayList
         }
 
-        private fun getLabels (size: Int): ArrayList<String> {
+        private fun getLabels(size: Int): ArrayList<String> {
             val arrayList = arrayListOf<String>()
             for (i in 1..size) {
                 arrayList.add("val$i")
@@ -58,7 +58,8 @@ class ChartActivity : AppCompatActivity() {
 
     enum class ChartType {
         BAR,
-        HORIZONTAL_BAR
+        HORIZONTAL_BAR,
+        LINE
     }
 
     private var chartType = ChartType.BAR
@@ -91,8 +92,6 @@ class ChartActivity : AppCompatActivity() {
                 )
             })
         }
-
-        return
 
         val intentExtraString = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
         chartType = ChartType.valueOf(intentExtraString)
@@ -268,10 +267,24 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    /*showBarChartsInternal(
+                    showBarChartsInternal(
                         chartLayout,
-                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )*/
+                        Gson().toJson(
+                            Bar(
+                                barData.title,
+                                "x axis",
+                                barData.xLabels,
+                                "y axis",
+                                barData.yLefts,
+                                barData.colors,
+                                null,
+                                null,
+                                null,
+                                false,
+                                null
+                            )
+                        )
+                    )
                 })
 
             }
@@ -600,11 +613,13 @@ class ChartActivity : AppCompatActivity() {
 
             }
 
+            ChartType.LINE -> {
+            }
         }
     }
 
-    private fun showRv(size: Int, getBindView: (chartLayout: LinearLayout, position: Int)->Unit) {
-        val airRv = AirRv(object: AirRv.Callback {
+    private fun showRv(size: Int, getBindView: (chartLayout: LinearLayout, position: Int) -> Unit) {
+        val airRv = AirRv(object : AirRv.Callback {
 
             override fun getAppContext(): Context? {
                 return this@ChartActivity
@@ -654,70 +669,15 @@ class ChartActivity : AppCompatActivity() {
 
     private fun showBarChartsInternal(viewGroup: ViewGroup, jsonString: String) {
 
-        /*val barInterface = object: AirChartBar.IBar {
-            override fun getTitle(): String? {
-                return bar.title
-            }
-
-            override fun getXAxisTitle(): String {
-                return bar.xAxisTitle
-            }
-
-            override fun getYLeftAxisTitle(): String {
-                return bar.yLeftAxisTitle
-            }
-
-            override fun getXAxisLabels(): ArrayList<String> {
-                return bar.xAxisLabels
-            }
-
-            override fun getYLeftAxisValues(): java.util.ArrayList<Value> {
-                return bar.yLeftAxisValues
-            }
-
-            @SuppressLint("ResourceType")
-            override fun getColors(): ArrayList<String>? {
-                return bar.colors
-                    ?: arrayListOf(
-                        resources.getString(R.color.red400),
-                        resources.getString(R.color.purple400),
-                        resources.getString(R.color.amber400),
-                        resources.getString(R.color.green400),
-                        resources.getString(R.color.brown300),
-                        resources.getString(R.color.indigo400)
-                    )
-            }
-
-            override fun getIsHorizontal(): Boolean {
-                return bar.isHorizontal
-            }
-
-             override fun getSubTitle(): String {
-                 return bar.subTitle
-             }
-
-            override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
-                return bar.additionalValues
-            }
-
-            override fun getDecimalFormatPattern(): String {
-                return bar.decimalFormatPattern
-            }
-
-            override fun getIsAnimationRequired(): Boolean {
-                return bar.isAnimationRequired
-            }
-
-        }*/
-
         when (chartType) {
             ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
                 AirChart(this, viewGroup).showBarChart(jsonString)
             }
+            ChartType.LINE -> AirChart(this, viewGroup).showLineChart(jsonString)
         }
     }
 
-    class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val chartHolder: LinearLayout = view.chartHolder
     }
 
