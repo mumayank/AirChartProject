@@ -38,22 +38,6 @@
   "subTitle": "This is a subtitle",
   "decimalFormatPattern": "0.00",
   "additionalValues": [
-    {
-      "key": "Key1",
-      "value": "Value1"
-    },
-    {
-      "key": "Key2",
-      "value": "Value2 but what if this is just a bit longer than expected, is the lib handling this case"
-    },
-    {
-      "key": "Key3",
-      "value": "Value3"
-    },
-    {
-      "key": "Key4",
-      "value": "Value4"
-    }
   ],
   "isAnimationRequired": true
 }
