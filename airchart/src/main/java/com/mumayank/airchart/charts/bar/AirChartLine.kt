@@ -109,7 +109,7 @@ class AirChartLine {
                     if (iLine.getColors() == null) {
                         colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                     } else {
-                        for (color in iLine.getColors()) {
+                        for (color in (iLine.getColors() as ArrayList<String>)) {
                             colors.add(Color.parseColor(color))
                         }
                     }
@@ -220,6 +220,8 @@ class AirChartLine {
                         )
                     lineChart.axisLeft?.axisMinimum = 0f
                     lineChart.axisLeft.setDrawTopYLabelEntry(true)
+
+                    //todo check for right axis label
 /*
 
                         lineChart.renderer =

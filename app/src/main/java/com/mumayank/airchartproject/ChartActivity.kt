@@ -11,13 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.mumayank.airchart.AirChart
-import com.mumayank.airchart.charts.bar.AirChartBar
-import com.mumayank.airchart.data_classes.AdditionalValue
 import com.mumayank.airchart.data_classes.Bar
 import com.mumayank.airchart.data_classes.Value
-import com.mumayank.airchart.util.AirChartUtil
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
 import mumayank.com.airrecyclerview.AirRv
@@ -29,12 +25,18 @@ class ChartActivity : AppCompatActivity() {
         const val INTENT_EXTRA_CHART_TYPE = "INTENT_EXTRA_CHART_TYPE"
         const val INTENT_EXTRA_DATA = "INTENT_EXTRA_DATA"
 
-        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int): ArrayList<Value> {
+        private fun getData(
+            noOfLegends: Int,
+            noOfDataItems: Int,
+            minDataVal: Int,
+            maxDataVal: Int
+        ): ArrayList<Value> {
             val legendsArrayList = java.util.ArrayList<Value>()
             for (k in 1..noOfLegends) {
                 val arrayList = java.util.ArrayList<Double>()
                 for (i in 1..noOfDataItems) {
-                    val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toDouble()
+                    val nextRandomFloat =
+                        kotlin.random.Random.nextInt(minDataVal, maxDataVal + 1).toDouble()
                     arrayList.add(nextRandomFloat)
                 }
                 legendsArrayList.add(
@@ -77,7 +79,7 @@ class ChartActivity : AppCompatActivity() {
                 "chart_data",
                 fun(string: String) {
                     showRv(1, fun(chartLayout: LinearLayout, position: Int) {
-                        showBarChartsInternal(
+                        showChartsInternal(
                             chartLayout,
                             string
                         )
@@ -86,7 +88,7 @@ class ChartActivity : AppCompatActivity() {
             )
         } else {
             showRv(1, fun(chartLayout: LinearLayout, position: Int) {
-                showBarChartsInternal(
+                showChartsInternal(
                     chartLayout,
                     intentExtraData
                 )
@@ -267,7 +269,7 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    showBarChartsInternal(
+                    showChartsInternal(
                         chartLayout,
                         Gson().toJson(
                             Bar(
@@ -614,6 +616,50 @@ class ChartActivity : AppCompatActivity() {
             }
 
             ChartType.LINE -> {
+                val lineData = arrayListOf(
+
+                    LineData(
+                        "No value",
+                        arrayListOf(),
+                        arrayListOf()
+                    ),
+                    LineData(
+                        "1 value",
+                        getLabels(1),
+                        getData(1, 1, 10, 30)
+                    )
+                )
+
+                AssetHelper.readFile(
+                    this,
+                    "line_chart_data",
+                    fun(string: String) {
+                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, string)
+                        })
+                    }
+                )
+                /*
+                showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                    val data = lineData[position]
+                    showChartsInternal(
+                        chartLayout, Gson().toJson(
+                            Line(
+                                data.title,
+                                "x axis",
+                                data.xLabels,
+                                "y axis",
+                                data.yLefts,
+                                data.colors,
+                                null,
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    )
+                })
+                */
             }
         }
     }
@@ -667,7 +713,7 @@ class ChartActivity : AppCompatActivity() {
         LinearSnapHelper().attachToRecyclerView(airRv.rv)
     }
 
-    private fun showBarChartsInternal(viewGroup: ViewGroup, jsonString: String) {
+    private fun showChartsInternal(viewGroup: ViewGroup, jsonString: String) {
 
         when (chartType) {
             ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
@@ -682,6 +728,13 @@ class ChartActivity : AppCompatActivity() {
     }
 
     class BarData(
+        val title: String,
+        val xLabels: ArrayList<String>,
+        val yLefts: java.util.ArrayList<Value>,
+        val colors: ArrayList<String>? = null
+    )
+
+    class LineData(
         val title: String,
         val xLabels: ArrayList<String>,
         val yLefts: java.util.ArrayList<Value>,

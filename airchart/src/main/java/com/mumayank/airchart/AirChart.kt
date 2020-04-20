@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.charts.LineChart
 import com.google.gson.Gson
 import com.mumayank.airchart.charts.bar.AirChartBar
+import com.mumayank.airchart.charts.bar.AirChartLine
 import com.mumayank.airchart.data_classes.AdditionalValue
 import com.mumayank.airchart.data_classes.Bar
+import com.mumayank.airchart.data_classes.Line
 import com.mumayank.airchart.data_classes.Value
-import java.util.*
-import kotlin.collections.ArrayList
 
 class AirChart(
     val activity: Activity,
@@ -46,12 +46,89 @@ class AirChart(
         AirChartBar.show(activity, layoutInflater, chartHolderViewGroup, IBar, getBarChart)
     }
 
+    fun showLineChart(
+        iLine: AirChartLine.ILine,
+        getLineChart: ((lineChart: LineChart) -> Unit)? = null
+    ) {
+        AirChartLine.show(activity, layoutInflater, chartHolderViewGroup, iLine, getLineChart)
+    }
+
+    fun showLineChart(
+        jsonString: String,
+        getLineChart: ((lineChart: LineChart) -> Unit)? = null
+    ) {
+        try {
+            val line = Gson().fromJson(jsonString, Line::class.java)
+            if (line == null) {
+                throw Exception()
+            } else {
+                Line(
+                    line.title,
+                    line.xAxisTitle,
+                    line.xAxisLabels,
+                    line.yLeftAxisTitle,
+                    line.yLeftAxisValues,
+                    line.colors,
+                    line.subTitle,
+                    line.decimalFormatPattern,
+                    line.additionalValues,
+                    line.isAnimationRequired
+                )
+
+                showLineChart(object : AirChartLine.ILine {
+
+                    override fun getTitle(): String {
+                        return line.title
+                    }
+
+                    override fun getXAxisTitle(): String {
+                        return line.xAxisTitle
+                    }
+
+                    override fun getXAxisLabels(): ArrayList<String> {
+                        return line.xAxisLabels
+                    }
+
+                    override fun getYLeftAxisTitle(): String {
+                        return line.yLeftAxisTitle
+                    }
+
+                    override fun getYLeftAxisValues(): ArrayList<Value> {
+                        return line.yLeftAxisValues
+                    }
+
+                    override fun getColors(): ArrayList<String> {
+                        return line.colors
+                    }
+
+                    override fun getSubTitle(): String? {
+                        return line.subTitle
+                    }
+
+                    override fun getDecimalFormatPattern(): String? {
+                        return line.decimalFormatPattern
+                    }
+
+                    override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
+                        return line.additionalValues
+                    }
+
+                    override fun getIsAnimationRequired(): Boolean? {
+                        return line.isAnimationRequired
+                    }
+                })
+            }
+        } catch (e: Exception) {
+            Log.e("AirChart", e.message ?: "Some error occurred")
+        }
+    }
+
     fun showBarChart(
         jsonString: String,
         getBarChart: ((barChart: BarChart) -> Unit)? = null
     ) {
         try {
-            val bar = Gson().fromJson<Bar>(jsonString, Bar::class.java)
+            val bar = Gson().fromJson(jsonString, Bar::class.java)
             if (bar == null) {
                 throw Exception()
             } else {
@@ -68,7 +145,7 @@ class AirChart(
                     bar.isHorizontal,
                     bar.isAnimationRequired
                 )
-                showBarChart(object: AirChartBar.IBar {
+                showBarChart(object : AirChartBar.IBar {
 
                     override fun getTitle(): String {
                         return bar.title
