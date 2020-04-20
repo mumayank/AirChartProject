@@ -190,7 +190,7 @@ class AirChartLine {
 
                     lineChart.axisRight?.setDrawAxisLine(true)
                     lineChart.axisRight?.setDrawGridLines(false)
-                    lineChart.axisRight?.setDrawLabels(false)
+                    lineChart.axisRight?.setDrawLabels(lineChart.data.dataSets.size>1)
                     lineChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
                             activity,
