@@ -616,6 +616,7 @@ class ChartActivity : AppCompatActivity() {
             }
 
             ChartType.LINE -> {
+                val lineDataList = ArrayList<String>()
                 val lineData = arrayListOf(
 
                     LineData(
@@ -634,11 +635,50 @@ class ChartActivity : AppCompatActivity() {
                     this,
                     "line_chart_data",
                     fun(string: String) {
-                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
-                            showChartsInternal(chartLayout, string)
+                        lineDataList.add(string)
+
+                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, lineDataList[position])
                         })
                     }
                 )
+
+                AssetHelper.readFile(
+                    this,
+                    "single_line_chart_data",
+                    fun(string: String) {
+                        lineDataList.add(string)
+
+                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, lineDataList[position])
+                        })
+                    }
+                )
+
+                AssetHelper.readFile(
+                    this,
+                    "invisible_line_chart_data",
+                    fun(string: String) {
+                        lineDataList.add(string)
+
+                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, lineDataList[position])
+                        })
+                    }
+                )
+
+                AssetHelper.readFile(
+                    this,
+                    "negative_values_line_chart_data",
+                    fun(string: String) {
+                        lineDataList.add(string)
+
+                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, lineDataList[position])
+                        })
+                    }
+                )
+
                 /*
                 showRv(1, fun(chartLayout: LinearLayout, position: Int) {
                     val data = lineData[position]
