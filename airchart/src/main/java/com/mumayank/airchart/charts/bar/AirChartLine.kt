@@ -190,7 +190,7 @@ class AirChartLine {
 
                     lineChart.axisRight?.setDrawAxisLine(true)
                     lineChart.axisRight?.setDrawGridLines(false)
-                    lineChart.axisRight?.setDrawLabels(lineChart.data.dataSets.size>1)
+                    lineChart.axisRight?.setDrawLabels(lineChart.data.dataSets.size > 1)
                     lineChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
                             activity,
@@ -222,15 +222,13 @@ class AirChartLine {
                     lineChart.axisLeft.setDrawTopYLabelEntry(true)
 
                     //todo check for right axis label
-/*
 
-                        lineChart.renderer =
-                            CustomBarChartRenderer(
-                                lineChart,
-                                lineChart.animator,
-                                lineChart.viewPortHandler
-                            )
-*/
+                    lineChart.renderer =
+                        CustomLineChartRenderer(
+                            lineChart,
+                            lineChart.animator,
+                            lineChart.viewPortHandler
+                        )
 
                     // set zoom operations
                     lineChart.onChartGestureListener = object : OnChartGestureListener {
