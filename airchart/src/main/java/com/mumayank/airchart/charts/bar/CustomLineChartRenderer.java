@@ -30,10 +30,10 @@ public class CustomLineChartRenderer extends LineChartRenderer {
             }
             int space = 5 * length;
             c.rotate(-90f, x + 10, y - space);
-            c.drawText(valueText, x + 10, y - space, mValuePaint);
+            c.drawText(valueText, x + 20, y - space, mValuePaint);
         } else {
             c.rotate(-90f, x + 10, y);
-            c.drawText(valueText, x + 10, y, mValuePaint);
+            c.drawText(valueText, x + 20, y, mValuePaint);
         }
         c.restore();
     }
