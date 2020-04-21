@@ -1,10 +1,7 @@
 {
-  "title": "few line chart",
+  "title": "2 points line chart",
   "xAxisTitle": "Projects",
   "xAxisLabels": [
-    "Narendra",
-    "Rahul",
-    "Prakash",
     "Sonia",
     "Lalu"
   ],
@@ -13,11 +10,8 @@
     {
       "legendLabel": "Scope",
       "values": [
-        24.3,
-        12.1,
-        13.5,
-        12.7,
-        17.8
+        62122.7234,
+        57171.238
       ]
     }
   ],
@@ -25,7 +19,7 @@
     "#ff9800"
   ],
   "subTitle": "This is a subtitle",
-  "decimalFormatPattern": "0.0#",
+  "decimalFormatPattern": "#.##",
   "additionalValues": [
   ],
   "isAnimationRequired": true
