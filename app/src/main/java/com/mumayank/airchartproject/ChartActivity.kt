@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.mumayank.airchart.AirChart
-import com.mumayank.airchart.data_classes.Bar
 import com.mumayank.airchart.data_classes.Value
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
@@ -100,11 +98,10 @@ class ChartActivity : AppCompatActivity() {
 
         when (chartType) {
             ChartType.BAR -> {
+                /*
                 val barDatas = arrayListOf(
 
-                    /**
-                     * todo: POSITIVE VALUES
-                     */
+                    // todo: POSITIVE VALUES
 
                     BarData(
                         "No value",
@@ -177,9 +174,7 @@ class ChartActivity : AppCompatActivity() {
                         getData(1, 1000, 0, 30)
                     ),
 
-                    /**
-                     * todo: NEGATIVE VALUES
-                     */
+                    // todo: NEGATIVE VALUES
                     BarData(
                         "1 value - nagative",
                         getLabels(1),
@@ -216,9 +211,7 @@ class ChartActivity : AppCompatActivity() {
                         getData(1, 32, -3000, 3000)
                     ),
 
-                    /**
-                     * todo: GROUPED POSITIVE
-                     */
+                    // todo: GROUPED POSITIVE
 
                     BarData(
                         "2 grouped",
@@ -241,9 +234,7 @@ class ChartActivity : AppCompatActivity() {
                         getData(4, 16, 0, 30)
                     ),
 
-                    /**
-                     * todo: GROUPED NEGATIVE
-                     */
+                    // todo: GROUPED NEGATIVE
 
                     BarData(
                         "2 grouped - negative",
@@ -288,7 +279,16 @@ class ChartActivity : AppCompatActivity() {
                         )
                     )
                 })
-
+                */
+                AssetHelper.readFile(
+                    this,
+                    "chart_data",
+                    fun(string: String) {
+                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, string)
+                        })
+                    }
+                )
             }
 
             ChartType.HORIZONTAL_BAR -> {
