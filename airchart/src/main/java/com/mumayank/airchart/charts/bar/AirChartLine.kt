@@ -109,7 +109,7 @@ class AirChartLine {
                     if (iLine.getColors() == null) {
                         colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                     } else {
-                        for (color in (iLine.getColors() as ArrayList<String>)) {
+                        for (color in iLine.getColors()) {
                             colors.add(Color.parseColor(color))
                         }
                     }
@@ -166,7 +166,7 @@ class AirChartLine {
                             android.R.color.black
                         )
                     lineChart.xAxis?.setDrawAxisLine(true)
-                    lineChart.xAxis?.setDrawGridLines(false)
+                    lineChart.xAxis?.setDrawGridLines(true)
                     lineChart.xAxis?.position = XAxis.XAxisPosition.BOTTOM
                     lineChart.xAxis?.isGranularityEnabled = true
                     lineChart.xAxis?.granularity = 1f
@@ -185,8 +185,7 @@ class AirChartLine {
                             android.R.color.black
                         )
                     lineChart.xAxis.setAvoidFirstLastClipping(false)
-                    lineChart.xAxis.labelCount =
-                        if (xLabels.size > 20) 20 else xLabels.size
+                    lineChart.xAxis.labelCount = if (xLabels.size > 20) 20 else xLabels.size
 
                     lineChart.axisRight?.setDrawAxisLine(true)
                     lineChart.axisRight?.setDrawGridLines(false)
