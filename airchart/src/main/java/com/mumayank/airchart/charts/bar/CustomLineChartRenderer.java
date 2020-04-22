@@ -33,7 +33,7 @@ public class CustomLineChartRenderer extends LineChartRenderer {
             c.drawText(valueText, x + 20, y - space, mValuePaint);
         } else {
             c.rotate(-90f, x + 10, y);
-            c.drawText(valueText, x + 20, y, mValuePaint);
+            c.drawText(valueText, x - (valueText.length() * 8), y, mValuePaint);
         }
         c.restore();
     }
