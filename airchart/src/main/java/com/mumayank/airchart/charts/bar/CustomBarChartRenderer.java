@@ -31,7 +31,7 @@ public class CustomBarChartRenderer extends BarChartRenderer {
             c.drawText(valueText, x + 10, y - space, mValuePaint);
         } else {
             c.rotate(-90f, x + 10, y);
-            c.drawText(valueText, x + 10, y, mValuePaint);
+            c.drawText(valueText, x - valueText.length(), y, mValuePaint);
         }
         c.restore();
     }
