@@ -645,7 +645,7 @@ class ChartActivity : AppCompatActivity() {
 
                 AssetHelper.readFile(
                     this,
-                    "single_line_chart_data",
+                    "y_left_axis_y_right_axis_line_chart_data",
                     fun(string: String) {
                         lineDataList.add(string)
 
