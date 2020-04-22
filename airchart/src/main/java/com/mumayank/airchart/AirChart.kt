@@ -68,6 +68,8 @@ class AirChart(
                     line.xAxisLabels,
                     line.yLeftAxisTitle,
                     line.yLeftAxisValues,
+                    line.yRightAxisTitle,
+                    line.yRightAxisValues,
                     line.colors,
                     line.subTitle,
                     line.decimalFormatPattern,
@@ -95,6 +97,14 @@ class AirChart(
 
                     override fun getYLeftAxisValues(): ArrayList<Value> {
                         return line.yLeftAxisValues
+                    }
+
+                    override fun getYRightAxisTitle(): String? {
+                        return line.yRightAxisTitle
+                    }
+
+                    override fun getYRightAxisValues(): ArrayList<Value>? {
+                        return line.yRightAxisValues
                     }
 
                     override fun getColors(): ArrayList<String> {
