@@ -321,7 +321,7 @@ class AirChartLine {
                     })
 
                     // setup spacing
-                    val times = 0.2f
+                    val times = 0.5f
                     val min = if (lineData.yMin < 0) lineData.yMin else 0f
                     val max = if (lineData.yMax > 0) lineData.yMax else 0f
                     lineChart.axisLeft.axisMaximum = max + (max - min).absoluteValue * times
