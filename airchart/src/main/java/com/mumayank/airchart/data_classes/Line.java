@@ -27,6 +27,14 @@ public class Line {
     @Expose
     private ArrayList<Value> yLeftAxisValues = null;
 
+    @SerializedName("yRightAxisTitle")
+    @Expose
+    private String yRightAxisTitle;
+
+    @SerializedName("yRightAxisValues")
+    @Expose
+    private ArrayList<Value> yRightAxisValues = null;
+
     //todo should we include yRightAxisValues ??
 
     @SerializedName("colors")
@@ -57,9 +65,11 @@ public class Line {
 
     /**
      * @param yLeftAxisValues
+     * @param yRightAxisValues
      * @param xAxisLabels
      * @param subTitle
      * @param yLeftAxisTitle
+     * @param yRightAxisTitle
      * @param xAxisTitle
      * @param isAnimationRequired
      * @param title
@@ -67,7 +77,7 @@ public class Line {
      * @param additionalValues
      * @param colors
      */
-    public Line(String title, String xAxisTitle, ArrayList<String> xAxisLabels, String yLeftAxisTitle, ArrayList<Value> yLeftAxisValues,
+    public Line(String title, String xAxisTitle, ArrayList<String> xAxisLabels, String yLeftAxisTitle, ArrayList<Value> yLeftAxisValues, String yRightAxisTitle, ArrayList<Value> yRightAxisValues,
                 ArrayList<String> colors, String subTitle, String decimalFormatPattern, ArrayList<AdditionalValue> additionalValues,
                 Boolean isAnimationRequired) {
         super();
@@ -76,6 +86,8 @@ public class Line {
         this.xAxisLabels = xAxisLabels;
         this.yLeftAxisTitle = yLeftAxisTitle;
         this.yLeftAxisValues = yLeftAxisValues;
+        this.yRightAxisTitle = yRightAxisTitle;
+        this.yRightAxisValues = yRightAxisValues;
         this.colors = colors;
         this.subTitle = subTitle;
         this.decimalFormatPattern = decimalFormatPattern;
@@ -163,4 +175,19 @@ public class Line {
         this.isAnimationRequired = isAnimationRequired;
     }
 
+    public String getYRightAxisTitle() {
+        return yRightAxisTitle;
+    }
+
+    public void setYRightAxisTitle(String yRightAxisTitle) {
+        this.yRightAxisTitle = yRightAxisTitle;
+    }
+
+    public ArrayList<Value> getYRightAxisValues() {
+        return yRightAxisValues;
+    }
+
+    public void setYRightAxisValues(ArrayList<Value> yRightAxisValues) {
+        this.yRightAxisValues = yRightAxisValues;
+    }
 }
