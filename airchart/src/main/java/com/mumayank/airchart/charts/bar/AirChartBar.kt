@@ -446,7 +446,7 @@ class AirChartBar {
                     })
 
                     // setup spacing
-                    val times = if (iBar.getIsHorizontal() == false) 0.2f else 0.05f
+                    val times = if (iBar.getIsHorizontal() == false) 0.5f else 0.05f
                     val min = if (barData.yMin < 0) barData.yMin else 0f
                     val max = if (barData.yMax > 0) barData.yMax else 0f
                     barChart.axisLeft.axisMaximum = max + (max - min).absoluteValue * times
