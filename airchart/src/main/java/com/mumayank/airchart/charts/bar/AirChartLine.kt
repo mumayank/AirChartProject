@@ -70,6 +70,14 @@ class AirChartLine {
         fun onNoValueSelected() {
             return
         }
+
+        fun getYRightAxisTitle(): String? {
+            return null
+        }
+
+        fun getYRightAxisValues(): java.util.ArrayList<Value>? {
+            return null
+        }
     }
 
     companion object {
@@ -99,7 +107,12 @@ class AirChartLine {
                     for (i in iLine.getYLeftAxisValues()) {
                         airChartValueItems.add(i)
                     }
-
+                    // add data
+                    if (iLine.getYRightAxisValues() != null) {
+                        for (i in iLine.getYRightAxisValues()!!) {
+                            airChartValueItems.add(i)
+                        }
+                    }
                     // add x labels
                     for (i in iLine.getXAxisLabels()) {
                         xLabels.add(i)
@@ -187,9 +200,10 @@ class AirChartLine {
                     lineChart.xAxis.setAvoidFirstLastClipping(false)
                     lineChart.xAxis.labelCount = if (xLabels.size > 20) 20 else xLabels.size
 
-                    lineChart.axisRight?.setDrawAxisLine(true)
+                    lineChart.axisRight?.setDrawLabels(iLine.getYRightAxisValues() != null)
                     lineChart.axisRight?.setDrawGridLines(false)
-                    lineChart.axisRight?.setDrawLabels(lineChart.data.dataSets.size > 1)
+                    lineChart.axisRight?.setDrawAxisLine(iLine.getYRightAxisValues() != null)
+
                     lineChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
                             activity,
@@ -219,8 +233,6 @@ class AirChartLine {
                         )
                     lineChart.axisLeft?.axisMinimum = 0f
                     lineChart.axisLeft.setDrawTopYLabelEntry(true)
-
-                    //todo check for right axis label
 
                     lineChart.renderer =
                         CustomLineChartRenderer(
@@ -280,7 +292,6 @@ class AirChartLine {
 
                     }
                     lineChart.setExtraOffsets(0f, 16f, 0f, 16f)
-
 
                     // setup chart
                     lineChart.description = null
@@ -372,7 +383,7 @@ class AirChartLine {
                         chartHolderViewGroup?.subTitle?.visibility =
                             if (iLine.getSubTitle()?.isEmpty() == false) View.VISIBLE else View.GONE
                         chartHolderViewGroup?.yLabelRightLayout?.visibility =
-                            View.GONE
+                            if (iLine.getYRightAxisTitle() == null) View.GONE else View.VISIBLE
 
                         // add chart
                         chartHolderViewGroup?.xLabel?.text = iLine.getXAxisTitle()
@@ -380,6 +391,10 @@ class AirChartLine {
                             chartHolderViewGroup?.yLabelLeft as TextView?
                         yLabelLeft?.text = iLine.getYLeftAxisTitle()
 
+                        if (iLine.getYRightAxisTitle() != null) {
+                            val yLabelRight = chartHolderViewGroup?.yLabelRight as TextView?
+                            yLabelRight?.text = iLine.getYRightAxisTitle()
+                        }
                         lineChart.setScaleEnabled(true)
                         lineChart.isScaleYEnabled = false
                         if (valuesCount > 15) {
