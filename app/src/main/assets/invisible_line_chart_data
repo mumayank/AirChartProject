@@ -5,6 +5,7 @@
     "Narendra",
     "Rahul",
     "Prakash",
+    "Prakash1",
     "Sonia",
     "Lalu"
   ],
@@ -17,12 +18,25 @@
         12.1,
         13.5,
         12.7,
+        42.9,
         17.8
+      ]
+    },
+    {
+      "legendLabel": "Scope 1",
+      "values": [
+        34.3,
+        32.1,
+        33.5,
+        32.7,
+        22.9,
+        37.8
       ]
     }
   ],
   "colors": [
-    "#ffffff"
+    "#ff9800",
+    "#3f98c2"
   ],
   "subTitle": "This is a subtitle",
   "decimalFormatPattern": "0.0#",
