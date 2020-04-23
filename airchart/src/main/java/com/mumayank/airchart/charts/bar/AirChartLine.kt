@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -165,11 +166,34 @@ class AirChartLine {
                                     android.R.color.black
                                 )
                         }
-                        lineDataSet.setDrawValues(true)
+
+                        lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+                        lineDataSet.setDrawCircleHole(false)
+                        lineDataSet.lineWidth = 2f
+                        lineDataSet.circleRadius = 2f
+                        lineDataSet.setCircleColor(
+                            ContextCompat.getColor(
+                                activity,
+                                android.R.color.black
+                            )
+                        )
+                        if (airChartValueItems.size > 1 && index == 0) {
+                            lineDataSet.lineWidth = 5f
+                            lineDataSet.circleRadius = 4f
+                            lineDataSet.setCircleColor(
+                                ContextCompat.getColor(
+                                    activity,
+                                    R.color.blueGrey200
+                                )
+                            )
+                            lineDataSet.setDrawValues(false) // here
+                        }
+
                         lineDataSetList.add(lineDataSet)
                     }
                     val lineData = LineData(lineDataSetList.toList())
                     lineChart.data = lineData
+                    lineChart.setDrawMarkers(true)
 
                     lineChart.xAxis.valueFormatter =
                         IndexAxisValueFormatter(xLabels)
@@ -200,9 +224,6 @@ class AirChartLine {
                     lineChart.xAxis.setAvoidFirstLastClipping(false)
                     lineChart.xAxis.labelCount = if (xLabels.size > 20) 20 else xLabels.size
 
-                    lineChart.axisRight?.setDrawLabels(iLine.getYRightAxisValues() != null)
-                    lineChart.axisRight?.setDrawGridLines(false)
-                    lineChart.axisRight?.setDrawAxisLine(iLine.getYRightAxisValues() != null)
 
                     lineChart.axisRight.axisLineColor =
                         ContextCompat.getColor(
@@ -210,29 +231,14 @@ class AirChartLine {
                             android.R.color.black
                         )
 
-                    lineChart.axisLeft?.valueFormatter = object : ValueFormatter() {
-                        override fun getFormattedValue(value: Float): String {
-                            return value.toInt().toString()
-                        }
-                    }
-                    lineChart.axisLeft?.textColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
                     lineChart.axisLeft?.setDrawAxisLine(true)
-                    lineChart.axisLeft?.setDrawGridLines(false)
-                    lineChart.axisLeft?.isGranularityEnabled = true
-                    lineChart.axisLeft?.granularity = 1f
                     lineChart.axisLeft?.setDrawLabels(true)
-                    lineChart.axisLeft.textSize = 12f
-                    lineChart.axisLeft.axisLineColor =
-                        ContextCompat.getColor(
-                            activity,
-                            android.R.color.black
-                        )
-                    lineChart.axisLeft?.axisMinimum = 0f
-                    lineChart.axisLeft.setDrawTopYLabelEntry(true)
+
+                    lineChart.axisRight?.setDrawLabels(iLine.getYRightAxisValues() != null)
+                    lineChart.axisRight?.setDrawAxisLine(iLine.getYRightAxisValues() != null)
+
+                    applyAxisSettings(lineChart.axisLeft, activity)
+                    applyAxisSettings(lineChart.axisRight, activity)
 
                     lineChart.renderer =
                         CustomLineChartRenderer(
@@ -346,17 +352,9 @@ class AirChartLine {
                         lineChart.axisLeft.axisMinimum = 0f
                     }
 
-                    if (lineChart.data.dataSetCount > 1) {
-                        lineChart.xAxis.setCenterAxisLabels(true)
-                        lineChart.xAxis.granularity = 1f
-                        lineChart.xAxis.isGranularityEnabled = true
+                    lineChart.xAxis?.axisMinimum = lineData.xMin - 0.5f
+                    lineChart.xAxis?.axisMaximum = lineData.xMax + 0.5f
 
-                        lineChart.xAxis?.axisMinimum = lineData.xMin
-                        lineChart.xAxis?.axisMaximum = lineData.xMax + 1f
-                    } else {
-                        lineChart.xAxis?.axisMinimum = lineData.xMin - 0.5f
-                        lineChart.xAxis?.axisMaximum = lineData.xMax + 0.5f
-                    }
                     lineChart.setMaxVisibleValueCount(20)
 
                     return true
@@ -375,7 +373,7 @@ class AirChartLine {
                     viewModel.viewModelScope.launch(Dispatchers.Main) {
                         // setup views
                         chartHolderViewGroup?.title?.text =
-                            iLine.getTitle() ?: ""
+                            iLine.getTitle()
                         chartHolderViewGroup?.subTitle?.text =
                             iLine.getSubTitle()
                         chartHolderViewGroup?.title?.visibility =
@@ -461,6 +459,31 @@ class AirChartLine {
                     }
                 }
             })
+        }
+
+        private fun applyAxisSettings(axis: YAxis?, activity: Activity) {
+
+            axis?.valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return value.toInt().toString()
+                }
+            }
+            axis?.textColor =
+                ContextCompat.getColor(
+                    activity,
+                    android.R.color.black
+                )
+            axis?.setDrawGridLines(false)
+            axis?.isGranularityEnabled = true
+            axis?.granularity = 1f
+            axis?.textSize = 12f
+            axis?.axisLineColor =
+                ContextCompat.getColor(
+                    activity,
+                    android.R.color.black
+                )
+            axis?.axisMinimum = 0f
+            axis?.setDrawTopYLabelEntry(true)
         }
     }
 }
