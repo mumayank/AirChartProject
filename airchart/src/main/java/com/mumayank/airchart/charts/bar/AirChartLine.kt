@@ -352,14 +352,18 @@ class AirChartLine {
                     val min = if (lineData.yMin < 0) lineData.yMin else 0f
                     val max = if (lineData.yMax > 0) lineData.yMax else 0f
                     lineChart.axisLeft.axisMaximum = max + (max - min).absoluteValue * times
+                    lineChart.axisRight.axisMaximum = max + (max - min).absoluteValue * times
+
                     if (min < 0) {
                         val limitLine = LimitLine(0f, "")
                         limitLine.lineColor = Color.BLACK
                         limitLine.lineWidth = 0.5f
                         lineChart.axisLeft.addLimitLine(limitLine)
                         lineChart.axisLeft.axisMinimum = min + (min - max) * times
+                        lineChart.axisRight.axisMinimum = min + (min - max) * times
                     } else {
                         lineChart.axisLeft.axisMinimum = 0f
+                        lineChart.axisRight.axisMinimum = 0f
                     }
 
                     lineChart.xAxis?.axisMinimum = lineData.xMin - 0.5f
