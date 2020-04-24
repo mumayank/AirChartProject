@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.mumayank.airchart.AirChart
+import com.mumayank.airchart.data_classes.Bar
+import com.mumayank.airchart.data_classes.Line
 import com.mumayank.airchart.data_classes.Value
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
@@ -98,7 +101,6 @@ class ChartActivity : AppCompatActivity() {
 
         when (chartType) {
             ChartType.BAR -> {
-                /*
                 val barDatas = arrayListOf(
 
                     // todo: POSITIVE VALUES
@@ -279,8 +281,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     )
                 })
-                */
-                AssetHelper.readFile(
+/*                AssetHelper.readFile(
                     this,
                     "chart_data",
                     fun(string: String) {
@@ -288,7 +289,7 @@ class ChartActivity : AppCompatActivity() {
                             showChartsInternal(chartLayout, string)
                         })
                     }
-                )
+                )*/
             }
 
             ChartType.HORIZONTAL_BAR -> {
@@ -607,17 +608,32 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    /*showBarChartsInternal(
-                        chartLayout,
-                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )*/
+                    showChartsInternal(
+                        chartLayout, Gson().toJson(
+                            Bar(
+                                barData.title,
+                                "x axis",
+                                barData.xLabels,
+                                "y axis",
+                                barData.yLefts,
+                                barData.colors,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    )
                 })
-
             }
 
             ChartType.LINE -> {
                 val lineDataList = ArrayList<String>()
                 val lineData = arrayListOf(
+
+
+                    // todo: POSITIVE VALUES
 
                     LineData(
                         "No value",
@@ -628,59 +644,256 @@ class ChartActivity : AppCompatActivity() {
                         "1 value",
                         getLabels(1),
                         getData(1, 1, 10, 30)
+                    ),
+                    LineData(
+                        "2 values",
+                        getLabels(2),
+                        getData(1, 2, 10, 30)
+                    ),
+                    LineData(
+                        "3 values",
+                        getLabels(3),
+                        getData(1, 3, 0, 30)
+                    ),
+                    LineData(
+                        "4 values",
+                        getLabels(4),
+                        getData(1, 4, 0, 30)
+                    ),
+                    LineData(
+                        "8 values",
+                        getLabels(8),
+                        getData(1, 8, 0, 30)
+                    ),
+                    LineData(
+                        "8 values - large",
+                        getLabels(8),
+                        getData(1, 8, 100, 3000)
+                    ),
+                    LineData(
+                        "16 values",
+                        getLabels(16),
+                        getData(1, 16, 0, 30)
+                    ),
+                    LineData(
+                        "32 values",
+                        getLabels(32),
+                        getData(1, 32, 0, 30)
+                    ),
+                    LineData(
+                        "32 values - far apart",
+                        getLabels(32),
+                        getData(1, 32, 0, 30000)
+                    ),
+                    LineData(
+                        "50 values",
+                        getLabels(50),
+                        getData(1, 50, 0, 30)
+                    ),
+                    LineData(
+                        "100 values",
+                        getLabels(100),
+                        getData(1, 100, 0, 30)
+                    ),
+                    LineData(
+                        "500 values",
+                        getLabels(500),
+                        getData(1, 500, 0, 30)
+                    ),
+                    LineData(
+                        "1000 values",
+                        getLabels(1000),
+                        getData(1, 1000, 0, 30)
+                    ),
+
+                    // todo: NEGATIVE VALUES
+                    LineData(
+                        "1 value - nagative",
+                        getLabels(1),
+                        getData(1, 1, -30, -10)
+                    ),
+                    LineData(
+                        "2 values - nagative",
+                        getLabels(2),
+                        getData(1, 2, -30, -10)
+                    ),
+                    LineData(
+                        "3 values - nagative",
+                        getLabels(3),
+                        getData(1, 3, -30, -10)
+                    ),
+                    LineData(
+                        "4 values - nagative",
+                        getLabels(4),
+                        getData(1, 4, -30, 5)
+                    ),
+                    LineData(
+                        "8 values - nagative",
+                        getLabels(8),
+                        getData(1, 8, -30, 10)
+                    ),
+                    LineData(
+                        "8 values - nagative - large",
+                        getLabels(8),
+                        getData(1, 8, -3000, -100)
+                    ),
+                    LineData(
+                        "32 values - far apart - negative",
+                        getLabels(32),
+                        getData(1, 32, -3000, 3000)
+                    ),
+
+                    // todo: POSITIVE 2 right axis VALUES
+
+                    LineData(
+                        "No value",
+                        arrayListOf(),
+                        arrayListOf()
+                    ),
+                    LineData(
+                        "1 value",
+                        getLabels(1),
+                        getData(1, 1, 10, 30),
+                        getData(1, 1, 10, 30)
+                    ),
+                    LineData(
+                        "2 values",
+                        getLabels(2),
+                        getData(1, 2, 10, 30),
+                        getData(1, 2, 10, 30)
+                    ),
+                    LineData(
+                        "3 values",
+                        getLabels(3),
+                        getData(1, 3, 0, 30),
+                        getData(1, 3, 0, 30)
+                    ),
+                    LineData(
+                        "4 values",
+                        getLabels(4),
+                        getData(1, 4, 0, 30),
+                        getData(1, 4, 0, 30)
+                    ),
+                    LineData(
+                        "8 values",
+                        getLabels(8),
+                        getData(1, 8, 0, 30),
+                        getData(1, 8, 0, 30)
+                    ),
+                    LineData(
+                        "8 values - large",
+                        getLabels(8),
+                        getData(1, 8, 100, 3000),
+                        getData(1, 8, 100, 3000)
+                    ),
+                    LineData(
+                        "16 values",
+                        getLabels(16),
+                        getData(1, 16, 0, 30),
+                        getData(1, 16, 0, 30)
+                    ),
+                    LineData(
+                        "32 values",
+                        getLabels(32),
+                        getData(1, 32, 0, 30),
+                        getData(1, 32, 0, 30)
+                    ),
+                    LineData(
+                        "32 values - far apart",
+                        getLabels(32),
+                        getData(1, 32, 0, 30000),
+                        getData(1, 32, 0, 30000)
+                    ),
+                    LineData(
+                        "50 values",
+                        getLabels(50),
+                        getData(1, 50, 0, 30),
+                        getData(1, 50, 0, 30)
+                    ),
+                    LineData(
+                        "100 values",
+                        getLabels(100),
+                        getData(1, 100, 0, 30),
+                        getData(1, 100, 0, 30)
+                    ),
+                    LineData(
+                        "500 values",
+                        getLabels(500),
+                        getData(1, 500, 0, 30),
+                        getData(1, 500, 0, 30)
+                    ),
+                    LineData(
+                        "1000 values",
+                        getLabels(1000),
+                        getData(1, 1000, 0, 30),
+                        getData(1, 1000, 0, 30)
+                    ),
+
+                    // todo: NEGATIVE VALUES
+                    LineData(
+                        "1 value - nagative",
+                        getLabels(1),
+                        getData(1, 1, -30, -10),
+                        getData(1, 1, -30, -10)
+                    ),
+                    LineData(
+                        "2 values - nagative",
+                        getLabels(2),
+                        getData(1, 2, -30, -10),
+                        getData(1, 2, -30, -10)
+                    ),
+                    LineData(
+                        "3 values - nagative",
+                        getLabels(3),
+                        getData(1, 3, -30, -10),
+                        getData(1, 3, -30, -10)
+                    ),
+                    LineData(
+                        "4 values - nagative",
+                        getLabels(4),
+                        getData(1, 4, -30, 5),
+                        getData(1, 4, -30, 5)
+                    ),
+                    LineData(
+                        "5 values - nagative",
+                        getLabels(5),
+                        getData(1, 5, -30, 5),
+                        getData(1, 5, -30, 5)
+                    ),
+                    LineData(
+                        "6 values - nagative",
+                        getLabels(6),
+                        getData(1, 6, -30, 5),
+                        getData(1, 6, -30, 5)
+                    ),
+                    LineData(
+                        "7 values - nagative",
+                        getLabels(7),
+                        getData(1, 7, -30, 5),
+                        getData(1, 7, -30, 5)
+                    ),
+                    LineData(
+                        "8 values - nagative",
+                        getLabels(8),
+                        getData(1, 8, -30, 10),
+                        getData(1, 8, -30, 10)
+                    ),
+                    LineData(
+                        "8 values - nagative - large",
+                        getLabels(8),
+                        getData(1, 8, -3000, -100),
+                        getData(1, 8, -3000, -100)
+                    ),
+                    LineData(
+                        "32 values - far apart - negative",
+                        getLabels(32),
+                        getData(1, 32, -3000, 3000),
+                        getData(1, 32, -3000, 3000)
                     )
                 )
 
-                AssetHelper.readFile(
-                    this,
-                    "line_chart_data",
-                    fun(string: String) {
-                        lineDataList.add(string)
 
-                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
-                            showChartsInternal(chartLayout, lineDataList[position])
-                        })
-                    }
-                )
-
-                AssetHelper.readFile(
-                    this,
-                    "y_left_axis_y_right_axis_line_chart_data",
-                    fun(string: String) {
-                        lineDataList.add(string)
-
-                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
-                            showChartsInternal(chartLayout, lineDataList[position])
-                        })
-                    }
-                )
-
-                AssetHelper.readFile(
-                    this,
-                    "invisible_line_chart_data",
-                    fun(string: String) {
-                        lineDataList.add(string)
-
-                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
-                            showChartsInternal(chartLayout, lineDataList[position])
-                        })
-                    }
-                )
-
-                AssetHelper.readFile(
-                    this,
-                    "negative_values_line_chart_data",
-                    fun(string: String) {
-                        lineDataList.add(string)
-
-                        showRv(lineDataList.size, fun(chartLayout: LinearLayout, position: Int) {
-                            showChartsInternal(chartLayout, lineDataList[position])
-                        })
-                    }
-                )
-
-                /*
-                showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                showRv(lineData.size, fun(chartLayout: LinearLayout, position: Int) {
                     val data = lineData[position]
                     showChartsInternal(
                         chartLayout, Gson().toJson(
@@ -690,6 +903,8 @@ class ChartActivity : AppCompatActivity() {
                                 data.xLabels,
                                 "y axis",
                                 data.yLefts,
+                                if (data.yRights == null) null else "y axis right",
+                                data.yRights,
                                 data.colors,
                                 null,
                                 null,
@@ -699,7 +914,6 @@ class ChartActivity : AppCompatActivity() {
                         )
                     )
                 })
-                */
             }
         }
     }
@@ -778,6 +992,7 @@ class ChartActivity : AppCompatActivity() {
         val title: String,
         val xLabels: ArrayList<String>,
         val yLefts: java.util.ArrayList<Value>,
+        val yRights: java.util.ArrayList<Value>? = null,
         val colors: ArrayList<String>? = null
     )
 }
