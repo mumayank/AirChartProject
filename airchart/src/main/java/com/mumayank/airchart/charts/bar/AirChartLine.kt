@@ -42,7 +42,10 @@ class AirChartLine {
         fun getXAxisLabels(): java.util.ArrayList<String>
         fun getYLeftAxisTitle(): String
         fun getYLeftAxisValues(): java.util.ArrayList<Value>
-        fun getColors(): ArrayList<String>
+
+        fun getColors(): ArrayList<String>? {
+            return null
+        }
 
         fun getSubTitle(): String? {
             return ""
@@ -123,7 +126,7 @@ class AirChartLine {
                     if (iLine.getColors() == null) {
                         colors.add(activity.resources.getColor(android.R.color.holo_green_light))
                     } else {
-                        for (color in iLine.getColors()) {
+                        for (color in iLine.getColors()!!) {
                             colors.add(Color.parseColor(color))
                         }
                     }
@@ -167,7 +170,7 @@ class AirChartLine {
                                 )
                         }
 
-                        lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+//                        lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
                         lineDataSet.setDrawCircleHole(false)
                         lineDataSet.lineWidth = 2f
                         lineDataSet.circleRadius = 2f
@@ -177,16 +180,23 @@ class AirChartLine {
                                 android.R.color.black
                             )
                         )
-                        if (airChartValueItems.size > 1 && index == 0) {
-                            lineDataSet.lineWidth = 5f
-                            lineDataSet.circleRadius = 4f
-                            lineDataSet.setCircleColor(
-                                ContextCompat.getColor(
-                                    activity,
-                                    R.color.blueGrey200
+                        if (airChartValueItems.size > 1) {
+                            lineDataSet.setDrawValues(false)
+                            if (index == 0) {
+                                lineDataSet.lineWidth = 5f
+                                lineDataSet.circleRadius = 4f
+                                lineDataSet.setCircleColor(
+                                    ContextCompat.getColor(
+                                        activity,
+                                        R.color.blueGrey200
+                                    )
                                 )
-                            )
-                            lineDataSet.setDrawValues(false) // here
+                                lineDataSet.color =
+                                    ContextCompat.getColor(
+                                        activity,
+                                        android.R.color.holo_orange_light
+                                    )
+                            }
                         }
 
                         lineDataSetList.add(lineDataSet)
