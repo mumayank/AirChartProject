@@ -107,7 +107,7 @@ class AirChart(
                         return line.yRightAxisValues
                     }
 
-                    override fun getColors(): ArrayList<String> {
+                    override fun getColors(): ArrayList<String>? {
                         return line.colors
                     }
 
@@ -177,7 +177,7 @@ class AirChart(
                         return bar.yLeftAxisValues
                     }
 
-                    override fun getColors(): ArrayList<String> {
+                    override fun getColors(): ArrayList<String>? {
                         return bar.colors
                     }
 
