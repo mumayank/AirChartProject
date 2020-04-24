@@ -45,7 +45,10 @@ class AirChartBar {
         fun getXAxisLabels(): java.util.ArrayList<String>
         fun getYLeftAxisTitle(): String
         fun getYLeftAxisValues(): java.util.ArrayList<Value>
-        fun getColors(): ArrayList<String>
+
+        fun getColors(): ArrayList<String>? {
+            return null
+        }
 
         fun getSubTitle(): String? {
             return ""
