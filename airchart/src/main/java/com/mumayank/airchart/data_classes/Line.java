@@ -35,8 +35,6 @@ public class Line {
     @Expose
     private ArrayList<Value> yRightAxisValues = null;
 
-    //todo should we include yRightAxisValues ??
-
     @SerializedName("colors")
     @Expose
     private ArrayList<String> colors = null;
