@@ -632,7 +632,6 @@ class ChartActivity : AppCompatActivity() {
                 val lineDataList = ArrayList<String>()
                 val lineData = arrayListOf(
 
-
                     // todo: POSITIVE VALUES
 
                     LineData(
@@ -840,55 +839,55 @@ class ChartActivity : AppCompatActivity() {
                         "2 values - nagative",
                         getLabels(2),
                         getData(1, 2, -30, -10),
-                        getData(1, 2, -30, -10)
+                        getData(1, 2, -3, -1)
                     ),
                     LineData(
                         "3 values - nagative",
                         getLabels(3),
                         getData(1, 3, -30, -10),
-                        getData(1, 3, -30, -10)
+                        getData(1, 3, -27, -15)
                     ),
                     LineData(
                         "4 values - nagative",
                         getLabels(4),
                         getData(1, 4, -30, 5),
-                        getData(1, 4, -30, 5)
+                        getData(1, 4, -10, 25)
                     ),
                     LineData(
                         "5 values - nagative",
                         getLabels(5),
                         getData(1, 5, -30, 5),
-                        getData(1, 5, -30, 5)
+                        getData(1, 5, -25, 15)
                     ),
                     LineData(
                         "6 values - nagative",
                         getLabels(6),
                         getData(1, 6, -30, 5),
-                        getData(1, 6, -30, 5)
+                        getData(1, 6, -300, 5)
                     ),
                     LineData(
                         "7 values - nagative",
                         getLabels(7),
                         getData(1, 7, -30, 5),
-                        getData(1, 7, -30, 5)
+                        getData(1, 7, -50, 15)
                     ),
                     LineData(
                         "8 values - nagative",
                         getLabels(8),
                         getData(1, 8, -30, 10),
-                        getData(1, 8, -30, 10)
+                        getData(1, 8, -60, 10)
                     ),
                     LineData(
                         "8 values - nagative - large",
                         getLabels(8),
                         getData(1, 8, -3000, -100),
-                        getData(1, 8, -3000, -100)
+                        getData(1, 8, -2000, -150)
                     ),
                     LineData(
                         "32 values - far apart - negative",
                         getLabels(32),
                         getData(1, 32, -3000, 3000),
-                        getData(1, 32, -3000, 3000)
+                        getData(1, 32, -4000, 3000)
                     )
                 )
 
