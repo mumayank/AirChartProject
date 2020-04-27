@@ -82,6 +82,10 @@ class AirChartLine {
         fun getYRightAxisValues(): java.util.ArrayList<Value>? {
             return null
         }
+
+        fun getIsCurved(): Boolean? {
+            return false
+        }
     }
 
     companion object {
@@ -124,7 +128,8 @@ class AirChartLine {
 
                     // transform colors
                     if (iLine.getColors() == null) {
-                        colors.add(activity.resources.getColor(android.R.color.holo_green_light))
+                        colors.add(activity.resources.getColor(android.R.color.holo_orange_light))
+                        colors.add(activity.resources.getColor(android.R.color.holo_blue_light))
                     } else {
                         for (color in iLine.getColors()!!) {
                             colors.add(Color.parseColor(color))
@@ -166,11 +171,14 @@ class AirChartLine {
                             lineDataSet.color =
                                 ContextCompat.getColor(
                                     activity,
-                                    android.R.color.black
+                                    android.R.color.holo_blue_light
                                 )
                         }
 
-//                        lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+                        if (iLine.getIsCurved() == true) {
+                            lineDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+                        }
+
                         lineDataSet.setDrawCircleHole(false)
                         lineDataSet.lineWidth = 2f
                         lineDataSet.circleRadius = 2f
@@ -191,11 +199,12 @@ class AirChartLine {
                                         R.color.blueGrey200
                                     )
                                 )
-                                lineDataSet.color =
-                                    ContextCompat.getColor(
-                                        activity,
-                                        android.R.color.holo_orange_light
-                                    )
+                                if (iLine.getColors() == null)
+                                    lineDataSet.color =
+                                        ContextCompat.getColor(
+                                            activity,
+                                            android.R.color.holo_orange_light
+                                        )
                             }
                         }
 
