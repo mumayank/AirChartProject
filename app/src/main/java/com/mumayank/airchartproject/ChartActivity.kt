@@ -996,7 +996,7 @@ class ChartActivity : AppCompatActivity() {
                 /*
                 AssetHelper.readFile(
                     this,
-                    "invisible_line_chart_data",
+                    "line_chart_minimal_data",
                     fun(string: String) {
                         showRv(1, fun(chartLayout: LinearLayout, position: Int) {
                             showChartsInternal(chartLayout, string)
