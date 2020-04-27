@@ -1,46 +1,55 @@
 {
-  "title": "NO lines drawn",
+  "title": "Student records",
   "xAxisTitle": "Projects",
   "xAxisLabels": [
-    "Narendra",
-    "Rahul",
-    "Prakash",
-    "Prakash1",
-    "Sonia",
-    "Lalu"
+	"Narendra",
+	"Rahul",
+	"Prakash",
+	"Sonia",
+	"Lalu"
   ],
   "yLeftAxisTitle": "Progress Value",
   "yLeftAxisValues": [
-    {
-      "legendLabel": "Scope",
-      "values": [
-        24.3,
-        12.1,
-        13.5,
-        12.7,
-        42.9,
-        17.8
-      ]
-    },
-    {
-      "legendLabel": "Scope 1",
-      "values": [
-        34.3,
-        32.1,
-        33.5,
-        32.7,
-        22.9,
-        37.8
-      ]
-    }
+	{
+	  "legendLabel": "Scope",
+	  "values": [
+		24.3,
+		12.1,
+		13.5,
+		12.7,
+		17.8
+	  ]
+	}
+  ],
+  "yRightAxisTitle": "Progress range",
+  "yRightAxisValues": [
+	{
+	  "legendLabel": "Scope range",
+	  "values": [
+		24.3,
+		12.4,
+		14.5,
+		12.9,
+		10.8
+	  ]
+	}
   ],
   "colors": [
-    "#ff9800",
-    "#3f98c2"
+	"#2196f3",
+	"#ff9800"
   ],
-  "subTitle": "This is a subtitle",
+  "subTitle": "Subtitle of the chart",
   "decimalFormatPattern": "0.0#",
   "additionalValues": [
+	{
+	  "key": "Key1",
+	  "value": "Value1"
+	},
+	{
+	  "key": "Key2",
+	  "value": "Value2"
+	}
   ],
+  "isCurved": true,
   "isAnimationRequired": true
 }
