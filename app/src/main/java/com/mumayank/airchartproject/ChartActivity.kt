@@ -179,32 +179,32 @@ class ChartActivity : AppCompatActivity() {
 
                     // todo: NEGATIVE VALUES
                     BarData(
-                        "1 value - nagative",
+                        "1 value - negative",
                         getLabels(1),
                         getData(1, 1, -30, -10)
                     ),
                     BarData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10)
                     ),
                     BarData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10)
                     ),
                     BarData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5)
                     ),
                     BarData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10)
                     ),
                     BarData(
-                        "8 values - nagative - large",
+                        "8 values - negative - large",
                         getLabels(8),
                         getData(1, 8, -3000, -100)
                     ),
@@ -442,7 +442,7 @@ class ChartActivity : AppCompatActivity() {
                      * todo: NEGATIVE VALUES
                      */
                     BarData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10),
                         arrayListOf(
@@ -451,7 +451,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10),
                         arrayListOf(
@@ -461,7 +461,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5),
                         arrayListOf(
@@ -472,7 +472,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10),
                         arrayListOf(
@@ -487,7 +487,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "16 values - nagative - large",
+                        "16 values - negative - large",
                         getLabels(16),
                         getData(1, 16, -3000, -100),
                         arrayListOf(
@@ -630,7 +630,7 @@ class ChartActivity : AppCompatActivity() {
             }
 
             ChartType.LINE -> {
-                val lineDataList = ArrayList<String>()
+
                 val lineData = arrayListOf(
 
                     // todo: POSITIVE VALUES
@@ -708,32 +708,32 @@ class ChartActivity : AppCompatActivity() {
 
                     // todo: NEGATIVE VALUES
                     LineData(
-                        "1 value - nagative",
+                        "1 value - negative",
                         getLabels(1),
                         getData(1, 1, -30, -10)
                     ),
                     LineData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10)
                     ),
                     LineData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10)
                     ),
                     LineData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5)
                     ),
                     LineData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10)
                     ),
                     LineData(
-                        "8 values - nagative - large",
+                        "8 values - negative - large",
                         getLabels(8),
                         getData(1, 8, -3000, -100)
                     ),
@@ -851,55 +851,55 @@ class ChartActivity : AppCompatActivity() {
 
                     // todo: NEGATIVE VALUES
                     LineData(
-                        "1 value - nagative",
+                        "1 value - negative",
                         getLabels(1),
                         getData(1, 1, -30, -10, 1),
                         getData(1, 1, -30, -10, 2)
                     ),
                     LineData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10, 1),
                         getData(1, 2, -3, -1, 2)
                     ),
                     LineData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10, 1),
                         getData(1, 3, -27, -15, 2)
                     ),
                     LineData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5, 1),
                         getData(1, 4, -10, 25, 2)
                     ),
                     LineData(
-                        "5 values - nagative",
+                        "5 values - negative",
                         getLabels(5),
                         getData(1, 5, -30, 5, 1),
                         getData(1, 5, -25, 15, 2)
                     ),
                     LineData(
-                        "6 values - nagative",
+                        "6 values - negative",
                         getLabels(6),
                         getData(1, 6, -30, 5, 1),
                         getData(1, 6, -300, 5, 2)
                     ),
                     LineData(
-                        "7 values - nagative",
+                        "7 values - negative",
                         getLabels(7),
                         getData(1, 7, -30, 5, 1),
                         getData(1, 7, -50, 15, 2)
                     ),
                     LineData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10, 1),
                         getData(1, 8, -60, 10, 2)
                     ),
                     LineData(
-                        "8 values - nagative - large",
+                        "8 values - negative - large",
                         getLabels(8),
                         getData(1, 8, -3000, -100, 1),
                         getData(1, 8, -2000, -150, 2)
@@ -970,7 +970,6 @@ class ChartActivity : AppCompatActivity() {
                     )
                 )
 
-
                 showRv(lineData.size, fun(chartLayout: LinearLayout, position: Int) {
                     val data = lineData[position]
                     showChartsInternal(
@@ -987,11 +986,24 @@ class ChartActivity : AppCompatActivity() {
                                 null,
                                 null,
                                 null,
+                                null,
                                 null
                             )
                         )
                     )
                 })
+
+                /*
+                AssetHelper.readFile(
+                    this,
+                    "invisible_line_chart_data",
+                    fun(string: String) {
+                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, string)
+                        })
+                    }
+                )
+                */
             }
         }
     }
@@ -1051,7 +1063,98 @@ class ChartActivity : AppCompatActivity() {
             ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
                 AirChart(this, viewGroup).showBarChart(jsonString)
             }
-            ChartType.LINE -> AirChart(this, viewGroup).showLineChart(jsonString)
+
+            ChartType.LINE -> {
+                AirChart(this, viewGroup).showLineChart(jsonString)
+
+                /*
+
+                // extended usage example of line chart
+
+                AirChart(this, viewGroup).showLineChart(object : AirChartLine.ILine {
+
+                    //mandatory methods
+                    override fun getTitle(): String {
+                        return "title of the chart"
+                    }
+
+                    override fun getXAxisTitle(): String {
+                        return "this is X-axis"
+                    }
+
+                    override fun getXAxisLabels(): ArrayList<String> {
+                        return arrayListOf("Student1", "Student2", "Student3")
+                    }
+
+                    override fun getYLeftAxisTitle(): String {
+                        return "this is Y-axis"
+                    }
+
+                    override fun getYLeftAxisValues(): ArrayList<Value> {
+                        return arrayListOf(
+                            Value(
+                                "marks in sem 1",
+                                arrayListOf(50.0, 40.0, 49.5)
+                            )
+                        )
+                    }
+
+                    // extra methods that can be overridden
+
+                    override fun getColors(): ArrayList<String> {
+                        return arrayListOf("#ffa726", "#2196f3")
+                    }
+
+                    override fun getSubTitle(): String? {
+                        return "this is subtitle of the chart"
+                    }
+
+                    override fun getDecimalFormatPattern(): String? {
+                        return "0.#"
+                    }
+
+                    override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
+                        return arrayListOf(
+                            AdditionalValue("Key1", "Value1"),
+                            AdditionalValue("Key2", "Value2")
+                        )
+                    }
+
+                    override fun getCustomViewLayoutResId(): Int? {
+                        return R.layout.custom_view
+                    }
+
+                    override fun getIsAnimationRequired(): Boolean? {
+                        return true
+                    }
+
+                    override fun onValueSelected(e: Entry?) {
+                        // do something
+                    }
+
+                    override fun onNoValueSelected() {
+                        // do something
+                    }
+
+                    override fun getYRightAxisTitle(): String? {
+                        return "this is Y-axis right"
+                    }
+
+                    override fun getYRightAxisValues(): ArrayList<Value> {
+                        return arrayListOf(
+                            Value(
+                                "marks in sem 2",
+                                arrayListOf(50.5, 40.9, 39.5)
+                            )
+                        )
+                    }
+
+                    override fun getIsCurved(): Boolean? {
+                        return true
+                    }
+                })
+                */
+            }
         }
     }
 
