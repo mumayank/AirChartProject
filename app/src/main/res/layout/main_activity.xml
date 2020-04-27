@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/bar"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:text="Bar" />
 
         <Button
             android:id="@+id/supplyJson"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="input json and show bar" />
 
         <Button
             android:id="@+id/horizontalBar"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Horizontal Bar" />
 
-<!--        <com.github.mikephil.charting.charts.HorizontalBarChart-->
-<!--            android:id="@+id/horizontalBarChart"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="400dp" />-->
+        <Button
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Line" />
+
+        <!--        <com.github.mikephil.charting.charts.HorizontalBarChart-->
+        <!--            android:id="@+id/horizontalBarChart"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="400dp" />-->
 
     </LinearLayout>
 

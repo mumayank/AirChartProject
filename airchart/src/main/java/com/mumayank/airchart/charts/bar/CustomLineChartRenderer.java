@@ -4,12 +4,14 @@ import android.graphics.Canvas;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.interfaces.dataprovider.BarDataProvider;
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.renderer.BarChartRenderer;
+import com.github.mikephil.charting.renderer.LineChartRenderer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-public class CustomBarChartRenderer extends BarChartRenderer {
+public class CustomLineChartRenderer extends LineChartRenderer {
 
-    public CustomBarChartRenderer(BarDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
+    public CustomLineChartRenderer(LineDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
         super(chart, animator, viewPortHandler);
     }
 
@@ -28,10 +30,10 @@ public class CustomBarChartRenderer extends BarChartRenderer {
             }
             int space = 5 * length;
             c.rotate(-90f, x + 10, y - space);
-            c.drawText(valueText, x + 10, y - space, mValuePaint);
+            c.drawText(valueText, x + 20, y - space, mValuePaint);
         } else {
             c.rotate(-90f, x + 10, y);
-            c.drawText(valueText, x - valueText.length(), y, mValuePaint);
+            c.drawText(valueText, x - (valueText.length() * 8), y, mValuePaint);
         }
         c.restore();
     }

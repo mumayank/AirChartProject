@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.LineChart
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mumayank.airchart.R
@@ -276,6 +277,14 @@ class AirChartUtil {
                 barChart.xAxis.setDrawLabels(false)
             } else {
                 barChart.xAxis.setDrawLabels(true)
+            }
+        }
+
+        fun drawValuesAccordinglyInLineChart(lineChart: LineChart) {
+            if (lineChart.visibleXRange > 20) {
+                lineChart.xAxis.setDrawLabels(false)
+            } else {
+                lineChart.xAxis.setDrawLabels(true)
             }
         }
 

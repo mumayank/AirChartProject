@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textStyle="italic"
-        android:text="This is a custom view to say something that must not be interactable. For interactions, please choose to have a custom title bar, outside this chart view"
+        android:text="This is an un-interactable custom view"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/black" />
 

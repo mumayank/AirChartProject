@@ -3,9 +3,6 @@
   "xAxisTitle": "Projects",
   "xAxisLabels": [
     "Narendra",
-    "Rahul",
-    "Prakash",
-    "Sonia",
     "Lalu"
   ],
   "yLeftAxisTitle": "Progress Value",
@@ -14,47 +11,15 @@
       "legendLabel": "Scope",
       "values": [
         24.3,
-        12.1,
-        13.5,
-        12.7,
         17.8
-      ]
-    },
-    {
-      "legendLabel": "Taken up",
-      "values": [
-        13.1,
-        5.9,
-        2.4,
-        9.3,
-        5.3
       ]
     }
   ],
   "colors": [
-    "#2196f3",
     "#ff9800"
   ],
   "subTitle": "This is a subtitle",
   "decimalFormatPattern": "0.00",
-  "additionalValues": [
-    {
-      "key": "Key1",
-      "value": "Value1"
-    },
-    {
-      "key": "Key2",
-      "value": "Value2 but what if this is just a bit longer than expected, is the lib handling this case"
-    },
-    {
-      "key": "Key3",
-      "value": "Value3"
-    },
-    {
-      "key": "Key4",
-      "value": "Value4"
-    }
-  ],
-  "isHorizontal": true,
+  "isHorizontal": false,
   "isAnimationRequired": true
 }

@@ -1,0 +1,27 @@
+{
+  "title": "Student records",
+  "xAxisTitle": "Projects",
+  "xAxisLabels": [
+	"Narendra",
+	"Rahul",
+	"Prakash",
+	"Sonia",
+	"Lalu"
+  ],
+  "yLeftAxisTitle": "Progress Value",
+  "yLeftAxisValues": [
+	{
+	  "legendLabel": "Scope",
+	  "values": [
+		24.3,
+		12.1,
+		13.5,
+		12.7,
+		17.8
+	  ]
+	}
+  ],
+  "colors": [
+	"#ff9800"
+  ]
+}

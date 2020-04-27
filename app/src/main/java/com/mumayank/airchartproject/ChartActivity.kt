@@ -11,13 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.mumayank.airchart.AirChart
-import com.mumayank.airchart.charts.bar.AirChartBar
-import com.mumayank.airchart.data_classes.AdditionalValue
 import com.mumayank.airchart.data_classes.Bar
+import com.mumayank.airchart.data_classes.Line
 import com.mumayank.airchart.data_classes.Value
-import com.mumayank.airchart.util.AirChartUtil
 import kotlinx.android.synthetic.main.chart_activity.*
 import kotlinx.android.synthetic.main.chart_rv_item.view.*
 import mumayank.com.airrecyclerview.AirRv
@@ -29,17 +26,24 @@ class ChartActivity : AppCompatActivity() {
         const val INTENT_EXTRA_CHART_TYPE = "INTENT_EXTRA_CHART_TYPE"
         const val INTENT_EXTRA_DATA = "INTENT_EXTRA_DATA"
 
-        private fun getData(noOfLegends: Int, noOfDataItems: Int, minDataVal: Int, maxDataVal: Int): ArrayList<Value> {
+        private fun getData(
+            noOfLegends: Int,
+            noOfDataItems: Int,
+            minDataVal: Int,
+            maxDataVal: Int,
+            legendNum: Int? = null
+        ): ArrayList<Value> {
             val legendsArrayList = java.util.ArrayList<Value>()
             for (k in 1..noOfLegends) {
                 val arrayList = java.util.ArrayList<Double>()
                 for (i in 1..noOfDataItems) {
-                    val nextRandomFloat = kotlin.random.Random.nextInt(minDataVal, maxDataVal+1).toDouble()
+                    val nextRandomFloat =
+                        kotlin.random.Random.nextInt(minDataVal, maxDataVal + 1).toDouble()
                     arrayList.add(nextRandomFloat)
                 }
                 legendsArrayList.add(
                     Value(
-                        "lengend$k",
+                        if (legendNum == null) "legend$k" else "legend$legendNum",
                         arrayList
                     )
                 )
@@ -47,7 +51,7 @@ class ChartActivity : AppCompatActivity() {
             return legendsArrayList
         }
 
-        private fun getLabels (size: Int): ArrayList<String> {
+        private fun getLabels(size: Int): ArrayList<String> {
             val arrayList = arrayListOf<String>()
             for (i in 1..size) {
                 arrayList.add("val$i")
@@ -58,7 +62,8 @@ class ChartActivity : AppCompatActivity() {
 
     enum class ChartType {
         BAR,
-        HORIZONTAL_BAR
+        HORIZONTAL_BAR,
+        LINE
     }
 
     private var chartType = ChartType.BAR
@@ -76,7 +81,7 @@ class ChartActivity : AppCompatActivity() {
                 "chart_data",
                 fun(string: String) {
                     showRv(1, fun(chartLayout: LinearLayout, position: Int) {
-                        showBarChartsInternal(
+                        showChartsInternal(
                             chartLayout,
                             string
                         )
@@ -85,14 +90,12 @@ class ChartActivity : AppCompatActivity() {
             )
         } else {
             showRv(1, fun(chartLayout: LinearLayout, position: Int) {
-                showBarChartsInternal(
+                showChartsInternal(
                     chartLayout,
                     intentExtraData
                 )
             })
         }
-
-        return
 
         val intentExtraString = intent.getStringExtra(INTENT_EXTRA_CHART_TYPE) ?: ""
         chartType = ChartType.valueOf(intentExtraString)
@@ -101,9 +104,7 @@ class ChartActivity : AppCompatActivity() {
             ChartType.BAR -> {
                 val barDatas = arrayListOf(
 
-                    /**
-                     * todo: POSITIVE VALUES
-                     */
+                    // todo: POSITIVE VALUES
 
                     BarData(
                         "No value",
@@ -176,36 +177,34 @@ class ChartActivity : AppCompatActivity() {
                         getData(1, 1000, 0, 30)
                     ),
 
-                    /**
-                     * todo: NEGATIVE VALUES
-                     */
+                    // todo: NEGATIVE VALUES
                     BarData(
-                        "1 value - nagative",
+                        "1 value - negative",
                         getLabels(1),
                         getData(1, 1, -30, -10)
                     ),
                     BarData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10)
                     ),
                     BarData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10)
                     ),
                     BarData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5)
                     ),
                     BarData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10)
                     ),
                     BarData(
-                        "8 values - nagative - large",
+                        "8 values - negative - large",
                         getLabels(8),
                         getData(1, 8, -3000, -100)
                     ),
@@ -215,9 +214,7 @@ class ChartActivity : AppCompatActivity() {
                         getData(1, 32, -3000, 3000)
                     ),
 
-                    /**
-                     * todo: GROUPED POSITIVE
-                     */
+                    // todo: GROUPED POSITIVE
 
                     BarData(
                         "2 grouped",
@@ -240,9 +237,7 @@ class ChartActivity : AppCompatActivity() {
                         getData(4, 16, 0, 30)
                     ),
 
-                    /**
-                     * todo: GROUPED NEGATIVE
-                     */
+                    // todo: GROUPED NEGATIVE
 
                     BarData(
                         "2 grouped - negative",
@@ -268,12 +263,34 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    /*showBarChartsInternal(
+                    showChartsInternal(
                         chartLayout,
-                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )*/
+                        Gson().toJson(
+                            Bar(
+                                barData.title,
+                                "x axis",
+                                barData.xLabels,
+                                "y axis",
+                                barData.yLefts,
+                                barData.colors,
+                                null,
+                                null,
+                                null,
+                                false,
+                                null
+                            )
+                        )
+                    )
                 })
-
+/*                AssetHelper.readFile(
+                    this,
+                    "chart_data",
+                    fun(string: String) {
+                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, string)
+                        })
+                    }
+                )*/
             }
 
             ChartType.HORIZONTAL_BAR -> {
@@ -425,7 +442,7 @@ class ChartActivity : AppCompatActivity() {
                      * todo: NEGATIVE VALUES
                      */
                     BarData(
-                        "2 values - nagative",
+                        "2 values - negative",
                         getLabels(2),
                         getData(1, 2, -30, -10),
                         arrayListOf(
@@ -434,7 +451,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "3 values - nagative",
+                        "3 values - negative",
                         getLabels(3),
                         getData(1, 3, -30, -10),
                         arrayListOf(
@@ -444,7 +461,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "4 values - nagative",
+                        "4 values - negative",
                         getLabels(4),
                         getData(1, 4, -30, 5),
                         arrayListOf(
@@ -455,7 +472,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "8 values - nagative",
+                        "8 values - negative",
                         getLabels(8),
                         getData(1, 8, -30, 10),
                         arrayListOf(
@@ -470,7 +487,7 @@ class ChartActivity : AppCompatActivity() {
                         )
                     ),
                     BarData(
-                        "16 values - nagative - large",
+                        "16 values - negative - large",
                         getLabels(16),
                         getData(1, 16, -3000, -100),
                         arrayListOf(
@@ -592,19 +609,407 @@ class ChartActivity : AppCompatActivity() {
 
                 showRv(barDatas.size, fun(chartLayout: LinearLayout, position: Int) {
                     val barData = barDatas[position]
-                    /*showBarChartsInternal(
-                        chartLayout,
-                        Bar(barData.title, "x axis", barData.xLabels, "y axis", barData.yLefts, barData.colors, null, null, null, null, null)
-                    )*/
+                    showChartsInternal(
+                        chartLayout, Gson().toJson(
+                            Bar(
+                                barData.title,
+                                "x axis",
+                                barData.xLabels,
+                                "y axis",
+                                barData.yLefts,
+                                barData.colors,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    )
                 })
-
             }
 
+            ChartType.LINE -> {
+
+                val lineData = arrayListOf(
+
+                    // todo: POSITIVE VALUES
+
+                    LineData(
+                        "No value",
+                        arrayListOf(),
+                        arrayListOf()
+                    ),
+                    LineData(
+                        "1 value",
+                        getLabels(1),
+                        getData(1, 1, 10, 30)
+                    ),
+                    LineData(
+                        "2 values",
+                        getLabels(2),
+                        getData(1, 2, 10, 30)
+                    ),
+                    LineData(
+                        "3 values",
+                        getLabels(3),
+                        getData(1, 3, 0, 30)
+                    ),
+                    LineData(
+                        "4 values",
+                        getLabels(4),
+                        getData(1, 4, 0, 30)
+                    ),
+                    LineData(
+                        "8 values",
+                        getLabels(8),
+                        getData(1, 8, 0, 30)
+                    ),
+                    LineData(
+                        "8 values - large",
+                        getLabels(8),
+                        getData(1, 8, 1000, 3000)
+                    ),
+                    LineData(
+                        "16 values",
+                        getLabels(16),
+                        getData(1, 16, 0, 30)
+                    ),
+                    LineData(
+                        "32 values",
+                        getLabels(32),
+                        getData(1, 32, 0, 30)
+                    ),
+                    LineData(
+                        "32 values - far apart",
+                        getLabels(32),
+                        getData(1, 32, 0, 30000)
+                    ),
+                    LineData(
+                        "50 values",
+                        getLabels(50),
+                        getData(1, 50, 0, 30)
+                    ),
+                    LineData(
+                        "100 values",
+                        getLabels(100),
+                        getData(1, 100, 0, 30)
+                    ),
+                    LineData(
+                        "500 values",
+                        getLabels(500),
+                        getData(1, 500, 0, 30)
+                    ),
+                    LineData(
+                        "1000 values",
+                        getLabels(1000),
+                        getData(1, 1000, 0, 30)
+                    ),
+
+                    // todo: NEGATIVE VALUES
+                    LineData(
+                        "1 value - negative",
+                        getLabels(1),
+                        getData(1, 1, -30, -10)
+                    ),
+                    LineData(
+                        "2 values - negative",
+                        getLabels(2),
+                        getData(1, 2, -30, -10)
+                    ),
+                    LineData(
+                        "3 values - negative",
+                        getLabels(3),
+                        getData(1, 3, -30, -10)
+                    ),
+                    LineData(
+                        "4 values - negative",
+                        getLabels(4),
+                        getData(1, 4, -30, 5)
+                    ),
+                    LineData(
+                        "8 values - negative",
+                        getLabels(8),
+                        getData(1, 8, -30, 10)
+                    ),
+                    LineData(
+                        "8 values - negative - large",
+                        getLabels(8),
+                        getData(1, 8, -3000, -100)
+                    ),
+                    LineData(
+                        "32 values - far apart - negative",
+                        getLabels(32),
+                        getData(1, 32, -3000, 3000)
+                    ),
+                    LineData(
+                        "50 values - negative",
+                        getLabels(50),
+                        getData(1, 50, -30, 30)
+                    ),
+                    LineData(
+                        "100 values - negative",
+                        getLabels(100),
+                        getData(1, 100, -80, 80)
+                    ),
+                    LineData(
+                        "500 values - negative",
+                        getLabels(500),
+                        getData(1, 500, -300, 300)
+                    ),
+                    LineData(
+                        "1000 values - negative",
+                        getLabels(1000),
+                        getData(1, 1000, -5000, 3000)
+                    ),
+
+                    // todo: POSITIVE 2 right axis VALUES
+
+                    LineData(
+                        "No value",
+                        arrayListOf(),
+                        arrayListOf()
+                    ),
+                    LineData(
+                        "1 value",
+                        getLabels(1),
+                        getData(1, 1, 10, 30, 1),
+                        getData(1, 1, 10, 30, 2)
+                    ),
+                    LineData(
+                        "2 values",
+                        getLabels(2),
+                        getData(1, 2, 10, 30, 1),
+                        getData(1, 2, 10, 30, 2)
+                    ),
+                    LineData(
+                        "3 values",
+                        getLabels(3),
+                        getData(1, 3, 0, 30, 1),
+                        getData(1, 3, 0, 30, 2)
+                    ),
+                    LineData(
+                        "4 values",
+                        getLabels(4),
+                        getData(1, 4, 0, 30, 1),
+                        getData(1, 4, 0, 30, 2)
+                    ),
+                    LineData(
+                        "8 values",
+                        getLabels(8),
+                        getData(1, 8, 0, 30, 1),
+                        getData(1, 8, 0, 30, 2)
+                    ),
+                    LineData(
+                        "8 values - large",
+                        getLabels(8),
+                        getData(1, 8, 100, 3000, 1),
+                        getData(1, 8, 100, 3000, 2)
+                    ),
+                    LineData(
+                        "16 values",
+                        getLabels(16),
+                        getData(1, 16, 0, 30, 1),
+                        getData(1, 16, 0, 30, 2)
+                    ),
+                    LineData(
+                        "32 values",
+                        getLabels(32),
+                        getData(1, 32, 0, 30, 1),
+                        getData(1, 32, 0, 30, 2)
+                    ),
+                    LineData(
+                        "32 values - far apart",
+                        getLabels(32),
+                        getData(1, 32, 0, 30000, 1),
+                        getData(1, 32, 0, 30000, 2)
+                    ),
+                    LineData(
+                        "50 values",
+                        getLabels(50),
+                        getData(1, 50, 0, 30, 1),
+                        getData(1, 50, 0, 30, 2)
+                    ),
+                    LineData(
+                        "100 values",
+                        getLabels(100),
+                        getData(1, 100, 0, 30, 1),
+                        getData(1, 100, 0, 30, 2)
+                    ),
+                    LineData(
+                        "500 values",
+                        getLabels(500),
+                        getData(1, 500, 0, 30, 1),
+                        getData(1, 500, 0, 30, 2)
+                    ),
+                    LineData(
+                        "1000 values",
+                        getLabels(1000),
+                        getData(1, 1000, 0, 30, 1),
+                        getData(1, 1000, 0, 30, 2)
+                    ),
+
+                    // todo: NEGATIVE VALUES
+                    LineData(
+                        "1 value - negative",
+                        getLabels(1),
+                        getData(1, 1, -30, -10, 1),
+                        getData(1, 1, -30, -10, 2)
+                    ),
+                    LineData(
+                        "2 values - negative",
+                        getLabels(2),
+                        getData(1, 2, -30, -10, 1),
+                        getData(1, 2, -3, -1, 2)
+                    ),
+                    LineData(
+                        "3 values - negative",
+                        getLabels(3),
+                        getData(1, 3, -30, -10, 1),
+                        getData(1, 3, -27, -15, 2)
+                    ),
+                    LineData(
+                        "4 values - negative",
+                        getLabels(4),
+                        getData(1, 4, -30, 5, 1),
+                        getData(1, 4, -10, 25, 2)
+                    ),
+                    LineData(
+                        "5 values - negative",
+                        getLabels(5),
+                        getData(1, 5, -30, 5, 1),
+                        getData(1, 5, -25, 15, 2)
+                    ),
+                    LineData(
+                        "6 values - negative",
+                        getLabels(6),
+                        getData(1, 6, -30, 5, 1),
+                        getData(1, 6, -300, 5, 2)
+                    ),
+                    LineData(
+                        "7 values - negative",
+                        getLabels(7),
+                        getData(1, 7, -30, 5, 1),
+                        getData(1, 7, -50, 15, 2)
+                    ),
+                    LineData(
+                        "8 values - negative",
+                        getLabels(8),
+                        getData(1, 8, -30, 10, 1),
+                        getData(1, 8, -60, 10, 2)
+                    ),
+                    LineData(
+                        "8 values - negative - large",
+                        getLabels(8),
+                        getData(1, 8, -3000, -100, 1),
+                        getData(1, 8, -2000, -150, 2)
+                    ),
+                    LineData(
+                        "32 values - far apart - negative",
+                        getLabels(32),
+                        getData(1, 32, -3000, 3000, 1),
+                        getData(1, 32, -4000, 3000, 2)
+                    ),
+                    LineData(
+                        "50 values - negative",
+                        getLabels(50),
+                        getData(1, 50, -2000, 3000, 1),
+                        getData(1, 50, -2500, 3000, 2)
+                    ),
+                    LineData(
+                        "100 values - negative",
+                        getLabels(100),
+                        getData(1, 100, -1000, 3000, 1),
+                        getData(1, 100, -1000, 3000, 2)
+                    ),
+                    LineData(
+                        "500 values - negative",
+                        getLabels(500),
+                        getData(1, 500, -2000, 3000, 1),
+                        getData(1, 500, -2000, 3000, 2)
+                    ),
+                    LineData(
+                        "1000 values - negative",
+                        getLabels(1000),
+                        getData(1, 1000, -1500, 3000, 1),
+                        getData(1, 1000, -1500, 3000, 2)
+                    ),
+                    LineData(
+                        "20 values - far away - highest values",
+                        getLabels(20),
+                        getData(1, 20, 10000, 1000000, 1),
+                        getData(1, 20, 10000, 1000000, 2)
+                    ),
+                    LineData(
+                        "20 values - far away - highest values - negative",
+                        getLabels(1000),
+                        getData(1, 20, -1000000, -10000, 1),
+                        getData(1, 20, -1000000, -10000, 2)
+                    ),
+                    LineData(
+                        "20 values - no line",
+                        getLabels(20),
+                        getData(1, 20, 100, 200)
+                    ),
+                    LineData(
+                        "20 values - no line - negative",
+                        getLabels(20),
+                        getData(1, 20, -100, 200)
+                    ),
+                    LineData(
+                        "20 values - no line - 2 yaxis",
+                        getLabels(20),
+                        getData(1, 20, 100, 200, 1),
+                        getData(1, 20, 100, 200, 2)
+                    ),
+                    LineData(
+                        "20 values - no line - 2 yaxis - negative",
+                        getLabels(20),
+                        getData(1, 20, -200, -100, 1),
+                        getData(1, 20, -200, -100, 2)
+                    )
+                )
+
+                showRv(lineData.size, fun(chartLayout: LinearLayout, position: Int) {
+                    val data = lineData[position]
+                    showChartsInternal(
+                        chartLayout, Gson().toJson(
+                            Line(
+                                data.title,
+                                "x axis",
+                                data.xLabels,
+                                "y axis",
+                                data.yLefts,
+                                if (data.yRights == null) null else "y axis right",
+                                data.yRights,
+                                data.colors,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    )
+                })
+
+                /*
+                AssetHelper.readFile(
+                    this,
+                    "line_chart_minimal_data",
+                    fun(string: String) {
+                        showRv(1, fun(chartLayout: LinearLayout, position: Int) {
+                            showChartsInternal(chartLayout, string)
+                        })
+                    }
+                )
+                */
+            }
         }
     }
 
-    private fun showRv(size: Int, getBindView: (chartLayout: LinearLayout, position: Int)->Unit) {
-        val airRv = AirRv(object: AirRv.Callback {
+    private fun showRv(size: Int, getBindView: (chartLayout: LinearLayout, position: Int) -> Unit) {
+        val airRv = AirRv(object : AirRv.Callback {
 
             override fun getAppContext(): Context? {
                 return this@ChartActivity
@@ -652,72 +1057,108 @@ class ChartActivity : AppCompatActivity() {
         LinearSnapHelper().attachToRecyclerView(airRv.rv)
     }
 
-    private fun showBarChartsInternal(viewGroup: ViewGroup, jsonString: String) {
-
-        /*val barInterface = object: AirChartBar.IBar {
-            override fun getTitle(): String? {
-                return bar.title
-            }
-
-            override fun getXAxisTitle(): String {
-                return bar.xAxisTitle
-            }
-
-            override fun getYLeftAxisTitle(): String {
-                return bar.yLeftAxisTitle
-            }
-
-            override fun getXAxisLabels(): ArrayList<String> {
-                return bar.xAxisLabels
-            }
-
-            override fun getYLeftAxisValues(): java.util.ArrayList<Value> {
-                return bar.yLeftAxisValues
-            }
-
-            @SuppressLint("ResourceType")
-            override fun getColors(): ArrayList<String>? {
-                return bar.colors
-                    ?: arrayListOf(
-                        resources.getString(R.color.red400),
-                        resources.getString(R.color.purple400),
-                        resources.getString(R.color.amber400),
-                        resources.getString(R.color.green400),
-                        resources.getString(R.color.brown300),
-                        resources.getString(R.color.indigo400)
-                    )
-            }
-
-            override fun getIsHorizontal(): Boolean {
-                return bar.isHorizontal
-            }
-
-             override fun getSubTitle(): String {
-                 return bar.subTitle
-             }
-
-            override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
-                return bar.additionalValues
-            }
-
-            override fun getDecimalFormatPattern(): String {
-                return bar.decimalFormatPattern
-            }
-
-            override fun getIsAnimationRequired(): Boolean {
-                return bar.isAnimationRequired
-            }
-
-        }*/
+    private fun showChartsInternal(viewGroup: ViewGroup, jsonString: String) {
 
         when (chartType) {
             ChartType.BAR, ChartType.HORIZONTAL_BAR -> {
                 AirChart(this, viewGroup).showBarChart(jsonString)
             }
+
+            ChartType.LINE -> {
+                AirChart(this, viewGroup).showLineChart(jsonString)
+
+                /*
+
+                // extended usage example of line chart
+
+                AirChart(this, viewGroup).showLineChart(object : AirChartLine.ILine {
+
+                    //mandatory methods
+                    override fun getTitle(): String {
+                        return "title of the chart"
+                    }
+
+                    override fun getXAxisTitle(): String {
+                        return "this is X-axis"
+                    }
+
+                    override fun getXAxisLabels(): ArrayList<String> {
+                        return arrayListOf("Student1", "Student2", "Student3")
+                    }
+
+                    override fun getYLeftAxisTitle(): String {
+                        return "this is Y-axis"
+                    }
+
+                    override fun getYLeftAxisValues(): ArrayList<Value> {
+                        return arrayListOf(
+                            Value(
+                                "marks in sem 1",
+                                arrayListOf(50.0, 40.0, 49.5)
+                            )
+                        )
+                    }
+
+                    // extra methods that can be overridden
+
+                    override fun getColors(): ArrayList<String> {
+                        return arrayListOf("#ffa726", "#2196f3")
+                    }
+
+                    override fun getSubTitle(): String? {
+                        return "this is subtitle of the chart"
+                    }
+
+                    override fun getDecimalFormatPattern(): String? {
+                        return "0.#"
+                    }
+
+                    override fun getAdditionalValues(): java.util.ArrayList<AdditionalValue>? {
+                        return arrayListOf(
+                            AdditionalValue("Key1", "Value1"),
+                            AdditionalValue("Key2", "Value2")
+                        )
+                    }
+
+                    override fun getCustomViewLayoutResId(): Int? {
+                        return R.layout.custom_view
+                    }
+
+                    override fun getIsAnimationRequired(): Boolean? {
+                        return true
+                    }
+
+                    override fun onValueSelected(e: Entry?) {
+                        // do something
+                    }
+
+                    override fun onNoValueSelected() {
+                        // do something
+                    }
+
+                    override fun getYRightAxisTitle(): String? {
+                        return "this is Y-axis right"
+                    }
+
+                    override fun getYRightAxisValues(): ArrayList<Value> {
+                        return arrayListOf(
+                            Value(
+                                "marks in sem 2",
+                                arrayListOf(50.5, 40.9, 39.5)
+                            )
+                        )
+                    }
+
+                    override fun getIsCurved(): Boolean? {
+                        return true
+                    }
+                })
+                */
+            }
         }
     }
 
-    class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val chartHolder: LinearLayout = view.chartHolder
     }
 
@@ -725,6 +1166,14 @@ class ChartActivity : AppCompatActivity() {
         val title: String,
         val xLabels: ArrayList<String>,
         val yLefts: java.util.ArrayList<Value>,
+        val colors: ArrayList<String>? = null
+    )
+
+    class LineData(
+        val title: String,
+        val xLabels: ArrayList<String>,
+        val yLefts: java.util.ArrayList<Value>,
+        val yRights: java.util.ArrayList<Value>? = null,
         val colors: ArrayList<String>? = null
     )
 }
