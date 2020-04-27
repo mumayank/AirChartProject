@@ -74,7 +74,8 @@ class AirChart(
                     line.subTitle,
                     line.decimalFormatPattern,
                     line.additionalValues,
-                    line.isAnimationRequired
+                    line.isAnimationRequired,
+                    line.isCurved
                 )
 
                 showLineChart(object : AirChartLine.ILine {
@@ -125,6 +126,10 @@ class AirChart(
 
                     override fun getIsAnimationRequired(): Boolean? {
                         return line.isAnimationRequired
+                    }
+
+                    override fun getIsCurved(): Boolean? {
+                        return line.isCurved
                     }
                 })
             }

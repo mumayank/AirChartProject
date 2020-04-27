@@ -55,6 +55,10 @@ public class Line {
     @Expose
     private Boolean isAnimationRequired;
 
+    @SerializedName("isCurved")
+    @Expose
+    private Boolean isCurved;
+
     /**
      * No args constructor for use in serialization
      */
@@ -77,7 +81,7 @@ public class Line {
      */
     public Line(String title, String xAxisTitle, ArrayList<String> xAxisLabels, String yLeftAxisTitle, ArrayList<Value> yLeftAxisValues, String yRightAxisTitle, ArrayList<Value> yRightAxisValues,
                 ArrayList<String> colors, String subTitle, String decimalFormatPattern, ArrayList<AdditionalValue> additionalValues,
-                Boolean isAnimationRequired) {
+                Boolean isAnimationRequired, Boolean isCurved) {
         super();
         this.title = title;
         this.xAxisTitle = xAxisTitle;
@@ -91,6 +95,7 @@ public class Line {
         this.decimalFormatPattern = decimalFormatPattern;
         this.additionalValues = additionalValues;
         this.isAnimationRequired = isAnimationRequired;
+        this.isCurved = isCurved;
     }
 
     public String getTitle() {
@@ -187,5 +192,13 @@ public class Line {
 
     public void setYRightAxisValues(ArrayList<Value> yRightAxisValues) {
         this.yRightAxisValues = yRightAxisValues;
+    }
+
+    public void setIsCurved(Boolean isCurved) {
+        this.isCurved = isCurved;
+    }
+
+    public Boolean getIsCurved() {
+        return isCurved;
     }
 }
